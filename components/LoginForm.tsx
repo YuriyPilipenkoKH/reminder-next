@@ -9,11 +9,11 @@ function LoginForm() {
       <div className="flex flex-col gap-3 w-[380px] bg-slate-50 p-8 rounded-lg shadow-lg border-t-4 border-green-400">
         <h1 className="text-xl font-bold">LogIn</h1>
         <form className="grid grid-rows-4 gap-4 h-[200px]">
-            <input 
+        <input 
             type="text"
             placeholder="Email" 
             className="authinput"/>
-            <input 
+        <input 
             type="text"
             placeholder="Password"  
             className="authinput"/>

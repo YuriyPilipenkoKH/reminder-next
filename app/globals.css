@@ -78,7 +78,7 @@ border: 1px solid blue;
  }
 
 .authbtn{
-@apply bg-green-600 text-neutral-50 text-2xl px-6 py-1 rounded-lg font-bold w-full flex items-center justify-center
+@apply bg-green-600 text-neutral-50 text-2xl px-6 py-1 rounded-lg font-bold w-full flex items-center justify-center disabled:bg-gray-500
  }
 
 .autherror{
