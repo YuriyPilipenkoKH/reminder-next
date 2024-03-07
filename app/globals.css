@@ -18,16 +18,70 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: #777;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+* {
+  box-sizing: border-box;
+}
+
+ul, li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+
+}
+
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  clip: rect(0 0 0 0);
+}
+
+.inputfield:focus {
+outline: none;
+border: 1px solid blue;
+  
+}
+
+.authinput{
+@apply border border-solid border-gray-600 rounded-lg py-2 px-4 bg-zinc-100/70 w-full focus:outline-none focus:border-blue-500 
+ }
+
+.authbtn{
+@apply bg-green-600 text-neutral-50 text-2xl px-6 py-1 rounded-lg font-bold w-full flex items-center justify-center
+ }
+
+.autherror{
+@apply bg-red-600/80 text-neutral-50 text-sm px-3 py-1 rounded-md  flex items-center justify-start h-[28px]
+
 }
