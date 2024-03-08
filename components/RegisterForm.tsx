@@ -5,10 +5,17 @@ import { useForm } from "react-hook-form"
 import { FormInput, RegisterSchema } from "../models/auth"
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from "react";
-
+import { useRouter } from "next/navigation";
+import { connectMongoDB } from "@/lib/mongoDB";
+import { registerUser } from "@/lib/registerUser";
+// import dotenv from 'dotenv'
+// dotenv.config()
+// const { API_PORT=4040 } = process.env
+// console.log(API_PORT)
 
 function RegisterForm() {
-
+  
+  const router = useRouter();
   const {
     register, 
     handleSubmit,
@@ -27,19 +34,41 @@ const {
     errors,
     isDirty,
     isValid ,
-    isSubmitSuccessful,
 } = formState
 
-const onSubmit = (data:{}) => {
+const onSubmit = async(data:{
+  name:string, 
+  email:string, 
+  password:string 
+}) => {
   console.log('Form submited',data)
-  
+  const {name, email, password } = data
+
+  try {
+    const res = await fetch("http://localhost:4040/api/auth/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        password,
+      }),
+    });
+ 
+    if (res.ok) {
+      console.log("Sucsessfull registration.");
+      reset()
+      router.push("/");
+    } else {
+      console.log("User registration failed.");
+    }
+  } catch (error) {
+    console.log("Error during registration: ", error);
+  }
 };
 
-useEffect(() => {
-  if(isSubmitSuccessful) {
-      reset()
-  }
-}, [isSubmitSuccessful, reset])
   return (
     <div className="grid place-items-center h-screen ">
       <div className="flex flex-col gap-3 w-[380px] bg-slate-50 p-8 rounded-lg shadow-lg border-t-4 border-green-400">
@@ -51,17 +80,14 @@ useEffect(() => {
          className="grid grid-rows-5 gap-4 h-[250px]">
         <input 
              {...register('name')}
-            //  errors={errors?.name as boolean | undefined} 
             placeholder="Name" 
             className="authinput"/>
         <input 
             {...register('email')}
-            // errors={errors?.email as boolean | undefined}
             placeholder="Email" 
             className="authinput"/>
         <input 
             {...register('password')}
-            // errors={errors?.password as boolean | undefined} 
             placeholder="Password"  
             className="authinput"/>
             <button 
@@ -70,9 +96,9 @@ useEffect(() => {
             className="authbtn">Register</button>
             {(errors?.name || errors?.email || errors?.password )&& (
               <div className="autherror">
-               {errors.name && <div>{errors.name.message}</div>}
-               {errors.email && <div>{errors.email.message}</div>}
-               {errors.password && <div>{errors.password.message}</div>}
+                {errors.name && <div>{errors.name.message}</div>}
+                {!errors.name && errors.email && <div>{errors.email.message}</div>}
+                {!errors.name && !errors.email && errors.password && <div>{errors.password.message}</div>}
               </div>
             )}
         </form>
