@@ -2,7 +2,7 @@ import {connect} from "mongoose";
 
 
 export const connectMongoDB =async () => {
-    console.log(process.env)
+    console.log(process.env.NEXT_PUBLIC_API_PORT)
     try {
         // const mongoURL = process.env.MONGO_URL
         const mongoURL = "mongodb+srv://martin:Kh724397@cluster0.pijgqaf.mongodb.net/db_reminder?retryWrites=true&w=majority&appName=Cluster0"

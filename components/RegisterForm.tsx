@@ -4,14 +4,9 @@ import Link from "next/link"
 import { useForm } from "react-hook-form"
 import { FormInput, RegisterSchema } from "../models/auth"
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { connectMongoDB } from "@/lib/mongoDB";
-import { registerUser } from "@/lib/registerUser";
-// import dotenv from 'dotenv'
-// dotenv.config()
-// const { API_PORT=4040 } = process.env
-// console.log(API_PORT)
+
+
 
 function RegisterForm() {
   
@@ -34,6 +29,7 @@ const {
     errors,
     isDirty,
     isValid ,
+    isSubmitting
 } = formState
 
 const onSubmit = async(data:{
@@ -41,11 +37,11 @@ const onSubmit = async(data:{
   email:string, 
   password:string 
 }) => {
-  console.log('Form submited',data)
+  // console.log('Form submited',data)
   const {name, email, password } = data
 
   try {
-    const res = await fetch("http://localhost:4040/api/auth/register", {
+    const res = await fetch( `${process.env.NEXT_PUBLIC_API_PORT}api/auth/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -60,7 +56,7 @@ const onSubmit = async(data:{
     if (res.ok) {
       console.log("Sucsessfull registration.");
       reset()
-      router.push("/");
+      router.push("/dashboard")
     } else {
       console.log("User registration failed.");
     }
@@ -92,7 +88,7 @@ const onSubmit = async(data:{
             className="authinput"/>
             <button 
             type="submit" 
-            disabled={!isDirty || !isValid}
+            disabled={isSubmitting || !isDirty || !isValid}
             className="authbtn">Register</button>
             {(errors?.name || errors?.email || errors?.password )&& (
               <div className="autherror">

@@ -4,9 +4,11 @@ import Link from "next/link"
 import { useForm } from "react-hook-form"
 import { LogInput, LoginSchema } from "../models/auth"
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect } from "react";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 function LoginForm() {
+    const router = useRouter();
     const {
         register, 
         handleSubmit,
@@ -24,19 +26,39 @@ function LoginForm() {
         errors,
         isDirty,
         isValid ,
-        isSubmitSuccessful,
+        isSubmitting
     } = formState
     
-    const onSubmit = (data:{}) => {
+    const onSubmit =async (data:{
+        email:string, 
+        password:string 
+    }) => {
       console.log('Form submited',data)
-      
+      const { email, password } = data
+      try {
+        const res = await signIn('credentials',{  
+            email, 
+            password,
+            redirect: false
+         })
+
+       reset()
+       router.push("/dashboard")
+   
+    } 
+    catch (error: any) {
+        if (error) {
+          switch (error?.type) {
+            case 'CredentialsSignin':
+              return 'Invalid credentials.'
+            default:
+              return 'Something went wrong.'
+          }
+        }
+        throw error
+      }
     };
     
-    useEffect(() => {
-        if(isSubmitSuccessful) {
-            reset()
-        }
-      }, [isSubmitSuccessful, reset])
 
   return (
     <div className="grid place-items-center h-screen ">
@@ -57,7 +79,7 @@ function LoginForm() {
             className="authinput"/>
             <button 
             type="submit" 
-            disabled={!isDirty || !isValid}
+            disabled={isSubmitting || !isDirty || !isValid}
             className="authbtn">LogIn</button>
             {( errors?.email || errors?.password )&& (
               <div className="autherror">
@@ -74,5 +96,7 @@ function LoginForm() {
     </div>
   )
 }
+
+
 
 export default LoginForm
