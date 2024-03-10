@@ -35,34 +35,36 @@ function LoginForm() {
     }) => {
       console.log('Form submited',data)
       const { email, password } = data
-      try {
-        const res = await signIn('credentials',{  
-            email, 
-            password,
-            redirect: false
-         })
 
-       reset()
-       router.push("/dashboard")
+      // try-catch failed with backend
+    //   try {
+    //     const res = await signIn('credentials',{  
+    //         email, 
+    //         password,
+    //         redirect: false
+    //      })
+
+    //    reset()
+    //    router.push("/dashboard")
    
-    } 
-    catch (error: any) {
-        if (error) {
-          switch (error?.type) {
-            case 'CredentialsSignin':
-              return 'Invalid credentials.'
-            default:
-              return 'Something went wrong.'
-          }
-        }
-        throw error
-      }
+    // } 
+    // catch (error: any) {
+    //     if (error) {
+    //       switch (error?.type) {
+    //         case 'CredentialsSignin':
+    //           return 'Invalid credentials.'
+    //         default:
+    //           return 'Something went wrong.'
+    //       }
+    //     }
+    //     throw error
+    //   }
+
     };
     
-
   return (
-    <div className="grid place-items-center h-screen ">
-      <div className="flex flex-col gap-3 w-[380px] bg-slate-50 p-8 rounded-lg shadow-lg border-t-4 border-green-400">
+    <div className="pageWrapper">
+      <div className="formWrapper">
         <h1 className="text-xl font-bold">LogIn</h1>
         <form 
         onSubmit={handleSubmit(onSubmit)}   

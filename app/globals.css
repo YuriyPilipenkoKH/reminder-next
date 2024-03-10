@@ -73,6 +73,13 @@ border: 1px solid blue;
   
 }
 
+.pageWrapper{
+  @apply  grid place-items-center h-screen
+}
+.formWrapper{
+  @apply  flex flex-col gap-3 w-[380px] bg-slate-50 p-8 rounded-lg shadow-lg border-t-4 border-green-400
+}
+
 .authinput{
 @apply border border-solid border-gray-600 rounded-lg py-2 px-4 bg-zinc-100/70 w-full focus:outline-none focus:border-blue-500 
  }

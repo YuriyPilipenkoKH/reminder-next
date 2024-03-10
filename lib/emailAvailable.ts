@@ -1,4 +1,5 @@
 import "dotenv/config"
+import { connectMongoDB } from "./mongoDB";
 interface UserData {
     email: string;
     // Add any other properties if needed
@@ -6,8 +7,10 @@ interface UserData {
 
 
 export const emailAvailable = async (fieldValue: string): Promise<string | undefined> => {
+
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_PORT}api/users?email=${fieldValue}`);
+        await connectMongoDB()
+        const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}api/users?email=${fieldValue}`);
         const data: UserData[]  = await response.json();
         // console.log('data', data)
         const result = data.filter(u => u.email === fieldValue)

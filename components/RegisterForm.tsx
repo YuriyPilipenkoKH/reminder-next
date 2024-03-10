@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form"
 import { FormInput, RegisterSchema } from "../models/auth"
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from "next/navigation";
-
+import { connectMongoDB } from "@/lib/mongoDB";
 
 
 function RegisterForm() {
@@ -32,6 +32,9 @@ const {
     isSubmitting
 } = formState
 
+
+
+
 const onSubmit = async(data:{
   name:string, 
   email:string, 
@@ -41,33 +44,41 @@ const onSubmit = async(data:{
   const {name, email, password } = data
 
   try {
-    const res = await fetch( `${process.env.NEXT_PUBLIC_API_PORT}api/auth/register`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        email,
-        password,
-      }),
-    });
- 
-    if (res.ok) {
-      console.log("Sucsessfull registration.");
-      reset()
-      router.push("/dashboard")
-    } else {
-      console.log("User registration failed.");
-    }
-  } catch (error) {
-    console.log("Error during registration: ", error);
+
   }
+   catch (error:any) {
+    console.log(error)
+  }
+  // try-catch working with backend
+  // try {
+  //   const res = await fetch( `${process.env.NEXT_PUBLIC_API_PORT}api/auth/register`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       name,
+  //       email,
+  //       password,
+  //     }),
+  //   });
+ 
+  //   if (res.ok) {
+  //     console.log("Sucsessfull registration.");
+  //     reset()
+  //     router.push("/dashboard")
+  //   } else {
+  //     console.log("User registration failed.");
+  //   }
+  // } catch (error) {
+  //   console.log("Error during registration: ", error);
+  // }
+
 };
 
   return (
-    <div className="grid place-items-center h-screen ">
-      <div className="flex flex-col gap-3 w-[380px] bg-slate-50 p-8 rounded-lg shadow-lg border-t-4 border-green-400">
+    <div className="pageWrapper">
+      <div className="formWrapper">
         <h1 className="text-xl font-bold">Register</h1>
         <form
         onSubmit={handleSubmit(onSubmit)}   
@@ -86,7 +97,7 @@ const onSubmit = async(data:{
             {...register('password')}
             placeholder="Password"  
             className="authinput"/>
-            <button 
+        <button 
             type="submit" 
             disabled={isSubmitting || !isDirty || !isValid}
             className="authbtn">Register</button>
