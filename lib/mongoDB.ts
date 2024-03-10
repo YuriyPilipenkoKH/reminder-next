@@ -6,7 +6,7 @@ export const connectMongoDB =async () => {
     try {
         mongoose.connect(process.env.NEXT_PUBLIC_MONGO_URL!);
         const connection = mongoose.connection;
-
+        connection.setMaxListeners(20);
         connection.on('connected', () => {
             console.log('MongoDB connected successfully');
         })

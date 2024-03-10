@@ -1,9 +1,17 @@
 "use client"
 import axios from "axios"
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast"
 
+interface UserData {
+    name: string;
+    email: string;
+    // Add more properties if needed
+}
+
 function UserInfo() {
+    const [data, setData] = useState<UserData | null>(null);
     const router = useRouter();
     const logout =async() => {
         try {
@@ -19,14 +27,27 @@ function UserInfo() {
             
         }
     }
+    
+    const getUserDetails = async () => {
+        const res = await axios.get('/api/users/current')
+        console.log(res.data);
+        setData(res.data.data)
+    }
+    
+    useEffect(() => {
+        getUserDetails()
+    }, [])
   return (
     <div className="grid place-items-center h-screen ">
         <div className="shadow-lg p-8 bg-zinc-300 grid gap-4 rounded-lg">
           <div>Name:
-            <span className="font-bold ">John</span>
+            <span className="font-bold ">
+                {data?.name }
+            </span>
           </div>
           <div>Email:
-            <span className="font-bold ">John@mail</span>
+            <span className="font-bold ">
+            {data?.email }</span>
           </div>
           <button
            onClick={logout}
