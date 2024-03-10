@@ -5,7 +5,8 @@ import { useForm } from "react-hook-form"
 import { FormInput, RegisterSchema } from "../models/auth"
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from "next/navigation";
-import { connectMongoDB } from "@/lib/mongoDB";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 
 function RegisterForm() {
@@ -29,6 +30,7 @@ const {
     errors,
     isDirty,
     isValid ,
+    isLoading,
     isSubmitting
 } = formState
 
@@ -44,10 +46,13 @@ const onSubmit = async(data:{
   const {name, email, password } = data
 
   try {
-
+   const response = await axios.post("/api/users/register", data)
+   console.log("Signnup success", response.data)
+   router.push("/login")
   }
    catch (error:any) {
-    console.log(error)
+    console.log("Signup failed",error)
+    toast.error(error.message)
   }
   // try-catch working with backend
   // try {
@@ -79,7 +84,8 @@ const onSubmit = async(data:{
   return (
     <div className="pageWrapper">
       <div className="formWrapper">
-        <h1 className="text-xl font-bold">Register</h1>
+        <h1 className="text-xl font-bold">
+         {(isLoading || isSubmitting) ? "Processing" : "Register"} </h1>
         <form
         onSubmit={handleSubmit(onSubmit)}   
         autoComplete="off"
@@ -100,7 +106,8 @@ const onSubmit = async(data:{
         <button 
             type="submit" 
             disabled={isSubmitting || !isDirty || !isValid}
-            className="authbtn">Register</button>
+            className="authbtn">
+             {isValid ? "Register" : "No SignUp"}</button>
             {(errors?.name || errors?.email || errors?.password )&& (
               <div className="autherror">
                 {errors.name && <div>{errors.name.message}</div>}
