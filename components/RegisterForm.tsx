@@ -43,10 +43,12 @@ const onSubmit = async(data:{
   password:string 
 }) => {
   // console.log('Form submited',data)
-  const {name, email, password } = data
+  // const {name, email, password } = data
 
   try {
    const response = await axios.post("/api/users/register", data)
+   toast.success('Signnup success')
+   reset()
    console.log("Signnup success", response.data)
    router.push("/login")
   }
@@ -107,7 +109,8 @@ const onSubmit = async(data:{
             type="submit" 
             disabled={isSubmitting || !isDirty || !isValid}
             className="authbtn">
-             {isValid ? "Register" : "No SignUp"}</button>
+             {isValid ? "Register" : "No SignUp"}
+        </button>
             {(errors?.name || errors?.email || errors?.password )&& (
               <div className="autherror">
                 {errors.name && <div>{errors.name.message}</div>}

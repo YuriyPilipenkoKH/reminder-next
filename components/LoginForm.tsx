@@ -4,8 +4,9 @@ import Link from "next/link"
 import { useForm } from "react-hook-form"
 import { LogInput, LoginSchema } from "../models/auth"
 import { zodResolver } from '@hookform/resolvers/zod';
-import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 function LoginForm() {
     const router = useRouter();
@@ -26,7 +27,8 @@ function LoginForm() {
         errors,
         isDirty,
         isValid ,
-        isSubmitting
+        isSubmitting,
+        isLoading
     } = formState
     
     const onSubmit =async (data:{
@@ -34,7 +36,20 @@ function LoginForm() {
         password:string 
     }) => {
       console.log('Form submited',data)
-      const { email, password } = data
+    //   const { email, password } = data
+
+    try {
+        const response = await axios.post("/api/users/login", data)
+        toast.success('Login success')
+        reset()
+        console.log("Login success", response.data)
+        router.push("/profile")       
+    } 
+    catch (error:any) {
+        console.log("Login failed",error)
+        toast.error(error.message)
+        
+    }
 
       // try-catch failed with backend
     //   try {
@@ -65,7 +80,8 @@ function LoginForm() {
   return (
     <div className="pageWrapper">
       <div className="formWrapper">
-        <h1 className="text-xl font-bold">LogIn</h1>
+        <h1 className="text-xl font-bold">
+        {(isLoading || isSubmitting) ? "Processing" : "LogIn"} </h1>
         <form 
         onSubmit={handleSubmit(onSubmit)}   
         autoComplete="off"
@@ -79,10 +95,12 @@ function LoginForm() {
             {...register('password')}
             placeholder="Password"  
             className="authinput"/>
-            <button 
+        <button 
             type="submit" 
             disabled={isSubmitting || !isDirty || !isValid}
-            className="authbtn">LogIn</button>
+            className="authbtn">
+                LogIn
+        </button>
             {( errors?.email || errors?.password )&& (
               <div className="autherror">
                 {errors.email && <div>{errors.email.message}</div>}
