@@ -43,7 +43,7 @@ function LoginForm() {
         toast.success('Login success')
         reset()
         console.log("Login success", response.data)
-        router.push("/profile")       
+        router.push("/dashboard")       
     } 
     catch (error:any) {
         console.log("Login failed",error)
