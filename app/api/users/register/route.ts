@@ -2,6 +2,7 @@ import { connectMongoDB } from "@/lib/mongoDB";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from 'bcryptjs'
 import User from "@/models/user";
+import { sendEmail } from "@/lib/mailer";
 
 connectMongoDB()
 
@@ -30,7 +31,7 @@ export async function POST(req:NextRequest) {
          console.log(savedUser);
 
           //send verification email
-        //   await sendEmail({email, emailType: "VERIFY", userId: savedUser._id})
+          await sendEmail({email, emailType: "VERIFY", userId: savedUser._id})
  
          return NextResponse.json({
              message: "User created successfully",

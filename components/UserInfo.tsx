@@ -1,4 +1,5 @@
 "use client"
+import capitalize from "@/lib/capitalize";
 import axios from "axios"
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -33,16 +34,17 @@ function UserInfo() {
         console.log(res.data);
         setData(res.data.data)
     }
+    const profileName = capitalize(data?.name)
     
     useEffect(() => {
         getUserDetails()
     }, [])
   return (
     <div className="grid place-items-center h-screen ">
-        <div className="shadow-lg p-8 bg-zinc-300 grid gap-4 rounded-lg">
+        <div className="shadow-lg p-8 bg-zinc-300 grid gap-4 rounded-lg w-80">
           <div>Name:
             <span className="font-bold ">
-                {data?.name }
+              {profileName }           
             </span>
           </div>
           <div>Email:

@@ -42,8 +42,7 @@ const onSubmit = async(data:{
   email:string, 
   password:string 
 }) => {
-  // console.log('Form submited',data)
-  // const {name, email, password } = data
+
 
   try {
    const response = await axios.post("/api/users/register", data)
@@ -56,30 +55,7 @@ const onSubmit = async(data:{
     console.log("Signup failed",error)
     toast.error(error.message)
   }
-  // try-catch working with backend
-  // try {
-  //   const res = await fetch( `${process.env.NEXT_PUBLIC_API_PORT}api/auth/register`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       name,
-  //       email,
-  //       password,
-  //     }),
-  //   });
- 
-  //   if (res.ok) {
-  //     console.log("Sucsessfull registration.");
-  //     reset()
-  //     router.push("/dashboard")
-  //   } else {
-  //     console.log("User registration failed.");
-  //   }
-  // } catch (error) {
-  //   console.log("Error during registration: ", error);
-  // }
+
 
 };
 
@@ -109,7 +85,7 @@ const onSubmit = async(data:{
             type="submit" 
             disabled={isSubmitting || !isDirty || !isValid}
             className="authbtn">
-             {isValid ? "Register" : "No SignUp"}
+             {isValid ? "Register" : "Fill the Form"}
         </button>
             {(errors?.name || errors?.email || errors?.password )&& (
               <div className="autherror">

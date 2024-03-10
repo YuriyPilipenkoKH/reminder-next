@@ -7,8 +7,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { useState } from "react";
 
 function LoginForm() {
+    const [logError, setLogError] = useState('')
     const router = useRouter();
     const {
         register, 
@@ -35,8 +37,7 @@ function LoginForm() {
         email:string, 
         password:string 
     }) => {
-      console.log('Form submited',data)
-    //   const { email, password } = data
+
 
     try {
         const response = await axios.post("/api/users/login", data)
@@ -49,33 +50,12 @@ function LoginForm() {
     } 
     catch (error:any) {
         console.log("Login failed",error)
+        setLogError(error.message)
         toast.error(error.message)
         
     }
 
-      // try-catch failed with backend
-    //   try {
-    //     const res = await signIn('credentials',{  
-    //         email, 
-    //         password,
-    //         redirect: false
-    //      })
 
-    //    reset()
-    //    router.push("/dashboard")
-   
-    // } 
-    // catch (error: any) {
-    //     if (error) {
-    //       switch (error?.type) {
-    //         case 'CredentialsSignin':
-    //           return 'Invalid credentials.'
-    //         default:
-    //           return 'Something went wrong.'
-    //       }
-    //     }
-    //     throw error
-    //   }
 
     };
     
@@ -109,6 +89,7 @@ function LoginForm() {
                 {!errors.email && errors.password && <div>{errors.password.message}</div>}
               </div>
             )}
+            {logError && <div className="autherror">{"Incorrect login or password"}</div>}
         </form>
             <p className="text-sm flex gap-2 justify-end">Don`t have an account? 
             <Link
