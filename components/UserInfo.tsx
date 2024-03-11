@@ -1,5 +1,6 @@
 "use client"
 import capitalize from "@/lib/capitalize";
+import { Button } from "@radix-ui/themes";
 import axios from "axios"
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -51,9 +52,9 @@ function UserInfo() {
             <span className="font-bold ">
             {data?.email }</span>
           </div>
-          <button
+          <Button
            onClick={logout}
-          className="bg-red-600/90 text-neutral-100 font-bold px-6 py-2 rounded-lg">LogOut</button>
+          className="bg-red-600/90 text-neutral-100 font-bold px-6 py-2 rounded-lg">LogOut</Button>
         </div>
 
     </div>

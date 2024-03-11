@@ -42,7 +42,7 @@ export const authOptions: AuthOptions = {
   session: {
     strategy: "jwt", // Set the session strategy to JWT
   },
-  secret: process.env.NEXTAUTH_SECRET || 'http://localhost:3000/', // Provide a default secret
+  secret: process.env.NEXT_PUBLIC_TOKEN_SECRET, // Provide a default secret
   pages: {
     signIn: "/", // Define the sign-in page
   },
