@@ -7,11 +7,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import UserContext, { UserContextType } from "@/context/UserContext";
 
 function LoginForm() {
     const [logError, setLogError] = useState('')
     const router = useRouter();
+    const { setUser } = useContext(UserContext as React.Context<UserContextType>);
+
     const {
         register, 
         handleSubmit,
@@ -44,7 +47,7 @@ function LoginForm() {
         toast.success('Login success')
         reset()
         console.log("Login success", response.data)
-
+        setUser(data)
          router.push('/dashboard')
          
     } 

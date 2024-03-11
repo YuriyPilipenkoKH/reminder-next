@@ -1,9 +1,10 @@
 "use client"
+import UserContext, { UserContextType } from "@/context/UserContext";
 import capitalize from "@/lib/capitalize";
 import { Button } from "@radix-ui/themes";
 import axios from "axios"
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast"
 
 interface UserData {
@@ -13,8 +14,12 @@ interface UserData {
 }
 
 function UserInfo() {
+    // const {} = us
     const [data, setData] = useState<UserData | null>(null);
     const router = useRouter();
+
+    const {user} = useContext(UserContext as React.Context<UserContextType>)
+
     const logout =async() => {
         try {
             const response = await axios.get("/api/users/logout")
@@ -26,8 +31,7 @@ function UserInfo() {
         catch (error:any) {
             console.log("Logout failed",error)
             toast.error(error.message)
-            
-        }
+           }
     }
     
     const getUserDetails = async () => {
@@ -47,6 +51,7 @@ function UserInfo() {
             <span className="font-bold ">
               {profileName }           
             </span>
+            <span>context: {user?.email}</span>
           </div>
           <div>Email:
             <span className="font-bold ">
