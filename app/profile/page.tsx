@@ -22,7 +22,7 @@ function Profile() {
         }
     }
     return (
-      <div className="grid place-items-center h-[100vh]">
+      <div className="grid place-items-center">
        <h1>profile</h1>
        <button 
        onClick={logout}

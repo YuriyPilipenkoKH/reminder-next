@@ -66,6 +66,12 @@ outline: none;
 border: 1px solid blue;
   
 }
+.ant-divider-horizontal{
+  margin: 0 !important;
+}
+.h-screen{
+  height: 700px;
+}
 
 .pageWrapper{
   @apply  grid place-items-center h-screen

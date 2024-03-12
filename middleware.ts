@@ -25,7 +25,7 @@ export const config = {
     // '/',
     '/profile',
     '/login',
-    '/register',
+    // '/register',
     '/dashboard',
     '/verifyemail'
   ]

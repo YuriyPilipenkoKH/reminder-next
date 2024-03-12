@@ -6,6 +6,7 @@ import { options } from "@/lib/hotToast";
 import ThemeProvider from "@/providers/ThemeProvider";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import UserContextProvider from "@/context/UserContextProvider";
+import NavBar from "@/components/NavBar";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -25,11 +26,11 @@ export default function RootLayout({
     <html lang="en"  >
       <UserContextProvider>
         <body className={inter.className}>
-         <ThemeProvider>
-         <ThemeSwitcher/>
+         {/* <ThemeProvider> */}
+         <NavBar/>
            {children}
            <Toaster position="top-center" toastOptions={options} gutter={24} />
-         </ThemeProvider>
+         {/* </ThemeProvider> */}
         </body>
       </UserContextProvider>
     </html>
