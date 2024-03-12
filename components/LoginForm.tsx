@@ -13,7 +13,7 @@ import UserContext, { UserContextType } from "@/context/UserContext";
 function LoginForm() {
     const [logError, setLogError] = useState('')
     const router = useRouter();
-    const { setUser } = useContext(UserContext as React.Context<UserContextType>);
+    const { setUser ,setReRender} = useContext(UserContext as React.Context<UserContextType>);
 
     const {
         register, 
@@ -48,6 +48,7 @@ function LoginForm() {
         reset()
         console.log("Login success", response.data)
         // setUser(data)
+        setReRender((prev:boolean)=>!prev)
          router.push('/dashboard')
          
     } 

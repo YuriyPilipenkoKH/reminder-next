@@ -5,8 +5,15 @@ import UserContext from './UserContext'
 
 function UserContextProvider({children} : {children:ReactNode}) {
     const [user, setUser] = useState(null)
+    const [reRender, setReRender] = useState(false)
+
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ 
+      user, 
+      setUser, 
+      reRender, 
+      setReRender 
+      }}>
       {children}
     </UserContext.Provider>
   )

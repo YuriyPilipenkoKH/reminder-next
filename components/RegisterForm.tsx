@@ -7,10 +7,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { useState } from "react";
 
 
 function RegisterForm() {
-  
+  const [regError, setRegError] = useState('')
   const router = useRouter();
   const {
     register, 
@@ -53,6 +54,7 @@ const onSubmit = async(data:{
   }
    catch (error:any) {
     console.log("Signup failed",error)
+    setRegError(error.message)
     toast.error(error.message)
   }
 
@@ -94,6 +96,7 @@ const onSubmit = async(data:{
                 {!errors.name && !errors.email && errors.password && <div>{errors.password.message}</div>}
               </div>
             )}
+            {regError && <div className="autherror">{"User already exists"}</div>}
         </form>
             <p className="text-sm flex gap-2 justify-end">Already have an account? 
             <Link

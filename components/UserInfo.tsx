@@ -18,7 +18,7 @@ function UserInfo() {
     // const [data, setData] = useState<UserData | null>(null);
     const router = useRouter();
 
-    const {user, setUser} = useContext(UserContext as React.Context<UserContextType>)
+    const {user, setUser, setReRender} = useContext(UserContext as React.Context<UserContextType>)
 
     const logout =async() => {
         try {
@@ -27,6 +27,7 @@ function UserInfo() {
     
             console.log("Logout success", response.data)
             setUser(null)
+            setReRender((prev:boolean)=>!prev)
             router.push("/login ")                   
         } 
         catch (error:any) {
