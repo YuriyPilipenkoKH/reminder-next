@@ -3,6 +3,7 @@
 import axios from "axios"
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast"
+import UserInfo from "@/components/UserInfo"
 
 
 function Profile() {
@@ -23,10 +24,8 @@ function Profile() {
     }
     return (
       <div className="grid place-items-center">
-       <h1>profile</h1>
-       <button 
-       onClick={logout}
-       className="authbtn w-[200px]">logout</button>
+        <UserInfo/>
+
       </div>
     )
   }

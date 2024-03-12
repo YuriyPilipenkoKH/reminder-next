@@ -1,4 +1,5 @@
 "use client"
+
 import UserContext, { UserContextType } from "@/context/UserContext";
 import capitalize from "@/lib/capitalize";
 import { Button } from "@radix-ui/themes";
@@ -10,15 +11,14 @@ import toast from "react-hot-toast"
 interface UserData {
     name: string;
     email: string;
-    // Add more properties if needed
 }
 
 function UserInfo() {
-    // const {} = us
-    const [data, setData] = useState<UserData | null>(null);
+   
+    // const [data, setData] = useState<UserData | null>(null);
     const router = useRouter();
 
-    const {user} = useContext(UserContext as React.Context<UserContextType>)
+    const {user, setUser} = useContext(UserContext as React.Context<UserContextType>)
 
     const logout =async() => {
         try {
@@ -26,6 +26,7 @@ function UserInfo() {
             toast.success('Logout success')
     
             console.log("Logout success", response.data)
+            setUser(null)
             router.push("/login ")                   
         } 
         catch (error:any) {
@@ -35,11 +36,19 @@ function UserInfo() {
     }
     
     const getUserDetails = async () => {
-        const res = await axios.get('/api/users/current')
-        console.log(res.data);
-        setData(res.data.data)
+        try {
+            const res = await axios.get('/api/users/current')
+            console.log(res.data);
+            if(res.data) {
+                setUser(res.data.data)
+            }
+            
+        }
+        catch (error:any) {
+            console.log("getUserDetails failed",error)
+           }
     }
-    const profileName = capitalize(data?.name)
+    const profileName = capitalize(user?.name)
     
     useEffect(() => {
         getUserDetails()
@@ -47,15 +56,16 @@ function UserInfo() {
   return (
     <div className="grid place-items-center h-screen ">
         <div className="shadow-lg p-8 bg-zinc-300 grid gap-4 rounded-lg w-80">
-          <div>Name:
+          <div>Name: {' '}
             <span className="font-bold ">
               {profileName }           
             </span>
-            <span>context: {user?.email}</span>
+         
           </div>
-          <div>Email:
+          <div>Email: {' '}
             <span className="font-bold ">
-            {data?.email }</span>
+            {user?.email}
+            </span>
           </div>
           <Button
            onClick={logout}

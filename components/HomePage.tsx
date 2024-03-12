@@ -1,3 +1,5 @@
+"use client"
+
 import { Container } from '@radix-ui/themes'
 import { Flex } from 'antd'
 
