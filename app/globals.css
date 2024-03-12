@@ -81,7 +81,7 @@ border: 1px solid blue;
 }
 
 .authinput{
-@apply border border-solid border-gray-600 rounded-lg py-2 px-4 bg-zinc-100/70 w-full focus:outline-none focus:border-blue-500 
+@apply border border-solid border-gray-600 rounded-lg py-2 px-4 bg-zinc-100/70 w-full focus:outline-none focus:border-blue-500 h-[38px]
  }
 
 .authbtn{

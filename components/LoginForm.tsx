@@ -9,12 +9,14 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { useContext, useState } from "react";
 import UserContext, { UserContextType } from "@/context/UserContext";
+import BoolIcon from "./icons/BoolIcon";
 
 function LoginForm() {
     const [logError, setLogError] = useState('')
+    const [show, setShow] = useState(true)
+    
     const router = useRouter();
     const { setUser ,setReRender} = useContext(UserContext as React.Context<UserContextType>);
-
     const {
         register, 
         handleSubmit,
@@ -41,7 +43,6 @@ function LoginForm() {
         password:string 
     }) => {
 
-
     try {
         const response = await axios.post("/api/users/login", data)
         toast.success('Login success')
@@ -49,18 +50,13 @@ function LoginForm() {
         console.log("Login success", response.data)
         // setUser(data)
         setReRender((prev:boolean)=>!prev)
-         router.push('/dashboard')
-         
+        router.push('/dashboard')
     } 
     catch (error:any) {
         console.log("Login failed",error)
         setLogError(error.message)
         toast.error(error.message)
-        
-    }
-
-
-
+     }
     };
     
   return (
@@ -77,10 +73,18 @@ function LoginForm() {
             {...register('email')}
             placeholder="Email" 
             className="authinput"/>
-        <input 
-            {...register('password')}
-            placeholder="Password"  
-            className="authinput"/>
+        <label className="relative">
+            <input
+                {...register('password')}
+                placeholder="Password"
+                type={show ? "text" : "password"}
+                className="authinput"/>
+                <button 
+                type='button'
+                onClick={() => setShow((prev) => !prev)}
+                className="absolute top-3 right-4">
+                    < BoolIcon /></button>
+        </label>
         <button 
             type="submit" 
             disabled={isSubmitting || !isDirty || !isValid}

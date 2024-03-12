@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation'
 import { useContext, useEffect } from 'react'
 import UserContext, { UserContextType } from '@/context/UserContext'
 import axios from 'axios'
+import Way from './Way'
 
 
 function NavBar() {
@@ -34,7 +35,10 @@ function NavBar() {
   return (
     <>
       <nav className='flex w-full items-center justify-between p-4 px-8 h-[60px]'>
-          <Logo/>
+          <div className='flex gap-4 items-center'>
+            <Logo/>
+            {user && <Way/> }
+          </div>
        <div className='flex gap-4 items-center'>
         {!user && (
           <Button

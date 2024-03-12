@@ -8,10 +8,13 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useState } from "react";
+import BoolIcon from "./icons/BoolIcon";
+import { wait } from "@/lib/wait";
 
 
 function RegisterForm() {
   const [regError, setRegError] = useState('')
+  const [show, setShow] = useState(true)
   const router = useRouter();
   const {
     register, 
@@ -47,7 +50,9 @@ const onSubmit = async(data:{
 
   try {
    const response = await axios.post("/api/users/register", data)
-   toast.success('Signnup success')
+   toast.success('Registration successfull')
+   await wait(1000)
+   toast.success('Congratulstions!')
    reset()
    console.log("Signnup success", response.data)
    router.push("/login")
@@ -79,10 +84,18 @@ const onSubmit = async(data:{
             {...register('email')}
             placeholder="Email" 
             className="authinput"/>
-        <input 
-            {...register('password')}
-            placeholder="Password"  
-            className="authinput"/>
+        <label className="relative">
+            <input
+                {...register('password')}
+                placeholder="Password"
+                type={show ? "text" : "password"}
+                className="authinput"/>
+                <button 
+                type='button'
+                onClick={() => setShow((prev) => !prev)}
+                className="absolute top-3 right-4">
+                    < BoolIcon /></button>
+        </label>
         <button 
             type="submit" 
             disabled={isSubmitting || !isDirty || !isValid}
