@@ -6,7 +6,6 @@ function Profile() {
     return (
       <div className="grid place-items-center">
         <UserInfo/>
-
       </div>
     )
   }

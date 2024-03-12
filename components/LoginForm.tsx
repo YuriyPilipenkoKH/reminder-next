@@ -79,11 +79,12 @@ function LoginForm() {
                 placeholder="Password"
                 type={show ? "text" : "password"}
                 className="authinput"/>
-                <button 
+            <button 
                 type='button'
                 onClick={() => setShow((prev) => !prev)}
                 className="absolute top-3 right-4">
-                    < BoolIcon /></button>
+                    < BoolIcon />
+            </button>
         </label>
         <button 
             type="submit" 

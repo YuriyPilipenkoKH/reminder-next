@@ -34,14 +34,12 @@ function UserInfo() {
            }
     }
     
-    const profileName = capitalize(user?.name)
-
   return (
     <div className="grid place-items-center h-screen ">
         <div className="shadow-lg p-8 bg-zinc-300 grid gap-4 rounded-lg w-80 relative">
           <div>Name: {' '}
             <span className="font-bold ">
-              {profileName }           
+              { capitalize(user?.name) }           
             </span>
          
           </div>
