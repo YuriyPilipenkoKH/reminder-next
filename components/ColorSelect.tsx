@@ -24,7 +24,7 @@ function ColorSelect({ onColorChange }: ColorSelectProps) {
     const choose= async(e:any,color:any) => {
       setColor(color);
       setSelectedColor(color);
-        console.log('choose',e.target.value)
+        // console.log('choose',e.target.value)
         // e.stopPropagation();
         onColorChange(color)
         await wait(1)
@@ -32,7 +32,7 @@ function ColorSelect({ onColorChange }: ColorSelectProps) {
     }
   return (
       
-      <>
+  <>
     <div
         className={cn(`mselect w-full flex flex-col items-center justify-start gap-3 outline-none bg-slate-300`,
        CollectionColors[color as CollectionColor]
@@ -46,7 +46,6 @@ function ColorSelect({ onColorChange }: ColorSelectProps) {
         type='button'
         key={color}
         onClick={(e) => choose(e,color)}
-        // value={color}
         className={cn(`moption  flex items-center justify-center w-full h-[38px] py-5 rounded-lg  focus:text-white focus:font-bold focus:ring-2 ring-neutral-600 focus:ring-inset dark:focus:ring-white focus:px-6  `,
         CollectionColors[color as CollectionColor]
         )}
@@ -60,9 +59,9 @@ function ColorSelect({ onColorChange }: ColorSelectProps) {
     type='button'
     onClick={click}
     className='arrow'>
-    <MdKeyboardArrowDown />
+      <MdKeyboardArrowDown />
     </button>
-    </>
+ </>
   )
 }
 
