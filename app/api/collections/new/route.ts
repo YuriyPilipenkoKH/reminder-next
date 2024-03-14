@@ -9,7 +9,7 @@ export async function POST(req:NextRequest) {
     try {
       
         const reqBody = await req.json()
-        const {name, color} = reqBody
+        const {name, color, userId} = reqBody
         console.log(reqBody)
 
         // collection exists
@@ -19,8 +19,12 @@ export async function POST(req:NextRequest) {
                {error: "Collection already exists"},
                {status: 400})
         }
-
-        const savedCollection = await collection.save()
+        const newCollection = new Collection({
+            name,
+            color,
+            userId,
+        })
+        const savedCollection  = await newCollection.save()
         console.log(savedCollection);
 
 

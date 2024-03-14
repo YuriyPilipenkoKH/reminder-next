@@ -59,8 +59,8 @@ const onSubmit = async(data:{
   }
    catch (error:any) {
     console.log("Signup failed",error)
-    setRegError(error.message)
-    toast.error(error.message)
+    setRegError(error?.response.data.error)
+    toast.error(error?.response.data.error)
   }
 
 
@@ -109,7 +109,7 @@ const onSubmit = async(data:{
                 {!errors.name && !errors.email && errors.password && <div>{errors.password.message}</div>}
               </div>
             )}
-            {regError && <div className="autherror">{"User already exists"}</div>}
+            {regError && <div className="autherror">{regError}</div>}
         </form>
             <p className="text-sm flex gap-2 justify-end">Already have an account? 
             <Link

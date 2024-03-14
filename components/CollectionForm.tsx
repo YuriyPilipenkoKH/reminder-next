@@ -15,7 +15,7 @@ import { wait } from '@/lib/wait'
 function CollectionForm() {
     const [logError, setLogError] = useState('')
     const [selectedColor, setSelectedColor] = useState('');
-    const { setUser ,setReRender} = useContext(UserContext as React.Context<UserContextType>);
+    const { user, setUser ,setReRender} = useContext(UserContext as React.Context<UserContextType>);
     const router = useRouter();
     // console.log('selectedColor',selectedColor)
     const {
@@ -23,6 +23,7 @@ function CollectionForm() {
         handleSubmit,
         formState,
         reset,
+        watch
     } = useForm<createCollectionSchemaType>({
         defaultValues: {
             name: '',
@@ -36,7 +37,7 @@ function CollectionForm() {
         isDirty,
         isValid ,
         isSubmitting,
-        isLoading
+        isLoading,
     } = formState
 
     const onSubmit =async (data:{
@@ -44,20 +45,25 @@ function CollectionForm() {
         color:string 
     }) => {
         data.color = selectedColor
-        console.log('onSubmit', data)
+        console.log('onSubmit',data)
 
     try {
-        const response = await axios.post("/api/collections/new", data)
-        toast.success('New success')
+        const response = await axios.post("/api/collections/new", {
+            name: data.name,
+            color:data.color,
+            userId: user._id
+        })
+        toast.success(`${data?.name} created successfully` )
         reset()
-        console.log("New success", response.data)
+        console.log("Creation success", response.data)
         // setUser(data)
         // setReRender((prev:boolean)=>!prev)
         // router.push('/dashboard')
     } 
     catch (error:any) {
-        console.log("New failed",error)
-        setLogError(error.message)
+        console.log("Creation failed",error)
+        console.log(error?.response.data.error)
+        setLogError(error?.response.data.error)
         toast.error(error.message)
      }
     };
@@ -65,12 +71,13 @@ function CollectionForm() {
     const handleColorChange = (color:string) => {
         setSelectedColor(color); // Update the selected color in CollectionForm
     };
+    
+    const watchedCollectionName = watch('name')
+    useEffect(() => {
+        setLogError('')
+    }, [watchedCollectionName])
+    
 
-
-    useEffect ( () => {
-
-    setLogError('')
-    }, [logError])
 
   return (
     <div className='flex flex-col gap-6'>
@@ -114,7 +121,7 @@ function CollectionForm() {
                     {errors.name && <div>{errors.name.message}</div>}
                   </div>
                 )}
-                {logError && <div className="autherror">{"Incorrect ?? "}</div>}
+                {logError && <div className="autherror">{logError}</div>}
         </form>
       
     </div>
