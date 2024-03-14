@@ -20,12 +20,14 @@ function CollectionCard({collection} :Props) {
     const [isLoading, startTransition] = useTransition()
     const {tasks} = collection 
     const router = useRouter()
+    console.log('collection', collection)
 
-    const totalTasks = collection.tasks.length
-    const tasksDone = useMemo(() => {
-        return collection.tasks.filter(task => task.done).length
-    }, [collection.tasks])
-    const progress = totalTasks === 0  ? 0 :  (tasksDone / totalTasks) * 100
+
+    // const totalTasks = collection.tasks.length
+    // const tasksDone = useMemo(() => {
+    //     return collection.tasks.filter(task => task.done).length
+    // }, [collection.tasks])
+    // const progress = totalTasks === 0  ? 0 :  (tasksDone / totalTasks) * 100
 
     const removeCollection = async() => {
         try {
@@ -39,7 +41,9 @@ function CollectionCard({collection} :Props) {
     }
 
   return (
-    <></>
+    <div className="py-4 border-2 font-bold text-zinc-200 rounded-md">
+        {collection.name}
+    </div>
   
   )
 }

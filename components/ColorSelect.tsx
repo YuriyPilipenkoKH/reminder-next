@@ -1,9 +1,10 @@
 "use client"
 
+import UserContext, { UserContextType } from '@/context/UserContext'
 import { CollectionColor, CollectionColors } from '@/lib/constants'
 import { cn } from '@/lib/utils'
 import { wait } from '@/lib/wait'
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { MdKeyboardArrowDown } from 'react-icons/md'
 
 type ColorChangeHandler = (color: string) => void;
@@ -16,7 +17,7 @@ function ColorSelect({ onColorChange }: ColorSelectProps) {
     const [open, setOpen] = useState(false)
     const [color, setColor] = useState('')
     const [selectedColor, setSelectedColor] = useState('');
-
+    const { user ,reRender, setReRender} = useContext(UserContext as React.Context<UserContextType>);
     // console.log('color', color)
     const click=() => {
         setOpen(!open)
@@ -30,6 +31,10 @@ function ColorSelect({ onColorChange }: ColorSelectProps) {
         await wait(1)
         setOpen(false)
     }
+
+    useEffect(() => {
+      setColor('')
+    }, [reRender])
   return (
       
   <>

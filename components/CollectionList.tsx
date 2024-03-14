@@ -11,38 +11,36 @@ import CollectionTypes from "@/models/CollectionTypes";
 
 function CollectionList() {
   const [list, setList] = useState<CollectionTypes[]>([]);
-  const { user, setUser, reRender: boolean, setReRender} = useContext(UserContext as React.Context<UserContextType>);
+  const { user, reRender } = useContext(UserContext as React.Context<UserContextType>);
   const router = useRouter();
 
-  const grabUserColletions  = async() => {
-
+  const grabUserCollections = async () => {
     try {
-      const response = await axios.get("/api/collections")
-      if (response.data) {
-        setList(response.data)
-        console.log("Grabbed", response.data)
+      const response = await axios.get("/api/collections");
+      if (response.data && response.data.collections) {
+        setList(response.data.collections);
       }
-     }
-      catch (error:any) {
-       console.log("Grabbing failed",error)
+    } catch (error) {
+      console.log("Grabbing failed", error);
+    }
+  };
 
-     }
-   
-  }
-  
   useEffect(() => {
-    grabUserColletions()
-  }, [])
+    grabUserCollections();
+  }, [reRender]);
+
+  const collectionsOfCurrentUser = list.filter((c) => c.userId === user._id);
+
   return (
     <div className="flex flex-col w-full gap-4 mt-6">
-    {list.map((collection) => (
-      <CollectionCard
-      key={collection.id}
-      collection={collection}
-      ></CollectionCard>
-    ))}
-  </div>
-  )
+      {collectionsOfCurrentUser.map((collection) => (
+        <CollectionCard key={collection.id} collection={collection} />
+      ))}
+    </div>
+  );
 }
 
-export default CollectionList
+export default CollectionList;
+
+
+

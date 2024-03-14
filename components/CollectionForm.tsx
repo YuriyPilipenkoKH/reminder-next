@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation";
 function CollectionForm() {
     const [logError, setLogError] = useState('')
     const [selectedColor, setSelectedColor] = useState('');
-    const { user } = useContext(UserContext as React.Context<UserContextType>);
+    const { user ,reRender, setReRender} = useContext(UserContext as React.Context<UserContextType>);
     const router = useRouter();
     // console.log('selectedColor',selectedColor)
     const {
@@ -55,7 +55,7 @@ function CollectionForm() {
         toast.success(`${data?.name} created successfully` )
         reset()
         console.log("Creation success", response.data)
-        // setReRender((prev:boolean)=>!prev)
+        setReRender((prev:boolean)=>!prev)
     } 
     catch (error:any) {
         console.log("Creation failed",error)
@@ -72,6 +72,8 @@ function CollectionForm() {
     useEffect(() => {
         setLogError('')
     }, [watchedCollectionName])
+
+
     
 
 

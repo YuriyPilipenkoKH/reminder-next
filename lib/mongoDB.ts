@@ -1,19 +1,20 @@
 import mongoose from "mongoose";
 
+let db: mongoose.Connection; // Define connection outside the function
 
 export const connectMongoDB =async () => {
 
     try {
         mongoose.connect(process.env.NEXT_PUBLIC_MONGO_URL!);
-        const connection = mongoose.connection;
-        connection.setMaxListeners(20);
-        connection.on('connected', () => {
+        db = mongoose.connection; // Assign the connection inside the function
+        db.setMaxListeners(20);
+        db.on('connected', () => {
             console.log('MongoDB connected successfully');
         })
 
-        connection.on('error', (err) => {
+        db.on('error', (err) => {
             console.log('MongoDB connection error. Please make sure MongoDB is running. ' + err);
-            process.exit();
+            process.exit(1);
         })  
     
     } 
@@ -21,3 +22,5 @@ export const connectMongoDB =async () => {
         console.log('Error connecting to mongoDB', error)
     }
 }
+
+export  {db}
