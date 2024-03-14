@@ -1,7 +1,7 @@
 "use client"
 
+import { addDarkToHtml, getHtmlClasses, remDarkFromHtml } from '@/providers/darkProvider';
 import { MoonIcon, SunIcon } from '@radix-ui/react-icons';
-import { useTheme } from 'next-themes';
 import React, { useState } from 'react'
 
 interface ThemeSwitcherProps {
@@ -10,25 +10,45 @@ interface ThemeSwitcherProps {
   }
 
   function ThemeSwitcher() {
-      const {theme, setTheme} = useTheme()
+      const [theme, setTheme] = useState('')
+      const themeSetter = () => {
+          if(theme === 'light'){
+              setTheme('dark')
+          }
+          if(theme === 'dark'){
+              setTheme('light')
+          }
+        }
+
+// HTML
+
+const darkSetter = () => {
+  
+        let htmlClasses: string[] = []  
+        const htmlElement = document.querySelector('html');
+        if (htmlElement) {
+           htmlClasses = getHtmlClasses(htmlElement);
+        }
+
+          if(htmlClasses.includes("dark")){
+            remDarkFromHtml()
+            setTheme('')
+          }
+          else {
+            addDarkToHtml()
+            setTheme('dark')
+          }
+      }
 
 
-const themeSetter = () => {
-    if(theme === 'light'){
-        setTheme('dark')
-    }
-    if(theme === 'dark'){
-        setTheme('light')
-    }
-
-}
   return (
     <>
      <button 
-      onClick={themeSetter} >
-        {theme === 'light'  
-        ? <SunIcon className="h-[1.2rem] w-[1.2rem]"/>
-        :  <MoonIcon className="h-[1.2rem] w-[1.2rem]"/>}
+      onClick={darkSetter} >
+        {theme === 'dark'  
+        ? <MoonIcon className="h-[1.2rem] w-[1.2rem]"/>
+        : <SunIcon className="h-[1.2rem] w-[1.2rem]"/>
+        }
         
      </button>
     </>

@@ -8,6 +8,7 @@ import { useContext } from 'react'
 function UserButton() {
   const router = useRouter()
   const {user} = useContext(UserContext as React.Context<UserContextType>)
+ 
   return (
     <>
       <Button 

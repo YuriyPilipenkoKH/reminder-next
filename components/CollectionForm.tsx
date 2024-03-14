@@ -2,14 +2,15 @@
 
 import { createCollectionSchema, createCollectionSchemaType } from '@/models/schema/createCollection'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Button, Divider } from 'antd'
-import axios from 'axios'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import toast from 'react-hot-toast'
+import ColorSelect from './ColorSelect'
+
 
 function CollectionForm() {
     const [logError, setLogError] = useState('')
+    const [selectedColor, setSelectedColor] = useState('');
+    console.log('selectedColor',selectedColor)
     const {
         register, 
         handleSubmit,
@@ -35,6 +36,8 @@ function CollectionForm() {
         name:string, 
         color:string 
     }) => {
+        data.color = selectedColor
+        console.log('onSubmit', data)
 
     // try {
     //     const response = await axios.post("/api/users/login", data)
@@ -52,6 +55,15 @@ function CollectionForm() {
     //  }
     };
 
+    const handleColorChange = (color:string) => {
+        setSelectedColor(color); // Update the selected color in CollectionForm
+    };
+    const change=() => {
+        
+    }
+
+
+    // console.log(Object.values(CollectionColors)[1])
   return (
     <div className='flex flex-col gap-6'>
         <h3 >
@@ -61,29 +73,34 @@ function CollectionForm() {
             </h3>
         <form 
         onSubmit={handleSubmit(onSubmit)} 
-        className="grid grid-rows-4 gap-3 h-[280px] mform"
+        className="grid grid-rows-4 gap-3  h-[280px] mform"
         autoComplete="off"
         noValidate>
-            <label className='flex flex-col gap-1'>Name
+            <label className='flex flex-col gap-1'>Collection Name
                 <input 
                 {...register('name')}
-                className='authinput'
+                className='authinput bg-slate-300'
                 placeholder='Collection name'
                 type="text" />
             </label>
-            <label className='flex flex-col gap-1'>Color
-                <input 
-                {...register('color')}
-                 className='authinput'
-                 placeholder='Select collection color '
-                type="text" />
+           
+            <label className='mlabel flex flex-col gap-1'>Collection Color
+            <ColorSelect 
+            onColorChange={handleColorChange}/>
+            <input 
+            className='visually-hidden'
+            // {...register('color')}
+            onChange={change}
+            value={selectedColor}
+            type="text" />
             </label>
-             <Button
+           
+             <button
             disabled={isSubmitting || !isDirty || !isValid}
-            className="authbtn "
-            type='primary'>
+            className="authbtn cbtn"
+            type='submit'>
                 Confirm
-            </Button>
+            </button>
                 { errors?.name  && (
                     <div className="autherror">
                     {errors.name && <div>{errors.name.message}</div>}
@@ -97,3 +114,5 @@ function CollectionForm() {
 }
 
 export default CollectionForm
+
+

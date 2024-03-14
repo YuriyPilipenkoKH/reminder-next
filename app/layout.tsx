@@ -4,7 +4,6 @@ import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import { options } from "@/lib/hotToast";
 import ThemeProvider from "@/providers/ThemeProvider";
-import ThemeSwitcher from "@/components/ThemeSwitcher";
 import UserContextProvider from "@/context/UserContextProvider";
 import NavBar from "@/components/NavBar";
 
@@ -21,6 +20,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   
   return (
     <html lang="en"  >

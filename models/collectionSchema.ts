@@ -17,7 +17,12 @@ const collectionSchema = new mongoose.Schema({
             message: 'Invalid color'
         },
         required: true
-    }
+    },
+    userId: {
+        type: String,
+        min: 0,
+        required: true
+    },
 });
 
 // Mongoose model for Collection

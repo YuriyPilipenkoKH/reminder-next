@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const taskSchema = new mongoose.Schema({
     collectionId: {
-        type: Number,
+        type: String,
         min: 0,
         required: true
     },
