@@ -8,15 +8,13 @@ import ColorSelect from './ColorSelect'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import UserContext, { UserContextType } from '@/context/UserContext'
-import { useRouter } from "next/navigation";
 
 
 function CollectionForm() {
     const [logError, setLogError] = useState('')
     const [selectedColor, setSelectedColor] = useState('');
-    const { user ,reRender, setReRender} = useContext(UserContext as React.Context<UserContextType>);
-    const router = useRouter();
-    // console.log('selectedColor',selectedColor)
+    const { user , setReRender} = useContext(UserContext as React.Context<UserContextType>);
+ 
     const {
         register, 
         handleSubmit,
@@ -72,9 +70,6 @@ function CollectionForm() {
     useEffect(() => {
         setLogError('')
     }, [watchedCollectionName])
-
-
-    
 
 
   return (

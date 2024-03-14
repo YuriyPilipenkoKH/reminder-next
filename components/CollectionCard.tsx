@@ -1,5 +1,6 @@
 "use client"
 
+import capitalize from "@/lib/capitalize"
 import CollectionTypes from "@/models/CollectionTypes"
 import Task from "@/models/TaskTypes"
 import { useRouter } from "next/navigation"
@@ -42,7 +43,7 @@ function CollectionCard({collection} :Props) {
 
   return (
     <div className="py-4 border-2 font-bold text-zinc-200 rounded-md">
-        {collection.name}
+        {capitalize(collection?.name)}
     </div>
   
   )

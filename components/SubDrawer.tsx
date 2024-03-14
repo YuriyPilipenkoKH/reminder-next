@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+"use client"
+
+import React, { useContext, useEffect, useState } from 'react';
 import {  Drawer } from 'antd';
 import CollectionForm from './CollectionForm';
+import UserContext, { UserContextType } from '@/context/UserContext';
 
 const SubDrawer: React.FC = () => {
   const [open, setOpen] = useState(false);
+      const { reRender } = useContext(UserContext as React.Context<UserContextType>);
 
   const showDrawer = () => {
     setOpen(true);
@@ -13,6 +17,9 @@ const SubDrawer: React.FC = () => {
     setOpen(false);
   };
 
+    useEffect(() => {
+      onClose()
+    }, [reRender])
   return (
     <>
    <div className="w-full  rounded-lg  bg-slate-200 p-[2px]" >
@@ -29,7 +36,8 @@ const SubDrawer: React.FC = () => {
       style={{backgroundColor:"#555"}}
       onClose={onClose} 
       open={open}>
-        <CollectionForm />
+
+      <CollectionForm />
 
       </Drawer>
     </>
