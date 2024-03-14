@@ -2,6 +2,7 @@
 
 import { CollectionColor, CollectionColors } from '@/lib/constants'
 import { cn } from '@/lib/utils'
+import { wait } from '@/lib/wait'
 import React, { useState } from 'react'
 import { MdKeyboardArrowDown } from 'react-icons/md'
 
@@ -16,17 +17,18 @@ function ColorSelect({ onColorChange }: ColorSelectProps) {
     const [color, setColor] = useState('')
     const [selectedColor, setSelectedColor] = useState('');
 
-    console.log('color', color)
+    // console.log('color', color)
     const click=() => {
         setOpen(!open)
     }
-    const choose=(color:any) => {
+    const choose= async(e:any,color:any) => {
       setColor(color);
       setSelectedColor(color);
-        // console.log('choose',e.target.value)
-        setOpen(false)
+        console.log('choose',e.target.value)
         // e.stopPropagation();
         onColorChange(color)
+        await wait(1)
+        setOpen(false)
     }
   return (
       
@@ -43,7 +45,7 @@ function ColorSelect({ onColorChange }: ColorSelectProps) {
         <button
         type='button'
         key={color}
-        onClick={() => choose(color)}
+        onClick={(e) => choose(e,color)}
         // value={color}
         className={cn(`moption  flex items-center justify-center w-full h-[38px] py-5 rounded-lg  focus:text-white focus:font-bold focus:ring-2 ring-neutral-600 focus:ring-inset dark:focus:ring-white focus:px-6  `,
         CollectionColors[color as CollectionColor]

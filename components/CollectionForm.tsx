@@ -10,7 +10,7 @@ import ColorSelect from './ColorSelect'
 function CollectionForm() {
     const [logError, setLogError] = useState('')
     const [selectedColor, setSelectedColor] = useState('');
-    console.log('selectedColor',selectedColor)
+    // console.log('selectedColor',selectedColor)
     const {
         register, 
         handleSubmit,
@@ -58,9 +58,7 @@ function CollectionForm() {
     const handleColorChange = (color:string) => {
         setSelectedColor(color); // Update the selected color in CollectionForm
     };
-    const change=() => {
-        
-    }
+
 
 
     // console.log(Object.values(CollectionColors)[1])
@@ -89,9 +87,9 @@ function CollectionForm() {
             onColorChange={handleColorChange}/>
             <input 
             className='visually-hidden'
-            // {...register('color')}
-            onChange={change}
-            value={selectedColor}
+            {...register('color')}
+            // onChange={change}
+            // value={selectedColor}
             type="text" />
             </label>
            
