@@ -7,7 +7,6 @@ import capitalize from "@/lib/capitalize";
 import { useContext } from "react";
 
 
-
 function Dashboard() {
   const { user} = useContext(UserContext as React.Context<UserContextType>);
 

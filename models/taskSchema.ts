@@ -11,8 +11,14 @@ const taskSchema = new mongoose.Schema({
         minlength: 6,
         required: true
     },
+    createdAt: {
+        type: Date
+    },
     expiresAt: {
         type: Date
+    },
+    done: {
+        type: Boolean
     }
 });
 

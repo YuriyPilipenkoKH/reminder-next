@@ -1,6 +1,7 @@
 import { CollectionColors } from '@/lib/constants';
 import mongoose from 'mongoose';
 
+
 // Mongoose schema for Collection
 const collectionSchema = new mongoose.Schema({
     name: {
@@ -23,8 +24,16 @@ const collectionSchema = new mongoose.Schema({
         min: 0,
         required: true
     },
+    createdAt: {
+        type: Date
+        
+    },
+    tasks: {
+        type: Array
+    },
 });
 
 // Mongoose model for Collection
 const Collection = mongoose.models.collections || mongoose.model('collections', collectionSchema);
 export default Collection
+

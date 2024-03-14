@@ -9,13 +9,12 @@ import axios from 'axios'
 import toast from 'react-hot-toast'
 import UserContext, { UserContextType } from '@/context/UserContext'
 import { useRouter } from "next/navigation";
-import { wait } from '@/lib/wait'
 
 
 function CollectionForm() {
     const [logError, setLogError] = useState('')
     const [selectedColor, setSelectedColor] = useState('');
-    const { user, setUser ,setReRender} = useContext(UserContext as React.Context<UserContextType>);
+    const { user } = useContext(UserContext as React.Context<UserContextType>);
     const router = useRouter();
     // console.log('selectedColor',selectedColor)
     const {
@@ -56,13 +55,10 @@ function CollectionForm() {
         toast.success(`${data?.name} created successfully` )
         reset()
         console.log("Creation success", response.data)
-        // setUser(data)
         // setReRender((prev:boolean)=>!prev)
-        // router.push('/dashboard')
     } 
     catch (error:any) {
         console.log("Creation failed",error)
-        console.log(error?.response.data.error)
         setLogError(error?.response.data.error)
         toast.error(error.message)
      }
@@ -71,7 +67,7 @@ function CollectionForm() {
     const handleColorChange = (color:string) => {
         setSelectedColor(color); // Update the selected color in CollectionForm
     };
-    
+
     const watchedCollectionName = watch('name')
     useEffect(() => {
         setLogError('')
@@ -105,9 +101,7 @@ function CollectionForm() {
             <input 
             className='visually-hidden'
             {...register('color')}
-            // onChange={change}
-            // value={selectedColor}
-            type="text" />
+              type="text" />
             </label>
            
              <button
