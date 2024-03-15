@@ -13,6 +13,7 @@ import UserContext, { UserContextType } from '@/context/UserContext'
 function CollectionForm() {
     const [logError, setLogError] = useState('')
     const [selectedColor, setSelectedColor] = useState('');
+
     const { user , setReRender} = useContext(UserContext as React.Context<UserContextType>);
  
     const {

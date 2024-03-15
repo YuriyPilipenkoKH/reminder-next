@@ -12,6 +12,7 @@ import toast from "react-hot-toast"
 import { MdKeyboardArrowDown } from "react-icons/md"
 import { TfiTrash } from "react-icons/tfi";
 import { BsPlusSquare } from "react-icons/bs";
+import NewTaskModal from "./NewTaskModal"
 
 interface Props {
     collection: CollectionTypes & {
@@ -21,12 +22,15 @@ interface Props {
 
 function CollectionCard({collection} :Props) {
     const [isOpen, setIsOpen] = useState(false)
-    const [showCreateModal, setShowCreateModal] = useState(false)
     const [isLoading, startTransition] = useTransition()
+    const [isNewTaskModalOpen, setNewTaskModalOpen] = useState(false);
+
     const {tasks} = collection 
     const router = useRouter()
 
-
+    const toggleNewTaskModal = () => {
+        setNewTaskModalOpen(!isNewTaskModalOpen);
+      };
 
     // const totalTasks = collection.tasks.length
     // const tasksDone = useMemo(() => {
@@ -72,7 +76,9 @@ function CollectionCard({collection} :Props) {
             <div className="mcard-footer">
                 <h3>Created at</h3>
                 <div className="footer-btn-wrap">
-                    <button>
+                    <button 
+                    onClick={toggleNewTaskModal} 
+                    >
                     <BsPlusSquare />
                     </button>
                     <button>
@@ -82,9 +88,14 @@ function CollectionCard({collection} :Props) {
             </div>
         </>
         )}
+
+     <NewTaskModal 
+     visible={isNewTaskModalOpen}
+      onClose={toggleNewTaskModal}/>
     </div>
   
   )
 }
 
 export default CollectionCard
+
