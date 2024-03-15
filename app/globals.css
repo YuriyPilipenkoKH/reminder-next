@@ -141,9 +141,7 @@ border: 1px solid blue;
 .ant-divider-horizontal{
   margin: 0 !important;
 }
-.ant-modal-wrap{
-  /* pointer-events: none !important; */
-}
+
 .profile_card{
   background-color: var(--profile-background);
   transition: all 1s ease-in-out;
@@ -223,17 +221,12 @@ height: 38px;
 .ant-drawer-close >span> svg{
   fill: var(--text-color) ;
 }
-.mcard{
 
-}
 .mcard-head{
   position: relative;
 }
 
 .mcard-title-btn{
-  /* paint-order: stroke fill ; */
-  /* -webkit-text-stroke: 1px #777;
-  font-weight: 800; */
   color: #e4e4e7;
   cursor: pointer;
   display: flex;
@@ -254,6 +247,7 @@ height: 38px;
 .mcard-content{
   background-color: var(--card-color);
   min-height: 60px;
+  transition: all 1s ease-in-out;
 }
 .mcard-footer {
   background-color: var(--card-color);
@@ -261,6 +255,7 @@ height: 38px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: all 1s ease-in-out;
 }
 .formWrapper{
   background-color: var(--login-background);
@@ -274,14 +269,42 @@ height: 38px;
 .footer-btn-wrap >button{
   padding: 8px;
 }
+.ant-modal-header{
+  margin: 0 !important;
+}
+.modal-collection-name{
+margin-bottom: 16px;
+}
+
+.task-modal{
+}
 .task-modal > div>.ant-modal-content{
   height: 450px;
   width: 380px;
 }
+.ant-modal-content{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 
+}
+.task-modal-w1{
+  /* display: flex;
+  flex-direction: column;
+  gap: 4px; */
+}
 .task-modal > div{
 display: flex;
 justify-content: center;
 align-items: center;
 
+}
+.task-modal > div>.ant-modal-content>.task-create{
+  margin-top: auto;
+}
+
+.modal-form {
+  display: grid;
+  gap: 22px;
+  grid-template-rows: 140px 50px auto;
 }

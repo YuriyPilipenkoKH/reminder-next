@@ -25,13 +25,13 @@ function CollectionCard({collection} :Props) {
     const [isLoading, startTransition] = useTransition()
     const [isNewTaskModalOpen, setNewTaskModalOpen] = useState(false);
 
-    const {tasks} = collection 
+    const {tasks, name} = collection 
     const router = useRouter()
 
     const toggleNewTaskModal = () => {
         setNewTaskModalOpen(!isNewTaskModalOpen);
       };
-
+console.log('collection ',collection )
     // const totalTasks = collection.tasks.length
     // const tasksDone = useMemo(() => {
     //     return collection.tasks.filter(task => task.done).length
@@ -90,6 +90,7 @@ function CollectionCard({collection} :Props) {
         )}
 
      <NewTaskModal 
+      name={name}
      visible={isNewTaskModalOpen}
       onClose={toggleNewTaskModal}/>
     </div>

@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'antd';
+import capitalize from '@/lib/capitalize';
 
 interface Props {
     visible: boolean;
     onClose: () => void;
+    name: string;
   }
 
-  const NewTaskModal: React.FC<Props> = ({ visible, onClose }) => {
+  const NewTaskModal: React.FC<Props> = ({ visible, onClose, name }) => {
 
 
   const submit = () => {
-    
+
   }
 
   const handleCancel = () => {
@@ -27,20 +29,20 @@ interface Props {
         onCancel={handleCancel}
         footer={[ ]}
       >
-             <h1>
-                NAME
-            </h1>
             <div className='task-modal-w1'>
-                <span>Add a task to your collection</span>
+             <h1 className='modal-collection-name'>
+             {capitalize(name)}
+            </h1>
+                <span>Add a task to your collection</span><br />
                 <span>You can add as many tasks as you want</span>
             </div>
-            <form >
+            <form className='modal-form'>
 
             <div className='task-modal-w2'>
                 <h3>Content </h3>
                 <label >
                     <textarea 
-                    className="resize-none" 
+                    className="resize-none w-full" 
                     rows={5}
                     placeholder="Task conternt here">
                     </textarea>
@@ -54,7 +56,10 @@ interface Props {
                     type="datetime-local" />
                 </label>
             </div>
-          <button type="submit"  onClick={submit}>
+          <button 
+          className='authbtn task-create'
+          type="submit"  
+          onClick={submit}>
            Submit
            </button>
           </form>
