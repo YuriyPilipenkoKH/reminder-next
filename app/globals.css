@@ -143,6 +143,7 @@ border: 1px solid blue;
 }
 .profile_card{
   background-color: var(--profile-background);
+  transition: all 1s ease-in-out;
 }
 
 .pageWrapper{
@@ -213,13 +214,59 @@ height: 38px;
   scale: 2;
   fill: #777;
 }
+.mdrawer .ant-drawer-title{
+  color: var(--text-color) ;
+}
+.ant-drawer-close >span> svg{
+  fill: var(--text-color) ;
+}
+.mcard{
 
-.mcard-title{
+}
+.mcard-head{
+  position: relative;
+}
+
+.mcard-title-btn{
   /* paint-order: stroke fill ; */
   /* -webkit-text-stroke: 1px #777;
   font-weight: 800; */
-  color: #ccc;
+  color: #e4e4e7;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  padding: 2px 60px 2px 30px;
+}
+.mcard-head>svg{
+  pointer-events: none;
+}
+.mcard-title-arrow{
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  /* transform: rotate(180deg); */
+
+}
+.mcard-content{
+  background-color: var(--card-color);
+  min-height: 60px;
+}
+.mcard-footer {
+  background-color: var(--card-color);
+  padding: 8px 20px;
+  display: flex;
+  justify-content: space-between;
 }
 .formWrapper{
   background-color: var(--login-background);
+}
+.footer-btn-wrap{
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+}
+.footer-btn-wrap >button{
+  padding: 8px;
 }

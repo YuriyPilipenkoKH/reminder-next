@@ -32,8 +32,9 @@ const SubDrawer: React.FC = () => {
       </button>
     </div>
       <Drawer 
+      className='mdrawer'
       title="Add new collection" 
-      style={{backgroundColor:"#555"}}
+      style={{backgroundColor:"var(--background-color)", color: 'var(--text-color)'}}
       onClose={onClose} 
       open={open}>
 
