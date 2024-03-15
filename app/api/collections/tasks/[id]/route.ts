@@ -7,10 +7,13 @@ connectMongoDB()
 export async function DELETE(req:NextRequest,  {params}: {params: {id: string}} ) {
     try {
         const {id} = params
-        const response = await Collection.findByIdAndDelete(id)
+        const reqBody = await req.json()
+        const { collectionId} = reqBody
+        const response = await Collection.find(collectionId)
+        console.log(response)
  
         return NextResponse.json({
-            message: `Collection  deleted`,
+            // message: `Task  deleted`,
             success: true,
         })
     } 

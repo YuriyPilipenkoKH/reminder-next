@@ -10,6 +10,7 @@ import axios from 'axios';
 import UserContext, { UserContextType } from '@/context/UserContext';
 import CollectionTypes from '@/models/CollectionTypes';
 import toast from 'react-hot-toast';
+import { v4 as uuidv4 } from 'uuid';
 
 interface Props {
     visible: boolean;
@@ -52,10 +53,12 @@ interface Props {
         expiryDate = new Date(data.expiresAt);
     }
         try {
+          const taskId = uuidv4(); // Generate a UUID for the task
             const response = await axios.patch("/api/collections/addtask", {
                 content: data.content,
                 expiresAt: expiryDate,
-                collectionId: collection._id
+                collectionId: collection._id,
+                _id: 'j55' // Assign the generated UUID as the task ID
             })
             toast.success(`success task`)
             // console.log(response.data)

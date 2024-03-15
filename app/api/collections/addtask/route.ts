@@ -9,7 +9,7 @@ export async function PATCH(req:NextRequest) {
     try {
       
         const reqBody = await req.json()
-        const {content, expiresAt, collectionId} = reqBody
+        const {content, expiresAt, collectionId, _id} = reqBody
         // console.log(reqBody)
 
         // Find the collection by ID
@@ -22,7 +22,7 @@ export async function PATCH(req:NextRequest) {
                  { status: 404 });
         }
         // Push reqBody object to tasks array
-        collection.tasks.push({ content, expiresAt });
+        collection.tasks.push({ content, expiresAt, _id });
 
         // Save the updated collection
         await collection.save();
