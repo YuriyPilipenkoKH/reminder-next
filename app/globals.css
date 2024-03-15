@@ -9,10 +9,82 @@
   @tailwind utilities;
 }
 
+:root {
+  --accent-color: #ff8356;
+  --fone-color: #fef9f9;
+
+  --yellow: #ffc107;
+  --white: #ffffff;
+  --white-bg: #fdf7f2;
+
+  --black: #111111;
+  --medium-blue: #76bcf9;
+  --blue: #54adff;
+  --light-blue: #cce4fb;
+  --green: #00c3ad;
+  --red: #f43f5e;
+  --grey: #888888;
+
+  --gradient-yr: #ff5f40;
+  --gradient-yl: #ffcf45;
+  --gradient-bl: #88c7fc;
+  --gradient-br: #4da5f3;
+    
+  --time: 250ms;
+  --shadow-default: 3px 8px 14px 0px #88C6FD30;
+  --shadow-hover: 7px 13px 14px 0px #74B1E83D;
+
+  --background-color: #a3a29a;
+  --background-link: transparent;
+  --text-color: #1C1E21;
+  --card-color: #fff;
+  --profile-background: #d4d4d8;
+  --login-background: #f8fafc;
+  
+  --field-color: #eeeeee;
+  --border: 3px solid transparent;
+  --button-color-loguut: #333;
+  --background-color-form: #fff;
+  --background-color-input: #fff;
+  --input-text-color: #888888;
+  --input-background: #cbd5e1;
+  --placeholder-input-color: #888; 
+  --button-color-option: #54adff;
+
+  --main-text:  #001129;
+  --link-span:  #ffc107;
+}
+
+:root.dark {
+  --background-color: #0f172a;
+  --background-link: #ff75;
+  --text-color: #f5f6f7cc;
+  --card-color: #9994;
+  --profile-background: #777;
+  --login-background: #183250;
+
+  --field-color: #eee5;
+  --border: 3px solid var(--blue);
+  --button-color-loguut: #54adff;
+  --background-color-form: #1E325C;
+  --background-color-input: #1E325C;
+  --input-text-color: white;
+  --input-background: #334155;
+  --placeholder-input-color: #E0FFFF; 
+  --button-color-option: #003366;
+  
+  --main-text:  #001129;
+  --link-span:  #54adff;
+
+}
+
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background-color: #777;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: all 1s ease-in-out;
 }
 
 * {
@@ -69,8 +141,8 @@ border: 1px solid blue;
 .ant-divider-horizontal{
   margin: 0 !important;
 }
-.h-screen{
-  /* height: 600px; */
+.profile_card{
+  background-color: var(--profile-background);
 }
 
 .pageWrapper{
@@ -81,7 +153,9 @@ border: 1px solid blue;
 }
 
 .authinput{
-@apply border border-solid border-gray-600 rounded-lg py-2 px-4 bg-slate-300 w-full focus:outline-none focus:border-blue-500 h-[38px]
+@apply border border-solid border-gray-600 rounded-lg py-2 px-4 bg-slate-300 w-full focus:outline-none focus:border-blue-500 h-[38px];
+background-color: var(--input-background);
+
  }
 
 .authbtn{
@@ -115,9 +189,10 @@ height: 38px;
 }
 .moption{
 
-color: #eee;
-height: 20px;
-z-index: 4;
+  color: #ccc;
+  font-weight: 600;
+  height: 20px;
+  z-index: 4;
 }
 .arrow{
   position: absolute;
@@ -137,4 +212,14 @@ z-index: 4;
 .arrow>svg {
   scale: 2;
   fill: #777;
+}
+
+.mcard-title{
+  /* paint-order: stroke fill ; */
+  /* -webkit-text-stroke: 1px #777;
+  font-weight: 800; */
+  color: #ccc;
+}
+.formWrapper{
+  background-color: var(--login-background);
 }

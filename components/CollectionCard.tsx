@@ -1,13 +1,14 @@
 "use client"
 
 import capitalize from "@/lib/capitalize"
+import { CollectionColor, CollectionColors } from "@/lib/constants"
+import { cn } from "@/lib/utils"
 import CollectionTypes from "@/models/CollectionTypes"
 import Task from "@/models/TaskTypes"
 import { useRouter } from "next/navigation"
 import { useMemo, useState, useTransition } from "react"
 import toast from "react-hot-toast"
 
-// console.log(Collection , Task)
 
 interface Props {
     collection: CollectionTypes & {
@@ -21,7 +22,7 @@ function CollectionCard({collection} :Props) {
     const [isLoading, startTransition] = useTransition()
     const {tasks} = collection 
     const router = useRouter()
-    console.log('collection', collection)
+
 
 
     // const totalTasks = collection.tasks.length
@@ -42,8 +43,13 @@ function CollectionCard({collection} :Props) {
     }
 
   return (
-    <div className="py-4 border-2 font-bold text-zinc-200 rounded-md">
-        {capitalize(collection?.name)}
+    <div
+
+    className={cn(`mcard py-4 border-2  text-zinc-200 rounded-md`,
+    CollectionColors[collection.color as CollectionColor]
+    )}
+    >
+        <h2 className="mcard-title font-bold">{capitalize(collection?.name)}</h2>
     </div>
   
   )

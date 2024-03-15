@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import UserContext, { UserContextType } from "@/context/UserContext";
 import BoolIcon from "./icons/BoolIcon";
 
@@ -22,6 +22,7 @@ function LoginForm() {
         handleSubmit,
         formState,
         reset,
+        watch
     } = useForm<LogInput>({
         defaultValues: {
             email: '',
@@ -58,6 +59,11 @@ function LoginForm() {
         toast.error(error.message)
      }
     };
+    const watchedUserEmail = watch('email')
+    const watchedUserPassword = watch('password')
+    useEffect(() => {
+        setLogError('')
+    }, [watchedUserEmail, watchedUserPassword])
     
   return (
     <div className="pageWrapper">

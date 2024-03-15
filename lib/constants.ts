@@ -6,7 +6,7 @@ export enum CollectionColors {
     candy = "bg-gradient-to-r from-yellow-400 via-pink-500 to-red-500",
     firtree = "bg-gradient-to-r from-emerald-500 to-emerald-900",
     metal = "bg-gradient-to-r from-slate-500 to-slate-800",
-    powder = "bg-gradient-to-r from-violet-200 to-pink-200",
+    powder = "bg-gradient-to-r from-violet-400 to-pink-400",
 }
 
 export type CollectionColor = keyof typeof CollectionColors;
