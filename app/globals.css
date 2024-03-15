@@ -279,7 +279,7 @@ margin-bottom: 16px;
 .task-modal{
 }
 .task-modal > div>.ant-modal-content{
-  height: 450px;
+  height: 480px;
   width: 380px;
 }
 .ant-modal-content{

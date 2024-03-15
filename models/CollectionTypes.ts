@@ -1,7 +1,7 @@
 import Task from "./TaskTypes";
 
 type CollectionTypes = {
-    id: string;
+    _id: string;
     name: string;
     color: string;
     userId: string;

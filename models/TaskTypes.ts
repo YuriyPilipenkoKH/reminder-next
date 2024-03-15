@@ -1,5 +1,5 @@
 type Task = {
-    id: string;
+    _id: string;
     collectionId: string;
     content: string;
     expiresAt: Date | null;

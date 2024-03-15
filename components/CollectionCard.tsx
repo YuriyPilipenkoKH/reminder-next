@@ -7,12 +7,15 @@ import CollectionTypes from "@/models/CollectionTypes"
 import Task from "@/models/TaskTypes"
 import { Divider } from "antd"
 import { useRouter } from "next/navigation"
-import { useMemo, useState, useTransition } from "react"
+import { useContext, useMemo, useState, useTransition } from "react"
 import toast from "react-hot-toast"
 import { MdKeyboardArrowDown } from "react-icons/md"
 import { TfiTrash } from "react-icons/tfi";
 import { BsPlusSquare } from "react-icons/bs";
 import NewTaskModal from "./NewTaskModal"
+import { format } from 'date-fns';
+import UserContext, { UserContextType } from "@/context/UserContext"
+import axios from "axios"
 
 interface Props {
     collection: CollectionTypes & {
@@ -24,29 +27,32 @@ function CollectionCard({collection} :Props) {
     const [isOpen, setIsOpen] = useState(false)
     const [isLoading, startTransition] = useTransition()
     const [isNewTaskModalOpen, setNewTaskModalOpen] = useState(false);
-
-    const {tasks, name} = collection 
+    const { user , setReRender} = useContext(UserContext as React.Context<UserContextType>);
+    const {tasks } = collection 
     const router = useRouter()
 
     const toggleNewTaskModal = () => {
         setNewTaskModalOpen(!isNewTaskModalOpen);
       };
-console.log('collection ',collection )
+// console.log('collection ',collection )
     // const totalTasks = collection.tasks.length
     // const tasksDone = useMemo(() => {
     //     return collection.tasks.filter(task => task.done).length
     // }, [collection.tasks])
     // const progress = totalTasks === 0  ? 0 :  (tasksDone / totalTasks) * 100
 
-    const removeCollection = async() => {
+    const removeCollection = async( id:string) => {
         try {
-            // await deleteCollection(collection.id)
-            toast.success(`success` )
-            router.refresh()
-            }
-            catch (error:any) {
-                toast.error(error.message)
+            const response = await axios.delete(`/api/collections/dumpster/${id}`);
+            toast.success(`Collection ${collection.name} Deleted`)
+            // console.log(response.data)
+
+            setReRender((prev:boolean)=>!prev)
         }
+         catch (error:any) {
+            console.log("Trashing failed",error)
+            toast.error(error.message)
+         }
     }
 
   return (
@@ -69,9 +75,23 @@ console.log('collection ',collection )
         {isOpen && (
             
         <>
-            <div className="mcard-content">
-                <div className="LIST"></div>
-            </div>
+        <div className="mcard-content flex flex-col gap-4 py-2 pl-6 pr-40">
+            {tasks && tasks.length > 0 ? (
+                tasks.map(task => (
+                    <div key={task._id} className="flex items-center align-middle justify-between gap-6 text-[0.9rem]">
+                        <span className="bg-sky-200">{task?.content}</span>
+                        <span className="bg-sky-200"> 
+                            {task?.expiresAt 
+                                ? format(new Date(task.expiresAt), 'MMMM dd, yyyy') // Format the date
+                                : 'No expiration date'
+                            }
+                        </span>
+                    </div>
+                ))
+            ) : (
+                <div>No tasks available</div>
+            )}
+        </div>
                 <Divider/>
             <div className="mcard-footer">
                 <h3>Created at</h3>
@@ -81,7 +101,7 @@ console.log('collection ',collection )
                     >
                     <BsPlusSquare />
                     </button>
-                    <button>
+                    <button onClick={() => removeCollection(collection._id)}>
                     <TfiTrash />
                     </button>
                 </div>
@@ -90,8 +110,8 @@ console.log('collection ',collection )
         )}
 
      <NewTaskModal 
-      name={name}
-     visible={isNewTaskModalOpen}
+        collection={collection}
+      visible={isNewTaskModalOpen}
       onClose={toggleNewTaskModal}/>
     </div>
   

@@ -10,7 +10,7 @@ export async function POST(req:NextRequest) {
       
         const reqBody = await req.json()
         const {name, color, userId} = reqBody
-        console.log(reqBody)
+        // console.log(reqBody)
 
         // collection exists
         const collection = await Collection.findOne({name})

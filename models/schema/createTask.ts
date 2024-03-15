@@ -2,16 +2,15 @@ import { z } from "zod";
 
 
 export const createTaskSchema = z.object({
-    collectionId: z
-    .number()
-    .nonnegative(),
+
     content: z
     .string()
-    .min(8, "Task content must be at least 8 characters"),
+    .min(4, "Task content must be at least 4 characters long"),
     expiresAt: z
-    .date()
+    .string()
     .optional(),
 
 })
 export type createTaskSchemaType = z.infer<typeof createTaskSchema>
+
 

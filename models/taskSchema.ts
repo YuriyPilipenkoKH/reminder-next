@@ -8,7 +8,7 @@ const taskSchema = new mongoose.Schema({
     },
     content: {
         type: String,
-        minlength: 6,
+        minlength: 4,
         required: true
     },
     createdAt: {

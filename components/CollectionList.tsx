@@ -34,7 +34,7 @@ function CollectionList() {
   return (
     <div className="flex flex-col w-full gap-4 mt-6">
       {collectionsOfCurrentUser.map((collection) => (
-        <CollectionCard key={collection.id} collection={collection} />
+        <CollectionCard key={collection._id} collection={collection} />
       ))}
     </div>
   );
