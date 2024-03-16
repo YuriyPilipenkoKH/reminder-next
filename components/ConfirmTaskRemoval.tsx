@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Button, Modal } from 'antd';
+import { Button, Modal, Tooltip } from 'antd';
 import { TfiTrash } from "react-icons/tfi";
 import axios from 'axios';
 import capitalize from '@/lib/capitalize';
@@ -54,12 +54,14 @@ const ConfirmTaskRemoval: React.FC<ConfirmTaskRemovalProps> = ({collection, task
     const ty = `Are you sure deleting ${words}.... `
 
   return (
-    <>
+    <> 
+    <Tooltip title="Delete" color={'#f00c'} placement="top">
       <Button  
       className="mcard-content-btn"
       onClick={showModal}>
       <TfiTrash />
       </Button>
+    </Tooltip>
       <Modal 
       title={ty}
       open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>

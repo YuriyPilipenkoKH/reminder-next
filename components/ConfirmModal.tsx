@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import UserContext, { UserContextType } from '@/context/UserContext';
-import { Button, Modal } from 'antd';
+import { Button, Modal, Tooltip } from 'antd';
 import { TfiTrash } from "react-icons/tfi";
 import axios from 'axios';
 import capitalize from '@/lib/capitalize';
@@ -46,9 +46,13 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({collection}) => {
 
   return (
     <>
+    <Tooltip title="Delete Collecttion" color={'#f00c'} placement="top">
+
       <Button  onClick={showModal}>
       <TfiTrash />
       </Button>
+    </Tooltip>
+
       <Modal 
       title={ty}
       open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>

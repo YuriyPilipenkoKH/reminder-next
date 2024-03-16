@@ -5,7 +5,7 @@ import { CollectionColor, CollectionColors } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 import CollectionTypes from "@/models/CollectionTypes"
 import Task from "@/models/TaskTypes"
-import { Button, Checkbox, CheckboxProps, Divider } from "antd"
+import { Button, Checkbox, CheckboxProps, Divider, Tooltip } from "antd"
 import { useRouter } from "next/navigation"
 import { useContext, useEffect, useMemo, useState, useTransition } from "react"
 import toast from "react-hot-toast"
@@ -78,11 +78,13 @@ function CollectionCard({collection} :Props) {
                 {format(new Date(collection?.createdAt || ''), 'dd.MM.yyyy HH:mm')}
                 </span>
                 <div className="footer-btn-wrap">
+                <Tooltip title="Add Task" color={'#006effcc'} placement="top">
                     <Button 
                     onClick={toggleNewTaskModal} 
                     >
                     <BsPlusSquare />
                     </Button>
+                </Tooltip>
                     <ConfirmModal collection = {collection}/>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-import { Button, Checkbox , CheckboxProps, Popover,} from 'antd'
+import { Button, Checkbox , CheckboxProps, Popover, Tooltip,} from 'antd'
 import UserContext, { UserContextType } from "@/context/UserContext";
 import { useContext } from "react";
 import ConfirmTaskRemoval from "./ConfirmTaskRemoval"
@@ -66,16 +66,14 @@ function TaskElement({collection, task} :Props) {
                 : 'no expiration'
             }
         </div>
-        {/* <Button className="mcard-content-btn">
-         
-        </Button> */}
+      
         <ConfirmTaskEditing 
              collection = {collection} 
              task = {task}/>
         <ConfirmTaskRemoval 
-        collection = {collection} 
-        task = {task}/>
-    </div>
+            collection = {collection} 
+            task = {task}/>
+      </div>
   )
 }
 

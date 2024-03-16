@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import UserContext, { UserContextType } from '@/context/UserContext';
-import { Button, Modal } from 'antd';
+import { Button, Modal, Tooltip } from 'antd';
 import CollectionTypes from '@/models/CollectionTypes';
 import Task from '@/models/TaskTypes';
 import { GrEdit } from "react-icons/gr";
@@ -97,12 +97,15 @@ if (data.expiresAt !== undefined) {
 
   return (
     <>
-      <Button 
-      disabled={task?.done}
-      className="mcard-content-btn"
-      onClick={showModal}>
-      <GrEdit />
-      </Button>
+      <Tooltip title="Edit" color={'#037305dd'} >
+        <Button 
+        disabled={task?.done}
+        className="mcard-content-btn"
+        onClick={showModal}>
+        <GrEdit />
+        </Button>
+     </Tooltip>
+
       <Modal className='task-modal'
         open={open}
         title={(isLoading || isSubmitting) 
