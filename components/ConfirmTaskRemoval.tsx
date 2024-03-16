@@ -8,13 +8,12 @@ import Task from '@/models/TaskTypes';
 import toast from 'react-hot-toast';
 import UserContext, { UserContextType } from '@/context/UserContext';
 
-interface ConfirmModalProps {
-    collection: CollectionTypes & {
-        tasks: Task[]
-    }
+interface ConfirmTaskRemovalProps {
+    collection: CollectionTypes 
+     task: Task
 }
 
-const ConfirmModal: React.FC<ConfirmModalProps> = ({collection}) => {
+const ConfirmTaskRemoval: React.FC<ConfirmTaskRemovalProps> = ({collection, task}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { user , setReRender, reRender} = useContext(UserContext as React.Context<UserContextType>);
 
@@ -23,18 +22,24 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({collection}) => {
   };
 
   const handleOk = () => {
-    removeCollection(collection._id)
+    // removeCollection(collection._id)
+    removeTask(task._id, collection._id)
     setIsModalOpen(false);
   };
 
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-
-  const removeCollection = async( id:string) => {
+  
+  const removeTask = async( id:string, collectionId:string,) => {
     try {
-        const response = await axios.delete(`/api/collections/dumpster/${id}`);
-        toast.success(`Collection ${capitalize(collection?.name)} deleted`)
+        console.log('task id',id)
+        const response = await axios.delete(`/api/collections/tasks/${id}`,
+        {
+            data: { collectionId } // Pass collectionId in the request body
+        }
+        );
+        toast.success(`Task deleted`)
         setReRender(!reRender)
     }
      catch (error:any) {
@@ -42,7 +47,9 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({collection}) => {
         toast.error(error.message)
      }
 }
-    const ty = `Are you sure deleting ${capitalize(collection?.name)} ?`
+
+
+    const ty = `Are you sure deleting ${capitalize(task?.content)}.... `
 
   return (
     <>
@@ -53,7 +60,8 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({collection}) => {
       title={ty}
       open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
         <div className='flex flex-col gap-6'>
-            <p>There will be no return...</p>
+            <p className='text-xs font-semibold'>From {capitalize(collection?.name)} ?</p>
+            <p>There will be no return</p>
         </div>
 
       </Modal>
@@ -61,4 +69,4 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({collection}) => {
   );
 };
 
-export default ConfirmModal;
+export default ConfirmTaskRemoval;

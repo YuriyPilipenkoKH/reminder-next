@@ -18,6 +18,7 @@ import { format } from 'date-fns';
 import UserContext, { UserContextType } from "@/context/UserContext"
 import axios from "axios"
 import ConfirmModal from "./ConfirmModal"
+import ConfirmTaskRemoval from "./ConfirmTaskRemoval"
 
 interface Props {
     collection: CollectionTypes & {
@@ -45,22 +46,7 @@ function CollectionCard({collection} :Props) {
     // const progress = totalTasks === 0  ? 0 :  (tasksDone / totalTasks) * 100
 
 
-    const removeTask = async( id:string, collectionId:string,) => {
-        try {
-            console.log('task id',id)
-            const response = await axios.delete(`/api/collections/tasks/${id}`,
-            {
-                data: { collectionId } // Pass collectionId in the request body
-            }
-            );
-            toast.success(`Task deleted`)
-            setReRender(!reRender)
-        }
-         catch (error:any) {
-            console.log("Trashing failed",error)
-            toast.error(error.message)
-         }
-    }
+
 
   return (
     <div className="mcard">
@@ -96,9 +82,9 @@ function CollectionCard({collection} :Props) {
                         <button >
                           <GrEdit />
                         </button>
-                        <button onClick={() => removeTask(task._id,collection._id)}>
-                          <TfiTrash />
-                        </button>
+                        <ConfirmTaskRemoval 
+                        collection = {collection} 
+                        task = {task}/>
                     </div>
                 ))
             ) : (
