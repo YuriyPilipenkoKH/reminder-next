@@ -5,7 +5,7 @@ import { CollectionColor, CollectionColors } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 import CollectionTypes from "@/models/CollectionTypes"
 import Task from "@/models/TaskTypes"
-import { Divider } from "antd"
+import { Button, Divider } from "antd"
 import { useRouter } from "next/navigation"
 import { useContext, useEffect, useMemo, useState, useTransition } from "react"
 import toast from "react-hot-toast"
@@ -17,6 +17,7 @@ import NewTaskModal from "./NewTaskModal"
 import { format } from 'date-fns';
 import UserContext, { UserContextType } from "@/context/UserContext"
 import axios from "axios"
+import ConfirmModal from "./ConfirmModal"
 
 interface Props {
     collection: CollectionTypes & {
@@ -43,17 +44,7 @@ function CollectionCard({collection} :Props) {
     // }, [collection.tasks])
     // const progress = totalTasks === 0  ? 0 :  (tasksDone / totalTasks) * 100
 
-    const removeCollection = async( id:string) => {
-        try {
-            const response = await axios.delete(`/api/collections/dumpster/${id}`);
-            toast.success(`Collection ${capitalize(collection.name)} deleted`)
-            setReRender(!reRender)
-        }
-         catch (error:any) {
-            console.log("Trashing failed",error)
-            toast.error(error.message)
-         }
-    }
+
     const removeTask = async( id:string, collectionId:string,) => {
         try {
             console.log('task id',id)
@@ -70,9 +61,6 @@ function CollectionCard({collection} :Props) {
             toast.error(error.message)
          }
     }
-    // useEffect(() => {
-       
-    //   }, [reRender]);
 
   return (
     <div className="mcard">
@@ -121,14 +109,12 @@ function CollectionCard({collection} :Props) {
             <div className="mcard-footer">
                 <h3>Created at</h3>
                 <div className="footer-btn-wrap">
-                    <button 
+                    <Button 
                     onClick={toggleNewTaskModal} 
                     >
                     <BsPlusSquare />
-                    </button>
-                    <button onClick={() => removeCollection(collection._id)}>
-                    <TfiTrash />
-                    </button>
+                    </Button>
+                    <ConfirmModal collection = {collection}/>
                 </div>
             </div>
         </>
@@ -138,8 +124,10 @@ function CollectionCard({collection} :Props) {
         collection={collection}
       visible={isNewTaskModalOpen}
       onClose={toggleNewTaskModal}/>
+
     </div>
-  )
+)
+
 }
 
 export default CollectionCard
