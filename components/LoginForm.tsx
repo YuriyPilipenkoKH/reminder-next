@@ -16,7 +16,7 @@ function LoginForm() {
     const [show, setShow] = useState(true)
     
     const router = useRouter();
-    const { setUser ,setReRender} = useContext(UserContext as React.Context<UserContextType>);
+    const { setUser ,setReRender, reRender} = useContext(UserContext as React.Context<UserContextType>);
     const {
         register, 
         handleSubmit,
@@ -50,7 +50,7 @@ function LoginForm() {
         reset()
         console.log("Login success", response.data)
         // setUser(data)
-        setReRender((prev:boolean)=>!prev)
+        setReRender(!reRender)
         router.push('/dashboard')
     } 
     catch (error:any) {

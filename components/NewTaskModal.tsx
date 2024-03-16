@@ -10,7 +10,7 @@ import axios from 'axios';
 import UserContext, { UserContextType } from '@/context/UserContext';
 import CollectionTypes from '@/models/CollectionTypes';
 import toast from 'react-hot-toast';
-import { v4 as uuidv4 } from 'uuid';
+import { nanoid } from 'nanoid';
 
 interface Props {
     visible: boolean;
@@ -20,7 +20,7 @@ interface Props {
 
   const NewTaskModal: React.FC<Props> = ({ visible, onClose, collection }) => {
     const [logError, setLogError] = useState('')
-    const { user , setReRender} = useContext(UserContext as React.Context<UserContextType>);
+    const { user , setReRender, reRender} = useContext(UserContext as React.Context<UserContextType>);
     const {
         register, 
         handleSubmit,
@@ -44,8 +44,7 @@ interface Props {
     } = formState
 
     const onSubmit = async (data: createTaskSchemaType) => {
-        
-        console.log('Submit', data);
+        // console.log('Submit', data);
           
     // Convert expiresAt string to Date object if it's not undefined
     let expiryDate: Date | undefined;
@@ -53,18 +52,18 @@ interface Props {
         expiryDate = new Date(data.expiresAt);
     }
         try {
-          const taskId = uuidv4(); // Generate a UUID for the task
+          const taskId = nanoid(15); // Generate a ID for the task
             const response = await axios.patch("/api/collections/addtask", {
                 content: data.content,
                 expiresAt: expiryDate,
                 collectionId: collection._id,
-                _id: 'j55' // Assign the generated UUID as the task ID
+                _id: taskId 
             })
-            toast.success(`success task`)
+            toast.success(`Another crucial task`)
             // console.log(response.data)
             reset()
             onClose();
-            setReRender((prev:boolean)=>!prev)
+            setReRender(!reRender)
         }
          catch (error:any) {
             console.log("Creation failed",error)

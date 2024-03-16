@@ -31,6 +31,7 @@ function CollectionCard({collection} :Props) {
     const { user , setReRender, reRender} = useContext(UserContext as React.Context<UserContextType>);
     const {tasks } = collection 
     const router = useRouter()
+    console.log('tasks', tasks)
 
     const toggleNewTaskModal = () => {
         setNewTaskModalOpen(!isNewTaskModalOpen);
@@ -46,7 +47,7 @@ function CollectionCard({collection} :Props) {
         try {
             const response = await axios.delete(`/api/collections/dumpster/${id}`);
             toast.success(`Collection ${capitalize(collection.name)} deleted`)
-            setReRender((prev:boolean)=>!prev)
+            setReRender(!reRender)
         }
          catch (error:any) {
             console.log("Trashing failed",error)
@@ -55,14 +56,14 @@ function CollectionCard({collection} :Props) {
     }
     const removeTask = async( id:string, collectionId:string,) => {
         try {
-            console.log(id)
-            const response = await axios.delete(`/api/collections/tasks/j55`,
+            console.log('task id',id)
+            const response = await axios.delete(`/api/collections/tasks/${id}`,
             {
                 data: { collectionId } // Pass collectionId in the request body
             }
             );
             toast.success(`Task deleted`)
-            setReRender((prev:boolean)=>!prev)
+            setReRender(!reRender)
         }
          catch (error:any) {
             console.log("Trashing failed",error)
@@ -91,16 +92,16 @@ function CollectionCard({collection} :Props) {
             <MdKeyboardArrowDown className="mcard-title-arrow" size={40} />
         </div>
         {isOpen && (
-            
         <>
         <div className="mcard-content flex flex-col gap-4 py-2 px-6">
             {tasks && tasks.length > 0 ? (
                 tasks.map(task => (
+
                     <div key={task._id} className="flex items-center align-middle justify-between gap-6 text-[1rem]">
                         <span className="">{task?.content}</span>
                         <span className=""> 
                             {task?.expiresAt 
-                                ? format(new Date(task.expiresAt), 'MM.dd.yyyy') 
+                                ? format(new Date(task.expiresAt), 'dd.MM.yyyy') 
                                 : 'No expiration date'
                             }
                         </span>
@@ -138,7 +139,6 @@ function CollectionCard({collection} :Props) {
       visible={isNewTaskModalOpen}
       onClose={toggleNewTaskModal}/>
     </div>
-  
   )
 }
 
