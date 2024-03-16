@@ -27,8 +27,12 @@ export async function PATCH(req:NextRequest ) {
             );
         }
 
-        // Update the task object with done: true
-        collection.tasks[taskIndex].done = true;
+        // Update the task object with done: true using spread operator
+        collection.tasks[taskIndex] = {
+            ...collection.tasks[taskIndex],
+            done: true
+        };
+
 
         // Save the collection with the updated task
         await collection.save();

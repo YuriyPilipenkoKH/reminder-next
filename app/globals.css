@@ -341,3 +341,6 @@ place-content: center;
 .box{
   justify-self: center;
 }
+.edit-modal-form{
+  height: 260px;
+}

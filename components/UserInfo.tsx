@@ -1,12 +1,12 @@
 "use client"
 
 import UserContext, { UserContextType } from "@/context/UserContext";
+import { useContext, useEffect, useState } from "react";
 import capitalize from "@/lib/capitalize";
 import { Cross1Icon } from "@radix-ui/react-icons";
 import { Button } from "@radix-ui/themes";
 import axios from "axios"
 import { useRouter } from "next/navigation";
-import { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast"
 
 interface UserData {

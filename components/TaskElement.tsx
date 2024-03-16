@@ -1,6 +1,6 @@
 import { Button, Checkbox , CheckboxProps,} from 'antd'
-import React from 'react'
-import { GrEdit } from "react-icons/gr";
+import UserContext, { UserContextType } from "@/context/UserContext";
+import { useContext } from "react";
 import ConfirmTaskRemoval from "./ConfirmTaskRemoval"
 import { format } from 'date-fns';
 import CollectionTypes from '@/models/CollectionTypes';
@@ -8,6 +8,7 @@ import Task from '@/models/TaskTypes';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import ConfirmTaskEditing from './ConfirmTaskEditing';
 
 interface Props {
     collection: CollectionTypes
@@ -15,6 +16,7 @@ interface Props {
 }
 
 function TaskElement({collection, task} :Props) {
+    const {user, setUser, setReRender} = useContext(UserContext as React.Context<UserContextType>)
     const router = useRouter()
 
      const onChange: CheckboxProps['onChange'] = (e) => {
@@ -30,7 +32,7 @@ function TaskElement({collection, task} :Props) {
             { collectionId, id }
             );
             toast.success(`Task done`)
-            router.refresh()
+            setReRender((prev:boolean)=>!prev)
         }
          catch (error:any) {
             console.log("Setting done failed",error)
@@ -60,9 +62,12 @@ function TaskElement({collection, task} :Props) {
                 : 'no expiration'
             }
         </span>
-        <Button className="mcard-content-btn">
-          <GrEdit />
-        </Button>
+        {/* <Button className="mcard-content-btn">
+         
+        </Button> */}
+        <ConfirmTaskEditing 
+             collection = {collection} 
+             task = {task}/>
         <ConfirmTaskRemoval 
         collection = {collection} 
         task = {task}/>

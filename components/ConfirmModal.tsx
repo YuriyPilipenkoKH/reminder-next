@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import UserContext, { UserContextType } from '@/context/UserContext';
 import { Button, Modal } from 'antd';
 import { TfiTrash } from "react-icons/tfi";
 import axios from 'axios';
@@ -6,7 +7,6 @@ import capitalize from '@/lib/capitalize';
 import CollectionTypes from '@/models/CollectionTypes';
 import Task from '@/models/TaskTypes';
 import toast from 'react-hot-toast';
-import UserContext, { UserContextType } from '@/context/UserContext';
 
 interface ConfirmModalProps {
     collection: CollectionTypes & {
