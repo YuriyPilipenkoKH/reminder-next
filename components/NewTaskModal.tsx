@@ -59,7 +59,7 @@ interface Props {
                 collectionId: collection._id,
                 _id: taskId 
             })
-            toast.success(`Another crucial task`)
+            toast.success(`Another crucial task added`)
             // console.log(response.data)
             reset()
             onClose();
@@ -81,7 +81,9 @@ interface Props {
       <Modal
         className='task-modal'
         open={visible}
-        title="Add task to collection "
+        title={(isLoading || isSubmitting) 
+          ? "Processing" 
+          : "Add a task to collection"}
         onOk={handleSubmit(onSubmit)} 
         onCancel={handleCancel}
         footer={[ ]}
@@ -90,11 +92,6 @@ interface Props {
              <h1 className='modal-collection-name'>
              {capitalize(collection?.name)}
             </h1>
-                <span>
-                {(isLoading || isSubmitting) 
-                ? "Processing" 
-                : "Add a task to your collection"}
-                </span><br />
                 <span>You can add as many tasks as you want</span>
             </div>
             <form 

@@ -7,6 +7,7 @@ import CollectionTypes from '@/models/CollectionTypes';
 import Task from '@/models/TaskTypes';
 import toast from 'react-hot-toast';
 import UserContext, { UserContextType } from '@/context/UserContext';
+import { wait } from '@/lib/wait';
 
 interface ConfirmTaskRemovalProps {
     collection: CollectionTypes 
@@ -24,13 +25,14 @@ const ConfirmTaskRemoval: React.FC<ConfirmTaskRemovalProps> = ({collection, task
   const handleOk = () => {
     // removeCollection(collection._id)
     removeTask(task._id, collection._id)
+
     setIsModalOpen(false);
   };
 
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  
+
   const removeTask = async( id:string, collectionId:string,) => {
     try {
         console.log('task id',id)
@@ -53,7 +55,9 @@ const ConfirmTaskRemoval: React.FC<ConfirmTaskRemovalProps> = ({collection, task
 
   return (
     <>
-      <Button  onClick={showModal}>
+      <Button  
+      className="mcard-content-btn"
+      onClick={showModal}>
       <TfiTrash />
       </Button>
       <Modal 

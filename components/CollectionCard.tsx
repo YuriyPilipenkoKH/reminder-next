@@ -5,7 +5,7 @@ import { CollectionColor, CollectionColors } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 import CollectionTypes from "@/models/CollectionTypes"
 import Task from "@/models/TaskTypes"
-import { Button, Divider } from "antd"
+import { Button, Checkbox, CheckboxProps, Divider } from "antd"
 import { useRouter } from "next/navigation"
 import { useContext, useEffect, useMemo, useState, useTransition } from "react"
 import toast from "react-hot-toast"
@@ -45,7 +45,9 @@ function CollectionCard({collection} :Props) {
     // }, [collection.tasks])
     // const progress = totalTasks === 0  ? 0 :  (tasksDone / totalTasks) * 100
 
-
+    const onChange: CheckboxProps['onChange'] = (e) => {
+        console.log(`checked = ${e.target.checked}`);
+      };
 
 
   return (
@@ -67,21 +69,33 @@ function CollectionCard({collection} :Props) {
         </div>
         {isOpen && (
         <>
-        <div className="mcard-content flex flex-col gap-4 py-2 px-6">
+        <div className="mcard-content ">
             {tasks && tasks.length > 0 ? (
                 tasks.map(task => (
 
-                    <div key={task._id} className="flex items-center align-middle justify-between gap-6 text-[1rem]">
-                        <span className="">{task?.content}</span>
-                        <span className=""> 
+                    <div 
+                    key={task._id} 
+                    className="row"
+                    // className="flex items-center align-middle justify-between gap-6 text-[1rem]"
+                    >
+                        <Checkbox 
+                        className="box"
+                        onChange={onChange}></Checkbox>
+
+                        <span 
+                        className="mcard-content-text">
+                            {task?.content}
+                        </span>
+                        <span 
+                        className="mcard-content-date"> 
                             {task?.expiresAt 
                                 ? format(new Date(task.expiresAt), 'dd.MM.yyyy') 
                                 : 'No expiration date'
                             }
                         </span>
-                        <button >
+                        <Button className="mcard-content-btn">
                           <GrEdit />
-                        </button>
+                        </Button>
                         <ConfirmTaskRemoval 
                         collection = {collection} 
                         task = {task}/>
@@ -93,7 +107,9 @@ function CollectionCard({collection} :Props) {
         </div>
                 <Divider/>
             <div className="mcard-footer">
-                <h3>Created at</h3>
+                <span className="text-[0.8rem] ">Created at: {' '}
+                {format(new Date(collection?.createdAt || ''), 'dd.MM.yyyy HH:mm')}
+                </span>
                 <div className="footer-btn-wrap">
                     <Button 
                     onClick={toggleNewTaskModal} 

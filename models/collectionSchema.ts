@@ -31,7 +31,7 @@ const collectionSchema = new mongoose.Schema({
     tasks: {
         type: Array
     },
-});
+}, { timestamps: true }); 
 
 // Mongoose model for Collection
 const Collection = mongoose.models.collections || mongoose.model('collections', collectionSchema);
