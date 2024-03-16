@@ -326,6 +326,10 @@ height: 38px;
 
 .mcard-content-text{
  justify-self: start;
+ overflow: hidden !important;
+ text-overflow: ellipsis; 
+ white-space: nowrap; 
+ max-width: 320px;
 }
 .mcard-content-date{
   justify-self: center;

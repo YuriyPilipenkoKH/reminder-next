@@ -98,6 +98,7 @@ if (data.expiresAt !== undefined) {
   return (
     <>
       <Button 
+      disabled={task?.done}
       className="mcard-content-btn"
       onClick={showModal}>
       <GrEdit />
