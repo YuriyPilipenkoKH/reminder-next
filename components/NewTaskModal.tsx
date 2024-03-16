@@ -57,7 +57,8 @@ interface Props {
                 content: data.content,
                 expiresAt: expiryDate,
                 collectionId: collection._id,
-                _id: taskId 
+                _id: taskId ,
+                done: false
             })
             toast.success(`Another crucial task added`)
             // console.log(response.data)

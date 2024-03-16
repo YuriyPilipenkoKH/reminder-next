@@ -7,7 +7,7 @@ import CollectionTypes from '@/models/CollectionTypes';
 import Task from '@/models/TaskTypes';
 import toast from 'react-hot-toast';
 import UserContext, { UserContextType } from '@/context/UserContext';
-import { wait } from '@/lib/wait';
+
 
 interface ConfirmTaskRemovalProps {
     collection: CollectionTypes 
@@ -50,8 +50,8 @@ const ConfirmTaskRemoval: React.FC<ConfirmTaskRemovalProps> = ({collection, task
      }
 }
 
-
-    const ty = `Are you sure deleting ${capitalize(task?.content)}.... `
+    const words = task?.content.trim().split(/\s+/).slice(0, 2).join(' ')
+    const ty = `Are you sure deleting ${words}.... `
 
   return (
     <>

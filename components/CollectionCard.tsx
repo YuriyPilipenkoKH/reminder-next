@@ -18,7 +18,8 @@ import { format } from 'date-fns';
 import UserContext, { UserContextType } from "@/context/UserContext"
 import axios from "axios"
 import ConfirmModal from "./ConfirmModal"
-import ConfirmTaskRemoval from "./ConfirmTaskRemoval"
+import TaskElement from "./TaskElement"
+
 
 interface Props {
     collection: CollectionTypes & {
@@ -38,16 +39,7 @@ function CollectionCard({collection} :Props) {
     const toggleNewTaskModal = () => {
         setNewTaskModalOpen(!isNewTaskModalOpen);
       };
-// console.log('collection ',collection )
-    // const totalTasks = collection.tasks.length
-    // const tasksDone = useMemo(() => {
-    //     return collection.tasks.filter(task => task.done).length
-    // }, [collection.tasks])
-    // const progress = totalTasks === 0  ? 0 :  (tasksDone / totalTasks) * 100
 
-    const onChange: CheckboxProps['onChange'] = (e) => {
-        console.log(`checked = ${e.target.checked}`);
-      };
 
 
   return (
@@ -72,34 +64,9 @@ function CollectionCard({collection} :Props) {
         <div className="mcard-content ">
             {tasks && tasks.length > 0 ? (
                 tasks.map(task => (
-
-                    <div 
-                    key={task._id} 
-                    className="row"
-                    // className="flex items-center align-middle justify-between gap-6 text-[1rem]"
-                    >
-                        <Checkbox 
-                        className="box"
-                        onChange={onChange}></Checkbox>
-
-                        <span 
-                        className="mcard-content-text">
-                            {task?.content}
-                        </span>
-                        <span 
-                        className="mcard-content-date"> 
-                            {task?.expiresAt 
-                                ? format(new Date(task.expiresAt), 'dd.MM.yyyy') 
-                                : 'No expiration date'
-                            }
-                        </span>
-                        <Button className="mcard-content-btn">
-                          <GrEdit />
-                        </Button>
-                        <ConfirmTaskRemoval 
-                        collection = {collection} 
-                        task = {task}/>
-                    </div>
+                    <TaskElement key={task._id}
+                    task={task}
+                    collection={collection}/>
                 ))
             ) : (
                 <div>No tasks available</div>
