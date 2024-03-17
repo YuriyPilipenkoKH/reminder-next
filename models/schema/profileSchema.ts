@@ -23,25 +23,19 @@ export const createProfileSchema = z.object({
             message: 'Domain is not supported'
           })
           .optional(), 
-    birthday: z
-        .string()
-        .regex( /^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-\d{4}$/, { 
-            message: "Valid date format: DD-MM-YYYY " 
-        })
-        .optional(), 
     phone: z
         .string()
         .regex(/^\+\d{12}$/, { 
             message: "Valid phone format: +380123456789" 
         })
         .optional(),  
+    company: z
+        .string()
+        .optional(),      
     location: z
         .string()
-        .regex(/^[A-Za-z\s]+$/, { 
-            message: "he string may contain only letters and numbers" 
-        })
-        .optional(),  
- 
+        .optional(),   
+    
 })
 
 export type createProfileSchemaType = z.infer<typeof createProfileSchema>

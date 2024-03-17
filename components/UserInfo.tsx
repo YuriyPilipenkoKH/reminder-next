@@ -8,6 +8,7 @@ import { Button } from "@radix-ui/themes";
 import axios from "axios"
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast"
+import ProfileForm from "./ProfileForm";
 
 interface UserData {
     name: string;
@@ -40,22 +41,14 @@ function UserInfo() {
           <div className="avatar">
 
           </div>
-          <div>Name: {' '}
-            <span className="font-bold ">
-              { capitalize(user?.name) }           
-            </span>
-         
-          </div>
-          <div>Email: {' '}
-            <span className="font-bold ">
-            {user?.email}
-            </span>
-          </div>
-   
-
+  
+          <ProfileForm />
           <Button
            onClick={logout}
-          className="bg-red-600/90 text-neutral-100 font-bold px-6 py-2 rounded-lg">LogOut</Button>
+          className= "logout bg-red-600/90 text-neutral-100 font-bold px-6 py-2 rounded-lg">
+            LogOut
+          </Button>
+
          <button 
          onClick={()=> router.back()}
          className="absolute top-28 right-6">

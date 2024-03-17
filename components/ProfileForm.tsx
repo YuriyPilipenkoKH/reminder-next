@@ -1,10 +1,15 @@
 
 import { createProfileSchema, createProfileSchemaType } from '@/models/schema/profileSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
-import React from 'react'
+
+import UserContext, { UserContextType } from "@/context/UserContext";
+import { useContext, useEffect, useState } from "react";
 import { useForm } from 'react-hook-form'
 
 function ProfileForm() {
+  const [logError, setLogError] = useState('')
+  const {user, setUser, setReRender} = useContext(UserContext as React.Context<UserContextType>)
+  
 
     const {
         register, 
@@ -14,10 +19,10 @@ function ProfileForm() {
         watch
     } = useForm<createProfileSchemaType>({
         defaultValues: {
-            name: '',
-            email: '',
-            birthday: '',
+            name: user?.name,
+            email: user?.email,
             phone: '',
+            company: '',
             location: '',
         },
         mode:'all',
@@ -40,35 +45,59 @@ function ProfileForm() {
 
   return (
     <form 
+    className='profile_form'
     onSubmit={handleSubmit(onSubmit)} 
     autoComplete="off"
     noValidate>
-    <label >name
+    <label 
+    className='profile_label'>name
       <input
+      {...register('name')}
+      className='profile_input'
        type="text" />
     </label>
-    <label >email
+    <label 
+    className='profile_label'>email
       <input 
       {...register('email')}
+      className='profile_input'
       type="text" />
     </label>
-    <label >birthday
-      <input 
-      {...register('birthday')}
-      type="text" />
-    </label>
-    <label >phone
+    <label 
+    className='profile_label'>phone
       <input
       {...register('phone')}
+      className='profile_input'
        type="text" />
     </label>
-    <label >location
+    <label 
+    className='profile_label'>company
       <input 
-      {...register('location')}
+      {...register('company')}
+      className='profile_input'
       type="text" />
     </label>
+    <label 
+    className='profile_label'>location
+      <input 
+      {...register('location')}
+      className='profile_input'
+      type="text" />
+    </label>
+    {(errors?.name || errors?.email || errors?.phone || errors?.company || errors?.location )&& (
+              <div className="autherror">
+                {errors.name && <div>{errors.name.message}</div>}
+                {!errors.name && errors.email && <div>{errors.email.message}</div>}
+                {!errors.name && !errors.email && errors.phone && <div>{errors.phone.message}</div>}
+                {!errors.name && !errors.email && errors.phone && errors.company &&<div>{errors.company.message}</div>}
+                {!errors.name && !errors.email && errors.phone && errors.company && errors.location &&<div>{errors.location.message}</div>}
+              </div>
+            )}
+            {logError && <div className="autherror">{"Incorrect some fiellds"}</div>}
     <button 
-    type='submit'>save</button>
+    className='save'
+    disabled={isSubmitting || !isDirty || !isValid}
+    type='submit'>Save</button>
   </form>
   )
 }

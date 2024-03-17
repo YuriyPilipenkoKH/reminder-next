@@ -19,14 +19,14 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: "",
       },
-    birthday: {
-        type: String,
-        default: "",
-    },
     phone: {
-        type: String,
-        default: "",
-    },
+          type: String,
+          default: "",
+        },
+     company: {
+         type: String,
+         default: "",
+     },
     location: {
         type: String,
         default: "",
