@@ -387,12 +387,12 @@ place-content: center;
   height: 100%;
 }
 .profile_card{
+  position: relative;
   background-color: var(--profile-background);
   transition: all 1s ease-in-out;
   height: 520px;
   width: 420px;
   border-radius: 0.5rem/* 8px */;
-  position: relative;
   padding: 140px 32px 16px;
   display: flex;
   flex-direction: column;
@@ -446,4 +446,44 @@ place-content: center;
     padding: 8px 24px;;
     border-radius: 0.5rem/* 8px */;
     width: 120px;
-}
+  }
+  .open_key{
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translate(50%, -50%);  
+ 
+  }
+  .edit_key{
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(-50%, -50%);  
+ 
+  }
+  .key_style{
+ 
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 8px solid var(--link-span);
+  background-color: var(--profile-background);
+  display: grid;
+  place-items: center;
+  }
+  .two_btns{
+    left: 31px;
+    top: 90px;
+    display: flex;
+    justify-content: space-between;
+    gap: 80px;
+    width: 360px;
+    /* transform: translate(0, -50%);  */
+  }
+  .abs_btn{
+    color: rgb(245 245 245);
+     font-weight: 700;
+      padding: 8px 16px;;
+      border-radius:20px;
+      width: 100px;
+  }

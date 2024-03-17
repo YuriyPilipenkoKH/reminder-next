@@ -1,14 +1,16 @@
-
 import { createProfileSchema, createProfileSchemaType } from '@/models/schema/profileSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
-
 import UserContext, { UserContextType } from "@/context/UserContext";
 import { useContext, useEffect, useState } from "react";
 import { useForm } from 'react-hook-form'
 
-function ProfileForm() {
+interface ProfileFormProps {
+  anable: boolean
+  }
+
+const ProfileForm: React.FC<ProfileFormProps> = ({ anable }) => {
   const [logError, setLogError] = useState('')
-  const {user, setUser, setReRender} = useContext(UserContext as React.Context<UserContextType>)
+  const {user,  setReRender} = useContext(UserContext as React.Context<UserContextType>)
   
 
     const {
@@ -39,7 +41,7 @@ function ProfileForm() {
     const onSubmit =async (data: createProfileSchemaType) => {
       
       console.log('onSubmit',data)
-
+      reset()
   }
 
 
@@ -54,6 +56,7 @@ function ProfileForm() {
       <input
       {...register('name')}
       className='profile_input'
+      disabled= {!anable}
        type="text" />
     </label>
     <label 
@@ -61,6 +64,7 @@ function ProfileForm() {
       <input 
       {...register('email')}
       className='profile_input'
+      disabled= {!anable}
       type="text" />
     </label>
     <label 
@@ -68,6 +72,7 @@ function ProfileForm() {
       <input
       {...register('phone')}
       className='profile_input'
+      disabled= {!anable}
        type="text" />
     </label>
     <label 
@@ -75,6 +80,7 @@ function ProfileForm() {
       <input 
       {...register('company')}
       className='profile_input'
+      disabled= {!anable}
       type="text" />
     </label>
     <label 
@@ -82,6 +88,7 @@ function ProfileForm() {
       <input 
       {...register('location')}
       className='profile_input'
+      disabled= {!anable}
       type="text" />
     </label>
     {(errors?.name || errors?.email || errors?.phone || errors?.company || errors?.location )&& (
@@ -94,10 +101,12 @@ function ProfileForm() {
               </div>
             )}
             {logError && <div className="autherror">{"Incorrect some fiellds"}</div>}
-    <button 
-    className='save'
-    disabled={isSubmitting || !isDirty || !isValid}
-    type='submit'>Save</button>
+    {anable && (
+        <button 
+        className='save'
+        disabled={isSubmitting || !isDirty || !isValid}
+        type='submit'>Save</button>
+    )}        
   </form>
   )
 }

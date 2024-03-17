@@ -9,6 +9,8 @@ import axios from "axios"
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast"
 import ProfileForm from "./ProfileForm";
+import { FiEdit } from "react-icons/fi";
+import { HiOutlineCamera } from "react-icons/hi2";
 
 interface UserData {
     name: string;
@@ -16,7 +18,9 @@ interface UserData {
 }
 
 function UserInfo() {
-  const {user, setUser, setReRender} = useContext(UserContext as React.Context<UserContextType>)
+  const {user, setUser, setReRender, reRender} = useContext(UserContext as React.Context<UserContextType>)
+  const [anable, setAnable] = useState(false)
+  const [editPhoto, setEditPhoto] = useState(false)
   const router = useRouter();
 
     const logout =async() => {
@@ -26,7 +30,7 @@ function UserInfo() {
     
             console.log("Logout success", response.data)
             setUser(null)
-            setReRender((prev:boolean)=>!prev)
+            setReRender(!reRender)
             router.push("/login ")                   
         } 
         catch (error:any) {
@@ -42,18 +46,44 @@ function UserInfo() {
 
           </div>
   
-          <ProfileForm />
+          <ProfileForm 
+          anable={anable}/>
           <Button
            onClick={logout}
           className= "logout bg-red-600/90 text-neutral-100 font-bold px-6 py-2 rounded-lg">
             LogOut
           </Button>
 
-         <button 
-         onClick={()=> router.back()}
-         className="absolute top-28 right-6">
-           <Cross1Icon/>
-         </button>
+         <div  className="open_key key_style">
+           <button
+           className="flex items-center justify-center p-2"
+           onClick={()=> setAnable(!anable)}
+          >
+             { anable ?  <Cross1Icon /> : <FiEdit /> }
+           </button>
+         </div>
+        { anable && (
+         <div  className="edit_key key_style">
+           <button
+           className="flex items-center justify-center p-2"
+           onClick={()=> setEditPhoto(!editPhoto)}
+          >
+             <HiOutlineCamera />
+           </button>
+         </div>
+          ) }
+         {editPhoto && (
+          <div className="two_btns absolute">
+            <Button className="abs_btn bg-red-600/50">
+              Cancel
+            </Button>
+            <Button className="abs_btn  bg-green-600/50">
+              Confirm
+            </Button>
+          </div>
+         )} 
+
+
         </div>
     </div>
   )
