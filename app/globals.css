@@ -21,7 +21,7 @@
   --medium-blue: #76bcf9;
   --blue: #54adff;
   --light-blue: #cce4fb;
-  --green: #00c3ad;
+  --green: #159638;
   --red: #f43f5e;
   --grey: #888888;
 
@@ -140,6 +140,9 @@ border: 1px solid blue;
 }
 .ant-divider-horizontal{
   margin: 0 !important;
+}
+.ant-popover .ant-popover-inner {
+  max-width: 500px;
 }
 
 .profile_card{
@@ -347,4 +350,14 @@ place-content: center;
 }
 .edit-modal-form{
   height: 260px;
+}
+.green-spot{
+  position: absolute;
+  height: 1.1em;
+  width: 1.1em;
+  background-color: var(--green);
+  top: 8px;
+  left: 12px;
+  border-radius: 50%;
+  pointer-events: none;
 }

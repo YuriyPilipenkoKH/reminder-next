@@ -9,6 +9,7 @@ import toast from 'react-hot-toast';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import ConfirmTaskEditing from './ConfirmTaskEditing';
+import { cn } from '@/lib/utils';
 
 interface Props {
     collection: CollectionTypes
@@ -44,15 +45,26 @@ function TaskElement({collection, task} :Props) {
   return (
     <div 
 
-    className="row"
+    className="row relative"
     >
+    <Tooltip 
+        title={task?.done ? "Done" : "Set Done"}
+        color={'#037305dd'} 
+        >
         <Checkbox 
         className="box"
         disabled={task?.done}
         onChange={onChange}>
         </Checkbox>
+    </Tooltip>
+        <div className={cn('green-spot',
+        !task?.done && 'visually-hidden'
+        )}></div>
 
-        <Popover content={task?.content} title="My Task">
+        <Popover 
+        content={task?.content}
+        // defaultOpen
+         title="My Task">
             <div
             className="mcard-content-text">
                 {task?.content}

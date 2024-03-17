@@ -84,7 +84,7 @@ function CollectionCard({collection} :Props) {
                     >
                     <BsPlusSquare />
                     </Button>
-                </Tooltip>
+                    </Tooltip>
                     <ConfirmModal collection = {collection}/>
                 </div>
             </div>

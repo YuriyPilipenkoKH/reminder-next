@@ -24,7 +24,8 @@ const ConfirmTaskEditing: React.FC<ConfirmTaskEditingProps> = ({collection, task
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [logError, setLogError] = useState('')
-  const router = useRouter();
+  const [disabled, setDisabled] = useState(true);
+
 
   const formattedExpiresAt = task.expiresAt ? new Date(task.expiresAt).toISOString().slice(0, 16) : 'no expiration'; // Format expiresAt to string'yyyy-MM-dd') : ''; // Format expiresAt to string
 
@@ -97,7 +98,11 @@ if (data.expiresAt !== undefined) {
 
   return (
     <>
-      <Tooltip title="Edit" color={'#037305dd'} >
+      <Tooltip 
+
+      title={task?.done ? '' : "Edit"}
+      color={'#037305dd'} 
+      >
         <Button 
         disabled={task?.done}
         className="mcard-content-btn"
