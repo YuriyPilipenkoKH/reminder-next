@@ -10,6 +10,7 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import ConfirmTaskEditing from './ConfirmTaskEditing';
 import { cn } from '@/lib/utils';
+import capitalize from '@/lib/capitalize';
 
 interface Props {
     collection: CollectionTypes
@@ -41,7 +42,7 @@ function TaskElement({collection, task} :Props) {
          }
     }
 
-
+    const popoverTitle:string = "My Task from  " + capitalize(collection?.name)
   return (
     <div 
 
@@ -64,7 +65,7 @@ function TaskElement({collection, task} :Props) {
         <Popover 
         content={task?.content}
         // defaultOpen
-         title="My Task">
+         title={popoverTitle}>
             <div
             className="mcard-content-text">
                 {task?.content}

@@ -5,18 +5,15 @@ import { CollectionColor, CollectionColors } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 import CollectionTypes from "@/models/CollectionTypes"
 import Task from "@/models/TaskTypes"
-import { Button, Checkbox, CheckboxProps, Divider, Tooltip } from "antd"
+import { Button,  Divider, Tooltip } from "antd"
 import { useRouter } from "next/navigation"
 import { useContext, useEffect, useMemo, useState, useTransition } from "react"
 import toast from "react-hot-toast"
 import { MdKeyboardArrowDown } from "react-icons/md"
-import { GrEdit } from "react-icons/gr";
-import { TfiTrash } from "react-icons/tfi";
 import { BsPlusSquare } from "react-icons/bs";
 import NewTaskModal from "./NewTaskModal"
 import { format } from 'date-fns';
 import UserContext, { UserContextType } from "@/context/UserContext"
-import axios from "axios"
 import ConfirmModal from "./ConfirmModal"
 import TaskElement from "./TaskElement"
 
@@ -29,12 +26,9 @@ interface Props {
 
 function CollectionCard({collection} :Props) {
     const [isOpen, setIsOpen] = useState(false)
-    const [isLoading, startTransition] = useTransition()
     const [isNewTaskModalOpen, setNewTaskModalOpen] = useState(false);
     const { user , setReRender, reRender} = useContext(UserContext as React.Context<UserContextType>);
     const {tasks } = collection 
-    const router = useRouter()
-    console.log('tasks', tasks)
 
     const toggleNewTaskModal = () => {
         setNewTaskModalOpen(!isNewTaskModalOpen);
@@ -57,7 +51,12 @@ function CollectionCard({collection} :Props) {
             className="mcard-title-btn w-full h-full bg-transparent font-bold">
                 {capitalize(collection?.name)}
             </button>
-            <MdKeyboardArrowDown className="mcard-title-arrow" size={40} />
+            <MdKeyboardArrowDown 
+            className={cn("mcard-title-arrow" ,
+            isOpen && 'rotate-180'
+            )}
+            
+            size={40} />
         </div>
         {isOpen && (
         <>

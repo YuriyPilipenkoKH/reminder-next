@@ -35,8 +35,8 @@ function UserInfo() {
     }
     
   return (
-    <div className="grid place-items-center h-96 ">
-        <div className="profile_card  shadow-lg p-8 bg-zinc-300 grid gap-4 rounded-lg w-80 relative">
+    <div className="profile">
+        <div className="profile_card  shadow-lg p-8 bg-zinc-300 rounded-lg w-80 relative">
           <div>Name: {' '}
             <span className="font-bold ">
               { capitalize(user?.name) }           

@@ -4,7 +4,7 @@ import UserInfo from "@/components/UserInfo"
 
 function Profile() {
     return (
-      <div className=" grid place-items-center">
+      <div className=" 1">
         <UserInfo/>
       </div>
     )

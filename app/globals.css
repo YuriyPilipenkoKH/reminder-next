@@ -85,6 +85,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: all 1s ease-in-out;
+  margin: 0;
+  padding: 0;
 }
 
 * {
@@ -133,6 +135,27 @@ img {
   clip: rect(0 0 0 0);
 }
 
+.container{
+   display: flex;
+   flex-direction: column;
+   /* gap: 40px; */
+  background-color: var(--background-color);
+  margin: 0 auto;
+  height:  100vh ;
+  transition: all 1s ease-in-out;
+  @media screen and (min-width: 320px) {
+    width: 320px;
+}
+
+@media screen and (min-width: 768px) {
+    width: 768px;
+}
+
+@media screen and (min-width: 1280px) {
+    width: 1280px;
+}
+}
+
 .inputfield:focus {
 outline: none;
 border: 1px solid blue;
@@ -145,13 +168,9 @@ border: 1px solid blue;
   max-width: 500px;
 }
 
-.profile_card{
-  background-color: var(--profile-background);
-  transition: all 1s ease-in-out;
-}
 
 .pageWrapper{
-  @apply  grid place-items-center h-screen
+  @apply  grid place-items-center h-full
 }
 .formWrapper{
   @apply  flex flex-col gap-3 w-[380px] bg-slate-50 p-8 rounded-lg shadow-lg border-t-4 border-green-400
@@ -291,11 +310,7 @@ height: 38px;
   gap: 4px;
 
 }
-.task-modal-w1{
-  /* display: flex;
-  flex-direction: column;
-  gap: 4px; */
-}
+
 .task-modal > div{
   display: flex;
   justify-content: center;
@@ -358,6 +373,19 @@ place-content: center;
   background-color: var(--green);
   top: 8px;
   left: 12px;
-  border-radius: 50%;
+  border-radius: 4px;
   pointer-events: none;
+}
+.profile {
+  /* display: grid; */
+  /* place-items: center; */
+  
+  height: 100%;
+
+}
+.profile_card{
+  background-color: var(--profile-background);
+  transition: all 1s ease-in-out;
+  height: 400px;
+
 }
