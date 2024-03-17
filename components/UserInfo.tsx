@@ -36,7 +36,10 @@ function UserInfo() {
     
   return (
     <div className="profile">
-        <div className="profile_card  shadow-lg p-8 bg-zinc-300 rounded-lg w-80 relative">
+        <div className="profile_card  shadow-lg">
+          <div className="avatar">
+
+          </div>
           <div>Name: {' '}
             <span className="font-bold ">
               { capitalize(user?.name) }           
@@ -48,12 +51,14 @@ function UserInfo() {
             {user?.email}
             </span>
           </div>
+   
+
           <Button
            onClick={logout}
           className="bg-red-600/90 text-neutral-100 font-bold px-6 py-2 rounded-lg">LogOut</Button>
          <button 
          onClick={()=> router.back()}
-         className="absolute top-6 right-6">
+         className="absolute top-28 right-6">
            <Cross1Icon/>
          </button>
         </div>

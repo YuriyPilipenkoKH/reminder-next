@@ -15,6 +15,22 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please provide a password"],
     },
+    avatarURL: {
+        type: String,
+        default: "",
+      },
+    birthday: {
+        type: String,
+        default: "",
+    },
+    phone: {
+        type: String,
+        default: "",
+    },
+    location: {
+        type: String,
+        default: "",
+    },
     isVerified: {
         type: Boolean,
         default: false,
