@@ -111,7 +111,7 @@ if (data.expiresAt !== undefined) {
         </Button>
      </Tooltip>
 
-      <Modal className='task-modal'
+      <Modal className='task-modal text-color'
         open={open}
         title={(isLoading || isSubmitting) 
             ? "Processing" 
@@ -121,10 +121,10 @@ if (data.expiresAt !== undefined) {
         footer={[  ]}
       >
             <div className='task-modal-w1'>
-             <h1 className='modal-collection-name'>
+             <h1 className='modal-collection-name text-color'>
              {capitalize(collection?.name)}
             </h1>
-                <span>Write what you know</span>
+                <span className='text-color'>Write what you know</span>
             </div>
          <form 
             onSubmit={handleSubmit(onSubmit)}
@@ -134,16 +134,17 @@ if (data.expiresAt !== undefined) {
                 <label >Content
                     <textarea 
                      {...register('content')}
-                    className="resize-none w-full border-slate-600" 
+                    className="text_field resize-none w-full "
                     rows={5}
                     placeholder="Task conternt here"
                     />
                 
                 </label>
-                <label className='flex flex-col gap-2'>expires at
+                <label className='flex flex-col gap-2 h-[60px]'>expires at
                     <input 
                     {...register('expiresAt')}
                      type="datetime-local"
+                     className='expiry'
                      />
                 </label>
           <button 

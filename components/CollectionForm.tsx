@@ -9,12 +9,16 @@ import axios from 'axios'
 import toast from 'react-hot-toast'
 import UserContext, { UserContextType } from '@/context/UserContext'
 
+interface CollectionFormProps {
+    setIsSubmitting: (isSubmitting: boolean) => void; // Define setIsSubmitting prop
+  }
 
-function CollectionForm() {
+
+function CollectionForm({ setIsSubmitting }: CollectionFormProps)  {
     const [logError, setLogError] = useState('')
     const [selectedColor, setSelectedColor] = useState('');
 
-    const { user , setReRender} = useContext(UserContext as React.Context<UserContextType>);
+    const { user , setReRender, reRender} = useContext(UserContext as React.Context<UserContextType>);
  
     const {
         register, 
@@ -45,6 +49,7 @@ function CollectionForm() {
         data.color = selectedColor
         console.log('onSubmit',data)
 
+        setIsSubmitting(true)
     try {
         const response = await axios.post("/api/collections/new", {
             name: data.name,
@@ -54,13 +59,16 @@ function CollectionForm() {
         toast.success(`${data?.name} created successfully` )
         reset()
         console.log("Creation success", response.data)
-        setReRender((prev:boolean)=>!prev)
+        setReRender(!reRender)
     } 
     catch (error:any) {
         console.log("Creation failed",error)
         setLogError(error?.response.data.error)
         toast.error(error.message)
      }
+     finally {
+        setIsSubmitting(false); // Set isSubmitting back to false after submission
+      }
     };
 
     const handleColorChange = (color:string) => {
@@ -113,7 +121,7 @@ function CollectionForm() {
                     {errors.name && <div>{errors.name.message}</div>}
                   </div>
                 )}
-                {logError && <div className="autherror">{logError}</div>}
+                {(logError && !isSubmitting ) && <div className="autherror">{logError}</div>}
         </form>
       
     </div>

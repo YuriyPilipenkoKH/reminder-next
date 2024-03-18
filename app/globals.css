@@ -78,6 +78,26 @@
 
 }
 
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes ulAnimation {
+  0% {
+    transform: rotateX(-90deg)
+}
+70% {
+    transform: rotateX(20deg) 
+}
+100% {
+    transform: rotateX(0deg) 
+}
+}
+
 
 body {
   color: var(--text-color);
@@ -277,6 +297,7 @@ height: 38px;
   background-color: var(--card-color);
   min-height: 60px;
   transition: all 1s ease-in-out;
+  animation: ulAnimation 1s ease;   
 }
 .mcard-footer {
   background-color: var(--card-color);
@@ -306,10 +327,19 @@ height: 38px;
 }
 
 .task-modal{
+  
+}
+.anticon > svg{
+fill: var(--text-color);
+}
+.ant-modal .ant-modal-title {
+  background-color: var(--login-background);
+  color: var(--text-color);
 }
 .task-modal > div>.ant-modal-content{
   height: 480px;
   width: 380px;
+  background-color: var(--login-background)
 }
 .ant-modal-content{
   display: flex;
@@ -326,17 +356,21 @@ height: 38px;
 }
 .task-modal > div>.ant-modal-content>.task-create{
   margin-top: auto;
+  height: 40px;
 }
 
 .modal-form {
   display: grid;
   gap: 22px;
   grid-template-rows: 140px 50px auto;
+  /* height: 90%; */
 }
 .mcard-content {
   display: grid;
   gap: 20px;
+  align-items: center;
   padding: 8px 16px;
+  transition: all 0.5s ease;
 }
 .row{
   display: grid;
@@ -344,7 +378,10 @@ height: 38px;
   grid-column-gap: 10px;
   align-items: center;
   transition: all 0.5s ease;
-}
+  height: 32px;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+ }
 .row:hover{
   background-color: var(--button-color-option);
 }
@@ -483,11 +520,28 @@ place-content: center;
   .abs_btn{
     color: rgb(245 245 245);
      font-weight: 700;
-      padding: 8px 16px;;
+      padding: 8px 16px;
       border-radius:20px;
       width: 100px;
   }
 
-  .ant-checkbox .ant-checkbox-input{
+  .text_field, .expiry{
+    border: 2px solid #777;
+    border-radius:6px;
+    padding: 4px;
+    outline: none;
+    background-color: var(--field-color);
+  }
+  .text_field:focus, .expiry:focus{
+    border: 2px solid var(--blue);
 
   }
+
+ .expiry{
+  padding: 6px;;
+  height: 36px;
+  }
+ .text-color{
+  color: var(--text-color);
+  }
+

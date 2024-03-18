@@ -80,7 +80,7 @@ interface Props {
   return (
     <>
       <Modal
-        className='task-modal'
+        className='task-modal text-color'
         open={visible}
         title={(isLoading || isSubmitting) 
           ? "Processing" 
@@ -90,29 +90,30 @@ interface Props {
         footer={[ ]}
       >
             <div className='task-modal-w1'>
-             <h1 className='modal-collection-name'>
+             <h1 className='modal-collection-name text-color'>
              {capitalize(collection?.name)}
             </h1>
-                <span>You can add as many tasks as you want</span>
+                <span className='text-color'>You can add as many tasks as you want</span>
             </div>
             <form 
             onSubmit={handleSubmit(onSubmit)}
             className='modal-form'
             autoComplete="off"
             noValidate>
-                <label >Content
+                <label className='text-color'>Content
                     <textarea 
                      {...register('content')}
-                    className="resize-none w-full border-slate-600" 
+                    className="text_field resize-none w-full "
                     rows={5}
                     placeholder="Task conternt here"
-                    >
-                    </textarea>
+                    />
+                    
                 </label>
-                <label className='flex flex-col gap-2'>expires at
+                <label className='text-color flex flex-col gap-2 h-[60px]'>expires at
                     <input 
                     {...register('expiresAt')}
                     type="datetime-local"
+                    className='expiry'
                      />
                 </label>
           <button 
