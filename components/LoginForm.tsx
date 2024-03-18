@@ -16,7 +16,7 @@ function LoginForm() {
     const [show, setShow] = useState(true)
     
     const router = useRouter();
-    const { setUser ,setReRender, reRender} = useContext(UserContext as React.Context<UserContextType>);
+    const { setReRender, reRender} = useContext(UserContext as React.Context<UserContextType>);
     const {
         register, 
         handleSubmit,
@@ -49,7 +49,7 @@ function LoginForm() {
         toast.success('Login success')
         reset()
         console.log("Login success", response.data)
-        // setUser(data)
+ 
         setReRender(!reRender)
         router.push('/dashboard')
     } 

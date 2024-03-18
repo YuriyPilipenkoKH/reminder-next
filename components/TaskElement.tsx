@@ -18,7 +18,7 @@ interface Props {
 }
 
 function TaskElement({collection, task} :Props) {
-    const {user, setUser, setReRender} = useContext(UserContext as React.Context<UserContextType>)
+    const { setReRender} = useContext(UserContext as React.Context<UserContextType>)
     const router = useRouter()
 
      const onChange: CheckboxProps['onChange'] = (e) => {

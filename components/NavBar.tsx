@@ -22,7 +22,7 @@ function NavBar() {
           if(res.data) {
               setUser(res.data.data)
           }
-          
+      
       }
       catch (error:any) {
           console.log("getUserDetails failed",error)

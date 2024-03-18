@@ -38,6 +38,7 @@ function UserInfo() {
             toast.error(error.message)
            }
     }
+      
     
   return (
     <div className="profile">
@@ -47,6 +48,7 @@ function UserInfo() {
           </div>
   
           <ProfileForm 
+          user={user}
           anable={anable}/>
           <Button
            onClick={logout}

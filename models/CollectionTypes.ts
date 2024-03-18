@@ -5,7 +5,7 @@ type CollectionTypes = {
     name: string;
     color: string;
     userId: string;
-    createdAt: Date;
+    createdAt: Date | null;
     tasks: Task[]
 }
 export default CollectionTypes

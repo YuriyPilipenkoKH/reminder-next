@@ -1,4 +1,4 @@
-import { CollectionColors } from '@/lib/constants'
+
 import {z} from 'zod'
 export const createProfileSchema = z.object({
     name: z
@@ -25,15 +25,24 @@ export const createProfileSchema = z.object({
           .optional(), 
     phone: z
         .string()
-        .regex(/^\+\d{12}$/, { 
-            message: "Valid phone format: +380123456789" 
+        .min(0)
+        .refine((val) => val === '' || /^\+\d{12}$/.test(val), { // Remove regex if field is empty
+            message: "Valid phone format: +380123456789"
         })
         .optional(),  
     company: z
         .string()
+        // .min(0)
+        // .refine((val) => val === '' || /^[a-zA-Z]+$|^[0-9]+$|^[\w\s]+$|^[\w\s_]+$/.test(val), { // Remove regex if field is empty
+        //     message: "Letters and numbers only"
+        // })
         .optional(),      
     location: z
         .string()
+        .min(0)
+        .refine((val) => val === '' || /^[a-zA-Z]+$|^[0-9]+$|^[\w\s]+$|^[\w\s_]+$/.test(val), { // Remove regex if field is empty
+            message: "Letters and numbers only"
+        })
         .optional(),   
     
 })
