@@ -18,11 +18,11 @@ interface Props {
 }
 
 function TaskElement({collection, task} :Props) {
-    const { setReRender} = useContext(UserContext as React.Context<UserContextType>)
+    const { setReRender, reRender} = useContext(UserContext as React.Context<UserContextType>)
     const router = useRouter()
 
      const onChange: CheckboxProps['onChange'] = (e) => {
-        console.log(`checked = ${e.target.checked}`);
+        // console.log(`checked = ${e.target.checked}`);
         setTaskToDone(task._id, collection._id)
       };
 
@@ -34,7 +34,7 @@ function TaskElement({collection, task} :Props) {
             { collectionId, id }
             );
             toast.success(`Task done`)
-            setReRender((prev:boolean)=>!prev)
+            setReRender(!reRender);
         }
          catch (error:any) {
             console.log("Setting done failed",error)

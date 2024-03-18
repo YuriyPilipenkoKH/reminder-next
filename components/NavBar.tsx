@@ -8,12 +8,15 @@ import { useRouter } from 'next/navigation'
 import { useContext, useEffect } from 'react'
 import UserContext, { UserContextType } from '@/context/UserContext'
 import axios from 'axios'
-import Way from './Way'
+import Dashboard from './Dashboard'
 
 
 function NavBar() {
   const {user, setUser, reRender} = useContext(UserContext as React.Context<UserContextType>)
-  const router = useRouter()
+  const router = useRouter() 
+
+  // const isLoginPage = router.pathname === '/login';
+
 
   const getUserDetails = async () => {
       try {
@@ -37,7 +40,7 @@ function NavBar() {
       <nav className='flex w-full items-center justify-between p-4 px-8 h-[60px]'>
           <div className='flex gap-4 items-center'>
             <Logo/>
-            {user && <Way/> }
+            {user && <Dashboard/> }
           </div>
        <div className='flex gap-4 items-center'>
         {!user && (

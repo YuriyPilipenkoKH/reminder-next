@@ -52,7 +52,8 @@ function UserInfo() {
           anable={anable}/>
           <Button
            onClick={logout}
-          className= "logout bg-red-600/90 text-neutral-100 font-bold px-6 py-2 rounded-lg">
+           disabled={anable}
+          className= "logout bg-red-600/90 text-neutral-100 font-bold px-6 py-2 rounded-lg disabled:bg-red-600/40">
             LogOut
           </Button>
 

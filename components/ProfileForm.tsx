@@ -1,11 +1,10 @@
 import { createProfileSchema, createProfileSchemaType } from '@/models/schema/profileSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import UserContext, { UserContextType } from "@/context/UserContext";
-import { useContext, useEffect, useState } from "react";
+import { useContext,  useState } from "react";
 import { useForm } from 'react-hook-form'
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import { useRouter } from 'next/navigation';
 import User from '@/models/UserTypes';
 
 interface ProfileFormProps {
@@ -16,14 +15,13 @@ interface ProfileFormProps {
 const ProfileForm: React.FC<ProfileFormProps> = ({ anable, user }) => {
   const [logError, setLogError] = useState('')
   const { setReRender, reRender} = useContext(UserContext as React.Context<UserContextType>)
-  const router = useRouter()
+
 
     const {
         register, 
         handleSubmit,
         formState,
         reset,
-        watch
     } = useForm<createProfileSchemaType>({
         defaultValues: {
             name: user?.name || '',
@@ -70,12 +68,12 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ anable, user }) => {
   
           toast.success(`User Info updated`);
           setReRender(!reRender);
-          // router.refresh();
+
         });
 
     }
      catch (error:any) {
-        console.log("Updatin failed",error)
+        console.log("Updating failed",error)
         // setLogError(error?.response.data.error)
         toast.error(error.message)
      }
@@ -141,7 +139,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ anable, user }) => {
             {/* {user && <div className='absolute top-6'>{user?.name}</div>} */}
     {anable && (
         <button 
-        className='save'
+        className='save bg-green-800/90 disabled:bg-green-800/60'
         disabled={isSubmitting || !isDirty || !isValid}
         type='submit'>
           {(isLoading || isSubmitting) ? "Process" : "Save"}
