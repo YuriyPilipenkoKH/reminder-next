@@ -63,7 +63,7 @@
   --profile-background: #777;
   --login-background: #183250;
 
-  --field-color: #eee5;
+  --field-color: #909193;
   --border: 3px solid var(--blue);
   --button-color-logout: #54adff;
   --background-color-form: #1E325C;
@@ -163,8 +163,9 @@ img {
   margin: 0 auto;
   height:  100vh ;
   transition: all 1s ease-in-out;
-  @media screen and (min-width: 320px) {
-    width: 320px;
+
+  @media screen and (min-width: 420px) {
+    width: 420px;
 }
 
 @media screen and (min-width: 768px) {
@@ -186,6 +187,11 @@ border: 1px solid blue;
 }
 .ant-popover .ant-popover-inner {
   max-width: 500px;
+  @media screen and (max-width: 767px) {
+    max-width: 350px;
+
+  }
+  
 }
 
 
@@ -306,17 +312,26 @@ height: 38px;
   justify-content: space-between;
   align-items: center;
   transition: all 1s ease-in-out;
+  @media screen and (max-width: 767px) {
+    padding: 8px 20px;
+
+  }
 }
-.formWrapper{
-  background-color: var(--login-background);
-}
+
 .footer-btn-wrap{
   display: flex;
   gap: 40px;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 767px) {
+    gap: 16px;
+
+  }
 }
 .footer-btn-wrap >button{
+  padding: 8px;
+}
+.footer-btn-wrap >div>button{
   padding: 8px;
 }
 .ant-modal-header{
@@ -326,20 +341,17 @@ height: 38px;
   margin-bottom: 16px;
 }
 
-.task-modal{
-  
-}
-.anticon > svg{
-fill: var(--text-color);
-}
-.ant-modal .ant-modal-title {
-  background-color: var(--login-background);
-  color: var(--text-color);
+
+.ant-modal .ant-modal-content {
+  @media screen and (max-width: 767px) {
+    width: 400px;
+
+  }
 }
 .task-modal > div>.ant-modal-content{
   height: 480px;
   width: 380px;
-  background-color: var(--login-background)
+
 }
 .ant-modal-content{
   display: flex;
@@ -381,6 +393,11 @@ fill: var(--text-color);
   height: 32px;
   animation-duration: 0.5s;
   animation-fill-mode: both;
+  @media screen and (max-width: 767px) {
+    grid-template-columns: 30px auto  40px 40px;
+    grid-column-gap: 6px;
+    max-width: 390px;
+  }
  }
 .row:hover{
   background-color: var(--button-color-option);
@@ -392,10 +409,16 @@ fill: var(--text-color);
  text-overflow: ellipsis; 
  white-space: nowrap; 
  max-width: 320px;
+ @media screen and (max-width: 767px) {
+  max-width: 220px;
+}
 }
 .mcard-content-date{
   justify-self: center;
   font-size: 0.9rem;
+  @media screen and (max-width: 767px) {
+    display: none;
+}
 }
 .mcard-content-btn{
 justify-self: center;
@@ -419,6 +442,9 @@ place-content: center;
   left: 12px;
   border-radius: 4px;
   pointer-events: none;
+  @media screen and (max-width: 767px) {
+    left: 8px;
+  }
 }
 .profile {
   height: 100%;
@@ -465,6 +491,7 @@ place-content: center;
   border-radius: 12px;
   width: 260px;
   outline: none;
+  background-color:var(--field-color);
 }
 .logout{
   justify-self: flex-end;

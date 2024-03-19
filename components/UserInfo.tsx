@@ -8,9 +8,10 @@ import { Button } from "@radix-ui/themes";
 import axios from "axios"
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast"
-import ProfileForm from "./ProfileForm";
+import ProfileForm from "./Forms/ProfileForm";
 import { FiEdit } from "react-icons/fi";
 import { HiOutlineCamera } from "react-icons/hi2";
+import AvatarForm from "./Forms/AvatarForm";
 
 interface UserData {
     name: string;
@@ -38,13 +39,27 @@ function UserInfo() {
             toast.error(error.message)
            }
     }
+
+    const handleClickInput = (e:any) => {
+      // setEdit(true);
+      const [file] = e.target.files;
+      if (file) {
+          // setUserPhoto(file);
+      }
+  };
+  const change =(e:any) => {
+
+    console.log(e)
+  }
       
     
   return (
     <div className="profile">
         <div className="profile_card  shadow-lg">
           <div className="avatar">
-
+            {/* <AvatarForm/> */}
+            {/* <input type="file" name="file" onChange={change}/>
+            <button>go</button> */}
           </div>
   
           <ProfileForm 

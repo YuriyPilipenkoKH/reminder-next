@@ -2,13 +2,13 @@
 
 import Link from "next/link"
 import { useForm } from "react-hook-form"
-import { FormInput, RegisterSchema } from "../models/auth"
+import { FormInput, RegisterSchema } from "../../models/auth"
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useState } from "react";
-import BoolIcon from "./icons/BoolIcon";
+import BoolIcon from "../icons/BoolIcon";
 import { wait } from "@/lib/wait";
 
 

@@ -11,10 +11,10 @@ import { useContext, useEffect, useMemo, useState, useTransition } from "react"
 import toast from "react-hot-toast"
 import { MdKeyboardArrowDown } from "react-icons/md"
 import { BsPlusSquare } from "react-icons/bs";
-import NewTaskModal from "./NewTaskModal"
+import NewTaskModal from "./Modals/NewTaskModal"
 import { format } from 'date-fns';
 import UserContext, { UserContextType } from "@/context/UserContext"
-import ConfirmModal from "./ConfirmModal"
+import ConfirmModal from "./Modals/ConfirmModal"
 import TaskElement from "./TaskElement"
 
 

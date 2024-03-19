@@ -4,7 +4,7 @@ import { createCollectionSchema, createCollectionSchemaType } from '@/models/sch
 import { zodResolver } from '@hookform/resolvers/zod'
 import React, { useContext, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import ColorSelect from './ColorSelect'
+import ColorSelect from '../ColorSelect'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import UserContext, { UserContextType } from '@/context/UserContext'

@@ -45,7 +45,7 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({collection}) => {
     const ty = `Are you sure deleting ${capitalize(collection?.name)} ?`
 
   return (
-    <>
+    <div className='removal'>
     <Tooltip title="Delete Collecttion" color={'#f00c'} placement="top">
 
       <Button  onClick={showModal}>
@@ -56,12 +56,12 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({collection}) => {
       <Modal 
       title={ty}
       open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-        <div className='flex flex-col gap-6'>
+        <div className=' flex flex-col gap-6'>
             <p>There will be no return...</p>
         </div>
 
       </Modal>
-    </>
+    </div>
   );
 };
 

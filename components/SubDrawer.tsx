@@ -2,7 +2,7 @@
 
 import React, { useContext, useEffect, useState } from 'react';
 import {  Drawer } from 'antd';
-import CollectionForm from './CollectionForm';
+import CollectionForm from './Forms/CollectionForm';
 import UserContext, { UserContextType } from '@/context/UserContext';
 
 const SubDrawer: React.FC = () => {

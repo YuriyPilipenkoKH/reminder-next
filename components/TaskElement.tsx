@@ -1,14 +1,14 @@
 import { Button, Checkbox , CheckboxProps, Popover, Tooltip,} from 'antd'
 import UserContext, { UserContextType } from "@/context/UserContext";
 import { useContext } from "react";
-import ConfirmTaskRemoval from "./ConfirmTaskRemoval"
+import ConfirmTaskRemoval from "./Modals/ConfirmTaskRemoval"
 import { format } from 'date-fns';
 import CollectionTypes from '@/models/CollectionTypes';
 import Task from '@/models/TaskTypes';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import ConfirmTaskEditing from './ConfirmTaskEditing';
+import ConfirmTaskEditing from './Modals/ConfirmTaskEditing';
 import { cn } from '@/lib/utils';
 import capitalize from '@/lib/capitalize';
 

@@ -2,14 +2,14 @@
 
 import Link from "next/link"
 import { useForm } from "react-hook-form"
-import { LogInput, LoginSchema } from "../models/auth"
+import { LogInput, LoginSchema } from "../../models/auth"
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import UserContext, { UserContextType } from "@/context/UserContext";
-import BoolIcon from "./icons/BoolIcon";
+import BoolIcon from "../icons/BoolIcon";
 
 function LoginForm() {
     const [logError, setLogError] = useState('')

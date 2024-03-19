@@ -111,7 +111,7 @@ if (data.expiresAt !== undefined) {
         </Button>
      </Tooltip>
 
-      <Modal className='task-modal text-color'
+      <Modal className='task-modal '
         open={open}
         title={(isLoading || isSubmitting) 
             ? "Processing" 
@@ -121,10 +121,10 @@ if (data.expiresAt !== undefined) {
         footer={[  ]}
       >
             <div className='task-modal-w1'>
-             <h1 className='modal-collection-name text-color'>
+             <h1 className='modal-collection-name '>
              {capitalize(collection?.name)}
             </h1>
-                <span className='text-color'>Write what you know</span>
+                <span >Write what you know</span>
             </div>
          <form 
             onSubmit={handleSubmit(onSubmit)}
