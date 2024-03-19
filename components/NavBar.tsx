@@ -9,10 +9,11 @@ import { useContext, useEffect } from 'react'
 import UserContext, { UserContextType } from '@/context/UserContext'
 import axios from 'axios'
 import Dashboard from './Dashboard'
+import toast from 'react-hot-toast'
 
 
 function NavBar() {
-  const {user, setUser, reRender} = useContext(UserContext as React.Context<UserContextType>)
+  const {user, setUser, reRender,setReRender} = useContext(UserContext as React.Context<UserContextType>)
   const router = useRouter() 
 
   // const isLoginPage = router.pathname === '/login';

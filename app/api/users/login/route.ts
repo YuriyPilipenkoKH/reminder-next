@@ -41,7 +41,7 @@ export async function POST(req:NextRequest) {
         const token = await jwt.sign(
             tokenData, 
             process.env.NEXT_PUBLIC_TOKEN_SECRET!, 
-            {expiresIn: "1d"}
+            // {expiresIn: "2d"}
             )
 
         const response = NextResponse.json({

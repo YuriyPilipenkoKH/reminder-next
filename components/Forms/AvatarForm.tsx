@@ -15,6 +15,7 @@ function AvatarForm() {
     } = useForm<avatarFormSchemaType>({
         defaultValues: {
             avatarURL:'',
+            text:'',
   
         },
         mode:'all',
@@ -29,24 +30,38 @@ function AvatarForm() {
     } = formState
 
     const onSubmit =async (data: avatarFormSchemaType) => {
+        console.log(data)
         // Since avatarURL is a file, you need to access it from event.target.files
         const formData = new FormData();
         formData.append("avatarURL", data.avatarURL[0]); 
         // Assuming only one file is selected
-        console.log(formData); // Check if formData contains the file
+        console.log(formData);
+         // Check if formData contains the file
         // Now you can send formData to the server using fetch or axios
     }
   return (
     <form  
     onSubmit={handleSubmit(onSubmit)}
+    autoComplete="off"
+    noValidate
     >
-        {/* <label > */}
+        <label >
             <input 
              {...register('avatarURL')}
              accept=".png, .jpg, .jpeg, .webp"
              type="file" 
             />
-        {/* </label> */}
+             </label>
+            <input 
+             {...register('text')}
+            type="text" 
+            />
+        { errors?.text  && (
+                    <div className="autherror">
+                    {errors.text && <div>{errors.text.message}</div>}
+                  </div>
+                )}
+        
     <button type='submit'>go</button>
       
     </form>

@@ -56,10 +56,13 @@ function CollectionForm({ setIsSubmitting }: CollectionFormProps)  {
             color:data.color,
             userId: user._id
         })
-        toast.success(`${data?.name} created successfully` )
-        reset()
-        console.log("Creation success", response.data)
-        setReRender(!reRender)
+        .then(response => {
+
+            toast.success(`${data?.name} created successfully` )
+            reset()
+            console.log("Creation success", response.data)
+            setReRender(!reRender)
+        })
     } 
     catch (error:any) {
         console.log("Creation failed",error)

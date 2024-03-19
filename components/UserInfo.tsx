@@ -20,9 +20,14 @@ interface UserData {
 
 function UserInfo() {
   const {user, setUser, setReRender, reRender} = useContext(UserContext as React.Context<UserContextType>)
+  const [showData, setShowData] = useState(false);
+  const [edit, setEdit] = useState(false);
+  const [userPhoto, setUserPhoto] = useState('');
   const [anable, setAnable] = useState(false)
   const [editPhoto, setEditPhoto] = useState(false)
   const router = useRouter();
+
+  console.log('userPhoto', userPhoto)
 
     const logout =async() => {
         try {
@@ -40,26 +45,57 @@ function UserInfo() {
            }
     }
 
+    const handleAddAvatar = () => {
+      // const avatar = userPhoto;
+      const formData = new FormData();
+      // for (const key in { avatar }) {
+      //     formData.append(key, { avatar }[key]);
+      // }
+      // dispatch(operations.fetchUpdateUser(formData)).unwrap()
+      // .then(() => {
+      //     toast.success(lang.Photoupdated);
+      // })
+      // .catch(() => {
+      //     toast.error(lang.wrong);
+      // });;
+      // setEdit(false);
+      // setUserPhoto(false);
+  };
+
+  const handleCancelAvatar = (e:any) => {
+      setUserPhoto('');
+      setEdit(false);
+  };
+
     const handleClickInput = (e:any) => {
-      // setEdit(true);
+      console.log(e)
+      setEdit(true);
       const [file] = e.target.files;
+      console.log(file)
       if (file) {
-          // setUserPhoto(file);
+          setUserPhoto(file);
       }
   };
-  const change =(e:any) => {
 
-    console.log(e)
-  }
-      
     
   return (
     <div className="profile">
         <div className="profile_card  shadow-lg">
           <div className="avatar">
             {/* <AvatarForm/> */}
-            {/* <input type="file" name="file" onChange={change}/>
-            <button>go</button> */}
+            <form >
+              <input 
+                type="file"
+                id="userPhoto"
+                name="userPhoto"
+                accept=".png, .jpg, .jpeg, .webp"
+               //  hidden
+               //  disabled={!showData}
+                value=""
+                onChange={handleClickInput}
+              />
+              <button type='submit'  onClick={handleAddAvatar}>go</button>
+            </form>
           </div>
   
           <ProfileForm 

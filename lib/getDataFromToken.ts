@@ -9,7 +9,7 @@ export const getDataFromToken = (req:NextRequest) => {
         return decodedToken.id;
     }
     catch (error:any) {
-       throw new Error(error.message)
-        
+        console.log('Token died')
+      throw new Error(error.message)
     }
 }
