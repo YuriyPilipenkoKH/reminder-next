@@ -17,7 +17,7 @@ function ColorSelect({ onColorChange }: ColorSelectProps) {
     const [open, setOpen] = useState(false)
     const [color, setColor] = useState('')
     const [selectedColor, setSelectedColor] = useState('');
-    const { reRender, setReRender} = useContext(UserContext as React.Context<UserContextType>);
+    const { reRender} = useContext(UserContext as React.Context<UserContextType>);
 
     const click=() => {
         setOpen(!open)

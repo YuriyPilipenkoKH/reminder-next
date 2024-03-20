@@ -16,7 +16,7 @@ interface ConfirmModalProps {
 
 const ConfirmModal: React.FC<ConfirmModalProps> = ({collection}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { user , setReRender, reRender} = useContext(UserContext as React.Context<UserContextType>);
+  const {  setReRender, reRender} = useContext(UserContext as React.Context<UserContextType>);
 
   const showModal = () => {
     setIsModalOpen(true);

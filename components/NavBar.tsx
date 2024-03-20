@@ -13,11 +13,10 @@ import toast from 'react-hot-toast'
 
 
 function NavBar() {
-  const {user, setUser, reRender,setReRender} = useContext(UserContext as React.Context<UserContextType>)
+  const {user, setUser, reRender} = useContext(UserContext as React.Context<UserContextType>)
   const router = useRouter() 
 
   // const isLoginPage = router.pathname === '/login';
-
 
   const getUserDetails = async () => {
       try {
@@ -26,8 +25,7 @@ function NavBar() {
           if(res.data) {
               setUser(res.data.data)
           }
-      
-      }
+            }
       catch (error:any) {
           console.log("getUserDetails failed",error)
          }
@@ -36,6 +34,7 @@ function NavBar() {
   useEffect(() => {
       getUserDetails()
   }, [reRender])
+
   return (
     <>
       <nav className='flex w-full items-center justify-between p-4 px-8 h-[60px]'>

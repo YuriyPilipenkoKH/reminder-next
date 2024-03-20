@@ -15,6 +15,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please provide a password"],
     },
+    avatar: {
+        data: Buffer, // Store binary data
+        contentType: String // Optional: Store MIME type of avatar image
+    },
     avatarURL: {
         type: String,
         default: "",

@@ -27,7 +27,7 @@ interface Props {
 function CollectionCard({collection} :Props) {
     const [isOpen, setIsOpen] = useState(false)
     const [isNewTaskModalOpen, setNewTaskModalOpen] = useState(false);
-    const { user , setReRender, reRender} = useContext(UserContext as React.Context<UserContextType>);
+    const { user } = useContext(UserContext as React.Context<UserContextType>);
     const {tasks } = collection 
 
     const toggleNewTaskModal = () => {

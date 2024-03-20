@@ -463,16 +463,27 @@ place-content: center;
   gap: 6px;
 
 }
-.avatar{
+.avatar-wrap{
   height: 240px;
   width: 240px;
   border-radius: 50%;
   border: 16px solid var(--background-color);
   background-color: var(--profile-background);
+  z-index: 5;
+
   position: absolute;
   left: 210px;
   top: 0px;
   transform: translate(-50%, -50%);
+}
+
+.avatar{
+  position: absolute;
+  /* height: 210px;
+  width: 210px; */
+  border-radius: 50%;
+  object-fit: cover;
+
 }
 
 .profile_form{
@@ -537,8 +548,8 @@ place-content: center;
   place-items: center;
   }
   .two_btns{
-    left: 31px;
-    top: 90px;
+    left: -76px;
+    bottom: -20px;
     display: flex;
     justify-content: space-between;
     gap: 80px;
@@ -572,4 +583,22 @@ place-content: center;
  .text-color{
   color: var(--text-color);
   }
+  .userPhoto_input{
+    cursor: pointer;
+    width: 210px;
+    height: 210px;
+    border-radius:50%;
+    border: none;
+    outline: none;
+    /* background-color: var(--field-color); */
+   
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+
+  }
+
+ 
 

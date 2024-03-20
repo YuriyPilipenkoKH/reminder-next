@@ -1,8 +1,7 @@
 "use client"
 
-import UserContext, { UserContextType } from "@/context/UserContext";
-import { useContext, useEffect, useState } from "react";
-import capitalize from "@/lib/capitalize";
+import UserContext from "@/context/UserContext";
+import { useContext,  useState } from "react";
 import { Cross1Icon } from "@radix-ui/react-icons";
 import { Button } from "@radix-ui/themes";
 import axios from "axios"
@@ -11,23 +10,19 @@ import toast from "react-hot-toast"
 import ProfileForm from "./Forms/ProfileForm";
 import { FiEdit } from "react-icons/fi";
 import { HiOutlineCamera } from "react-icons/hi2";
-import AvatarForm from "./Forms/AvatarForm";
+import Image from "next/image";
 
-interface UserData {
-    name: string;
-    email: string;
-}
 
 function UserInfo() {
-  const {user, setUser, setReRender, reRender} = useContext(UserContext as React.Context<UserContextType>)
-  const [showData, setShowData] = useState(false);
-  const [edit, setEdit] = useState(false);
-  const [userPhoto, setUserPhoto] = useState('');
+  const {user, setUser, setReRender, reRender} = useContext(UserContext )
+  const [userPhoto, setUserPhoto] = useState(null);
+  const [previewImage, setPreviewImage] = useState(null);
   const [anable, setAnable] = useState(false)
   const [editPhoto, setEditPhoto] = useState(false)
   const router = useRouter();
 
-  console.log('userPhoto', userPhoto)
+  console.log('user', user)
+  // console.log('previewImage', previewImage)
 
     const logout =async() => {
         try {
@@ -39,41 +34,51 @@ function UserInfo() {
             setReRender(!reRender)
             router.push("/login ")                   
         } 
-        catch (error:any) {
+        catch (error) {
             console.log("Logout failed",error)
             toast.error(error.message)
            }
     }
 
-    const handleAddAvatar = () => {
-      // const avatar = userPhoto;
+    const handleAddAvatar = async(e) => {
+      e.preventDefault()
+      if (!userPhoto) {
+        toast('Select image')
+        return; // No file selected, do nothing
+      }
       const formData = new FormData();
-      // for (const key in { avatar }) {
-      //     formData.append(key, { avatar }[key]);
-      // }
-      // dispatch(operations.fetchUpdateUser(formData)).unwrap()
-      // .then(() => {
-      //     toast.success(lang.Photoupdated);
-      // })
-      // .catch(() => {
-      //     toast.error(lang.wrong);
-      // });;
-      // setEdit(false);
-      // setUserPhoto(false);
+     formData.append('avatar', userPhoto);
+     formData.append('userId', user._id);
+      // console.log('formData', formData);
+      try {
+          const response = await axios.patch("/api/users/updateavatar",
+           formData 
+           )
+        .then(response => {
+          const updatedUserData = response.data.user;
+ 
+          toast.success(`${updatedUserData?.name}s avatar updated`);
+          setReRender(!reRender);
+        })
+    }
+     catch (error) {
+        console.log("Updating avatar failed",error)
+        toast.error(error.message)
+      }
   };
 
-  const handleCancelAvatar = (e:any) => {
-      setUserPhoto('');
-      setEdit(false);
+  const handleCancelAvatar = (e) => {
+      setUserPhoto(null);
+      // setEditPhoto(false);
   };
 
-    const handleClickInput = (e:any) => {
-      console.log(e)
-      setEdit(true);
-      const [file] = e.target.files;
-      console.log(file)
+    const handleClickInput = (e) => {
+      // setEdit(true);
+      const file = e.target.files[0];
+      
       if (file) {
           setUserPhoto(file);
+          setPreviewImage(URL.createObjectURL(file));
       }
   };
 
@@ -81,20 +86,46 @@ function UserInfo() {
   return (
     <div className="profile">
         <div className="profile_card  shadow-lg">
-          <div className="avatar">
-            {/* <AvatarForm/> */}
-            <form >
+          <div className="avatar-wrap">
+          {!!userPhoto &&  (
+                <Image
+                className="avatar"
+                src={previewImage}
+                alt="user avatar" 
+                width={210}
+                height={210}/>
+            )}
+            <form 
+               action={handleAddAvatar} 
+               autoComplete="off"
+               noValidate>
               <input 
+                className="userPhoto_input "
                 type="file"
                 id="userPhoto"
                 name="userPhoto"
                 accept=".png, .jpg, .jpeg, .webp"
-               //  hidden
+                hidden={!editPhoto}
                //  disabled={!showData}
                 value=""
                 onChange={handleClickInput}
               />
-              <button type='submit'  onClick={handleAddAvatar}>go</button>
+          {editPhoto && (
+          <div className="two_btns absolute">
+            <Button 
+            className="abs_btn bg-red-600/50"
+            onClick={handleCancelAvatar}
+            type="button">
+              Cancel
+            </Button>
+            <Button 
+            className="abs_btn  bg-green-600/50"
+            onClick={handleAddAvatar}
+            type='submit'>
+              Confirm
+            </Button>
+          </div>
+         )} 
             </form>
           </div>
   
@@ -126,16 +157,7 @@ function UserInfo() {
            </button>
          </div>
           ) }
-         {editPhoto && (
-          <div className="two_btns absolute">
-            <Button className="abs_btn bg-red-600/50">
-              Cancel
-            </Button>
-            <Button className="abs_btn  bg-green-600/50">
-              Confirm
-            </Button>
-          </div>
-         )} 
+
 
 
         </div>

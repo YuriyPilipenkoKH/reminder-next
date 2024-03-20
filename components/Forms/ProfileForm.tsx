@@ -1,7 +1,7 @@
 import { createProfileSchema, createProfileSchemaType } from '@/models/schema/profileSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import UserContext, { UserContextType } from "@/context/UserContext";
-import { useContext,  useState } from "react";
+import { useContext,  useEffect,  useState } from "react";
 import { useForm } from 'react-hook-form'
 import axios from 'axios';
 import toast from 'react-hot-toast';
@@ -65,10 +65,8 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ anable, user }) => {
               company: updatedUserData.company,
               location: updatedUserData.location,
           });
-  
-          toast.success(`User Info updated`);
-          setReRender(!reRender);
-
+            toast.success(`User Info updated`);
+            setReRender(!reRender);
         });
 
     }
@@ -79,6 +77,16 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ anable, user }) => {
      }
 
   }
+//   useEffect(() => {
+//     reset({
+//       name: user?.name ,
+//       email: user?.email ,
+//       phone: user?.phone ,
+//       company: user?.company ,
+//       location: user?.location ,
+//   });
+   
+// }, [reRender])
 
   return (
     <form 
