@@ -469,7 +469,8 @@ place-content: center;
   border-radius: 50%;
   border: 16px solid var(--background-color);
   background-color: var(--profile-background);
-  z-index: 5;
+ 
+
 
   position: absolute;
   left: 210px;
@@ -479,6 +480,8 @@ place-content: center;
 
 .avatar{
   position: absolute;
+  z-index: 3;
+  pointer-events: none;
   /* height: 210px;
   width: 210px; */
   border-radius: 50%;
@@ -590,6 +593,7 @@ place-content: center;
     border-radius:50%;
     border: none;
     outline: none;
+    z-index: 4;
     /* background-color: var(--field-color); */
    
     appearance: none;

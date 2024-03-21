@@ -1,10 +1,12 @@
+"use client"
 import AvatarForm from '@/components/Forms/AvatarForm'
-import React from 'react'
+import React, { useState } from 'react'
 
 function TestPage() {
+    const [editPhoto, setEditPhoto] = useState(false)
   return (
     <div>
-      <AvatarForm/>
+      <AvatarForm editPhoto={true}/>
     </div>
   )
 }

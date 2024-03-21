@@ -6,25 +6,12 @@ connectMongoDB()
 
 export async function PATCH(req: NextRequest) {
     try {
-        // const reqBody = await req.json();
-        const file = await req.formData()
-        const avatar: File | null = file.get('avatar') as unknown as File
-        const userId = file.get('userId')
-        // const {  userId } = reqBody
+        const reqBody = await req.json();
+        const {  userId, avatarURL } = reqBody
         // const {  userId } = params;
-        // const { userId, ...updateData } = reqBody;
-
-        // console.log(reqBody)
-        console.log(file)
-        console.log(avatar)
+        console.log(avatarURL)
         console.log(userId)
 
-        const bytes = await avatar?.arrayBuffer();
-        const buffer = Buffer.from(bytes);
-        console.log(buffer)
-        
-
-        // console.log(formData)
         // Find user by ID
         let user = await User.findById(userId);
         if (!user) {
@@ -33,17 +20,10 @@ export async function PATCH(req: NextRequest) {
                 { status: 404 }
             );
         }
-                // Update avatar field using spread operator
-                // user = {
-                //     ...user.toObject(), // Convert Mongoose document to plain JavaScript object
-                //     avatar: buffer
-                // };
-        
-                // Save the updated user
-                // await User.findByIdAndUpdate(userId, user);
-
-        user.avatar = buffer;
-        // Object.assign(user, updateData);
+        // Update avatar field 
+        user.avatarURL = avatarURL;
+                
+        // Save the updated user
         await user.save();
 
         return NextResponse.json({

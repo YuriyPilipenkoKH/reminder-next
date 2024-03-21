@@ -1,5 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import formidable from 'formidable';
 import { UploadApiResponse, v2 as cloudinary } from 'cloudinary';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -13,19 +12,21 @@ cloudinary.config({
 // Define API route handler
 export async function POST(req: NextRequest, res: NextResponse) {
   try {
-    // const form = new formidable.IncomingForm();
     const file = await req.formData()
     const avatar: File | null = file.get('file') as unknown as File
- console.log(avatar)
+    console.log(avatar)
 
- const bytes = await avatar?.arrayBuffer();
- const buffer = Buffer.from(bytes);
-//  console.log(buffer)
+    const bytes = await avatar?.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+    //  console.log(buffer)
 
-   // Upload file buffer to Cloudinary using upload_stream
-   const result: UploadApiResponse = await new Promise((resolve, reject) => {
+    // Upload file buffer to Cloudinary using upload_stream
+    const result: UploadApiResponse = await new Promise((resolve, reject) => {
     const stream = cloudinary.uploader.upload_stream(
-      { resource_type: "raw" },
+      { 
+        resource_type: "image",
+        folder: "reminder"
+      },
       (error?: Error, result?: UploadApiResponse) => {
         if (error) {
           reject(error);
@@ -38,7 +39,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
     );
     stream.end(buffer);
   });
-  console.log(result?.secure_url)
+  console.log(`curl`,result?.secure_url)
 
       return NextResponse.json({
         message: `Uploaded`,

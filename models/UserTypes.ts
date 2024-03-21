@@ -3,7 +3,6 @@ type User = {
     name: string;
     email: string;
     password: string;
-    avatar: Buffer;
     avatarURL: string;
     phone: string;
     company: string;

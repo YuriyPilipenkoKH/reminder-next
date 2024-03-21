@@ -10,6 +10,7 @@ import User from '@/models/UserTypes';
 interface ProfileFormProps {
   user: User
   anable: boolean
+
   }
 
 const ProfileForm: React.FC<ProfileFormProps> = ({ anable, user }) => {
@@ -65,7 +66,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ anable, user }) => {
               company: updatedUserData.company,
               location: updatedUserData.location,
           });
-            toast.success(`User Info updated`);
+            toast.success(`${updatedUserData?.name}s  info updated`);
             setReRender(!reRender);
         });
 
@@ -75,18 +76,8 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ anable, user }) => {
         // setLogError(error?.response.data.error)
         toast.error(error.message)
      }
-
   }
-//   useEffect(() => {
-//     reset({
-//       name: user?.name ,
-//       email: user?.email ,
-//       phone: user?.phone ,
-//       company: user?.company ,
-//       location: user?.location ,
-//   });
-   
-// }, [reRender])
+
 
   return (
     <form 
@@ -134,7 +125,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ anable, user }) => {
       disabled= {!anable}
       type="text" />
     </label>
-    {(errors?.name || errors?.email || errors?.phone || errors?.company || errors?.location )&& (
+    {(  errors?.name || errors?.email || errors?.phone || errors?.company || errors?.location ) && anable &&(
               <div className="autherror">
                 {errors.name && <div>{errors.name.message}</div>}
                 {!errors.name && errors.email && <div>{errors.email.message}</div>}
@@ -143,7 +134,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ anable, user }) => {
                 {!errors.name && !errors.email && !errors.phone && !errors.company && errors.location &&<div>{errors.location.message}</div>}
               </div>
             )}
-            {logError && <div className="autherror">{"Incorrect some fiellds"}</div>}
+            {logError &&<div className="autherror">{"Incorrect some fiellds"}</div>}
             {/* {user && <div className='absolute top-6'>{user?.name}</div>} */}
     {anable && (
         <button 
