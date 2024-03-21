@@ -22,10 +22,12 @@ function NavBar() {
   const getUserDetails = async () => {
       try {
           const res = await axios.get('/api/users/current')
-          console.log(res.data);
-          if(res.data) {
-              setUser(res.data.data)
-          }
+          .then(response => {
+            if(response.data) {
+                setUser(response.data.data)
+                // console.log(res.data);
+            }
+          })
             }
       catch (error:any) {
           console.log("getUserDetails failed",error)
@@ -51,7 +53,6 @@ function NavBar() {
         )}
        {user && (
          <UserButton />
-
        )}
          <ThemeSwitcher/>
        </div>

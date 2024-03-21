@@ -6,14 +6,11 @@ import { cn } from "@/lib/utils"
 import CollectionTypes from "@/models/CollectionTypes"
 import Task from "@/models/TaskTypes"
 import { Button,  Divider, Tooltip } from "antd"
-import { useRouter } from "next/navigation"
-import { useContext, useEffect, useMemo, useState, useTransition } from "react"
-import toast from "react-hot-toast"
+import {  useState,  } from "react"
 import { MdKeyboardArrowDown } from "react-icons/md"
 import { BsPlusSquare } from "react-icons/bs";
 import NewTaskModal from "./Modals/NewTaskModal"
 import { format } from 'date-fns';
-import UserContext, { UserContextType } from "@/context/UserContext"
 import ConfirmModal from "./Modals/ConfirmModal"
 import TaskElement from "./TaskElement"
 
@@ -27,14 +24,11 @@ interface Props {
 function CollectionCard({collection} :Props) {
     const [isOpen, setIsOpen] = useState(false)
     const [isNewTaskModalOpen, setNewTaskModalOpen] = useState(false);
-    const { user } = useContext(UserContext as React.Context<UserContextType>);
     const {tasks } = collection 
 
     const toggleNewTaskModal = () => {
         setNewTaskModalOpen(!isNewTaskModalOpen);
       };
-
-
 
   return (
     <div className="mcard">

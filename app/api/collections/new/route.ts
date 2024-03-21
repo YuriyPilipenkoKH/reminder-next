@@ -7,7 +7,6 @@ connectMongoDB()
 
 export async function POST(req:NextRequest) {
     try {
-      
         const reqBody = await req.json()
         const {name, color, userId} = reqBody
         // console.log(reqBody)

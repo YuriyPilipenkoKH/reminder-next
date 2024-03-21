@@ -1,4 +1,3 @@
-
 import { connectMongoDB, db, } from "@/lib/mongoDB";
 import { NextRequest, NextResponse } from "next/server";
 

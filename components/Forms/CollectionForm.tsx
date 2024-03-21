@@ -57,7 +57,6 @@ function CollectionForm({ setIsSubmitting }: CollectionFormProps)  {
             userId: user._id
         })
         .then(response => {
-
             toast.success(`${data?.name} created successfully` )
             reset()
             console.log("Creation success", response.data)

@@ -47,15 +47,3 @@ export async function PATCH(req:NextRequest) {
          }
 }
 
-        // Update the content 
-        // if (avatar instanceof File) {
-        //     // Handle the avatar file properly, such as saving it to a storage system
-        //     // and updating the user's avatar URL accordingly.
-        //     // For example:
-        //     const avatarURL = "/path/to/avatars/" + userId + ".jpg"; // Example path
-        //     // Save avatar to storage (e.g., Amazon S3, local file system)
-        //     // Update user's avatarURL field with the new URL
-        //     user.avatarURL = avatarURL;
-        // } else {
-        //     // Handle the case where avatar is not a file (optional)
-        // }

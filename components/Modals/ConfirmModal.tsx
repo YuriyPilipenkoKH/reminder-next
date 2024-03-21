@@ -33,9 +33,12 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({collection}) => {
 
   const removeCollection = async( id:string) => {
     try {
-        const response = await axios.delete(`/api/collections/dumpster/${id}`);
-        toast.success(`Collection ${capitalize(collection?.name)} deleted`)
-        setReRender(!reRender)
+        const response = await axios.delete(`/api/collections/dumpster/${id}`)
+        .then(response => {
+
+          toast.success(`Collection ${capitalize(collection?.name)} deleted`)
+          setReRender(!reRender)
+        })
     }
      catch (error:any) {
         console.log("Trashing failed",error)

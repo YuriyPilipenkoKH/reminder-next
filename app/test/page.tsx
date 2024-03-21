@@ -6,7 +6,9 @@ function TestPage() {
     const [editPhoto, setEditPhoto] = useState(false)
   return (
     <div>
-      <AvatarForm editPhoto={true}/>
+      <AvatarForm 
+      setEditPhoto={setEditPhoto}
+      editPhoto={true}/>
     </div>
   )
 }

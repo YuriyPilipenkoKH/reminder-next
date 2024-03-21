@@ -32,9 +32,11 @@ function TaskElement({collection, task} :Props) {
             console.log('task id',id)
             const response = await axios.patch(`/api/collections/tasks/done/`,
             { collectionId, id }
-            );
-            toast.success(`Task done`)
-            setReRender(!reRender);
+            )
+            .then(response => {
+                toast.success(`Task done`)
+                setReRender(!reRender);
+            })
         }
          catch (error:any) {
             console.log("Setting done failed",error)

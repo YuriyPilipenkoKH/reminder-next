@@ -20,12 +20,9 @@ interface ConfirmTaskEditingProps {
 }
 
 const ConfirmTaskEditing: React.FC<ConfirmTaskEditingProps> = ({collection, task}) => {
-    const { user , setReRender, reRender} = useContext(UserContext as React.Context<UserContextType>);
-  const [loading, setLoading] = useState(false);
+  const {  setReRender, reRender} = useContext(UserContext as React.Context<UserContextType>);
   const [open, setOpen] = useState(false);
   const [logError, setLogError] = useState('')
-  const [disabled, setDisabled] = useState(true);
-
 
   const formattedExpiresAt = task.expiresAt ? new Date(task.expiresAt).toISOString().slice(0, 16) : 'no expiration'; // Format expiresAt to string'yyyy-MM-dd') : ''; // Format expiresAt to string
 
@@ -51,7 +48,6 @@ const {
 } = formState
 
 const onSubmit = async (data: createTaskSchemaType) => {
-    // console.log('Submit', data);
       
 // Convert expiresAt string to Date object if it's not undefined
 let expiryDate: Date | undefined;
@@ -65,13 +61,14 @@ if (data.expiresAt !== undefined) {
             expiresAt: expiryDate,
             collectionId: collection._id,
             _id: task._id ,
-            
         })
-        toast.success(`Another task edited`)
-        reset()
-        setReRender(!reRender)
-        handleCancel();
-       
+        .then(response => {
+          toast.success(`Another task edited`)
+          reset()
+          setReRender(!reRender)
+          handleCancel();
+         
+        })
     }
      catch (error:any) {
         console.log("Editing failed",error)
@@ -85,9 +82,7 @@ if (data.expiresAt !== undefined) {
   };
 
   const handleOk = () => {
-    setLoading(true);
     setTimeout(() => {
-      setLoading(false);
       setOpen(false);
     }, 3000);
   };

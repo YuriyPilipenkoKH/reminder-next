@@ -23,11 +23,12 @@ function UserInfo() {
     const logout =async() => {
         try {
             const response = await axios.get("/api/users/logout")
-            toast.success('Logout success')
-    
-            console.log("Logout success", response.data)
-            setUser(null)
-            router.push("/login ")                   
+            .then(response => {
+              toast.success('Logout success')
+              // console.log("Logout success", response.data)
+              setUser(null)
+              router.push("/login ")                   
+            })
         } 
         catch (error) {
             console.log("Logout failed",error)
@@ -35,13 +36,12 @@ function UserInfo() {
            }
     }
 
-
-    
   return (
     <div className="profile">
         <div className="profile_card  shadow-lg">
           <div className="avatar-wrap">
             <AvatarForm 
+            anable={anable}
             setEditPhoto={setEditPhoto}
             editPhoto={editPhoto}
             />
@@ -75,9 +75,6 @@ function UserInfo() {
            </button>
          </div>
           ) }
-
-
-
         </div>
     </div>
   )

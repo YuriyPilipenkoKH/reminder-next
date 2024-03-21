@@ -7,8 +7,6 @@ import CollectionTypes from '@/models/CollectionTypes';
 import Task from '@/models/TaskTypes';
 import toast from 'react-hot-toast';
 import UserContext, { UserContextType } from '@/context/UserContext';
-
-
 interface ConfirmTaskRemovalProps {
     collection: CollectionTypes 
      task: Task
@@ -23,7 +21,7 @@ const ConfirmTaskRemoval: React.FC<ConfirmTaskRemovalProps> = ({collection, task
   };
 
   const handleOk = () => {
-    // removeCollection(collection._id)
+
     removeTask(task._id, collection._id)
 
     setIsModalOpen(false);
@@ -40,9 +38,12 @@ const ConfirmTaskRemoval: React.FC<ConfirmTaskRemovalProps> = ({collection, task
         {
             data: { collectionId } // Pass collectionId in the request body
         }
-        );
-        toast.success(`Task deleted`)
-        setReRender(!reRender)
+        )
+        .then(response => {
+
+          toast.success(`Task deleted`)
+          setReRender(!reRender)
+        })
     }
      catch (error:any) {
         console.log("Trashing failed",error)

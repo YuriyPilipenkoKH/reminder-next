@@ -6,7 +6,7 @@ connectMongoDB()
 
 export async function PATCH(req:NextRequest ) {
     try {
-        
+
         const reqBody = await req.json()
         const { collectionId, id } = reqBody
         console.log( reqBody)
@@ -33,11 +33,8 @@ export async function PATCH(req:NextRequest ) {
             done: true
         };
 
-
         // Save the collection with the updated task
         await collection.save();
-
-
 
         return NextResponse.json({
             message: `Task done`,

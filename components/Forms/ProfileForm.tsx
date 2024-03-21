@@ -1,7 +1,7 @@
 import { createProfileSchema, createProfileSchemaType } from '@/models/schema/profileSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import UserContext, { UserContextType } from "@/context/UserContext";
-import { useContext,  useEffect,  useState } from "react";
+import { useContext,  useState } from "react";
 import { useForm } from 'react-hook-form'
 import axios from 'axios';
 import toast from 'react-hot-toast';
@@ -10,7 +10,6 @@ import User from '@/models/UserTypes';
 interface ProfileFormProps {
   user: User
   anable: boolean
-
   }
 
 const ProfileForm: React.FC<ProfileFormProps> = ({ anable, user }) => {
@@ -135,7 +134,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ anable, user }) => {
               </div>
             )}
             {logError &&<div className="autherror">{"Incorrect some fiellds"}</div>}
-            {/* {user && <div className='absolute top-6'>{user?.name}</div>} */}
+
     {anable && (
         <button 
         className='save bg-green-800/90 disabled:bg-green-800/60'

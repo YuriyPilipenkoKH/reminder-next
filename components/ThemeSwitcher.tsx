@@ -1,6 +1,6 @@
 "use client"
 
-import { addDarkToHtml, getHtmlClasses, remDarkFromHtml } from '@/providers/darkProvider';
+import { getHtmlClasses } from '@/providers/darkProvider';
 import { MoonIcon, SunIcon } from '@radix-ui/react-icons';
 import React, { useState } from 'react'
 
@@ -10,18 +10,9 @@ interface ThemeSwitcherProps {
   }
 
   function ThemeSwitcher() {
-      const [theme, setTheme] = useState('')
-      const themeSetter = () => {
-          if(theme === 'light'){
-              setTheme('dark')
-          }
-          if(theme === 'dark'){
-              setTheme('light')
-          }
-        }
+      const [theme, setTheme] = useState('light')
 
 // HTML
-
 const darkSetter = () => {
   
         let htmlClasses: string[] = []  
@@ -29,17 +20,18 @@ const darkSetter = () => {
         if (htmlElement) {
            htmlClasses = getHtmlClasses(htmlElement);
         }
-
           if(htmlClasses.includes("dark")){
-            remDarkFromHtml()
-            setTheme('')
+            if (htmlElement) {
+              htmlElement.classList.remove('dark');
+          }
+            setTheme('light')
           }
           else {
-            addDarkToHtml()
-            setTheme('dark')
+            if (htmlElement) {
+              htmlElement.classList.add('dark');
           }
-      }
-
+            setTheme('dark')
+          }}
 
   return (
     <>
@@ -49,7 +41,6 @@ const darkSetter = () => {
         ? <MoonIcon className="h-[1.2rem] w-[1.2rem]"/>
         : <SunIcon className="h-[1.2rem] w-[1.2rem]"/>
         }
-        
      </button>
     </>
   )

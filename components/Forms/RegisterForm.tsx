@@ -38,32 +38,29 @@ const {
     isSubmitting
 } = formState
 
-
-
-
 const onSubmit = async(data:{
   name:string, 
   email:string, 
   password:string 
 }) => {
 
-
   try {
    const response = await axios.post("/api/users/register", data)
-   toast.success('Registration successfull')
-   await wait(1000)
-   toast.success('Congratulstions!')
-   reset()
-   console.log("Signnup success", response.data)
-   router.push("/login")
+   .then(async(response) => {
+
+     toast.success('Registration successfull')
+     await wait(1000)
+     toast.success('Congratulstions!')
+     reset()
+     console.log("Signnup success", response.data)
+     router.push("/login")
+   })
   }
    catch (error:any) {
     console.log("Signup failed",error)
     setRegError(error?.response.data.error)
     toast.error(error?.response.data.error)
   }
-
-
 };
 
   return (

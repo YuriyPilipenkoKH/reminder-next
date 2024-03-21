@@ -1,7 +1,6 @@
 import { CollectionColors } from '@/lib/constants';
 import mongoose from 'mongoose';
 
-
 // Mongoose schema for Collection
 const collectionSchema = new mongoose.Schema({
     name: {

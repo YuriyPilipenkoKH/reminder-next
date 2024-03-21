@@ -1,25 +1,26 @@
 "use client"
 import UserContext, { UserContextType } from "@/context/UserContext";
-import React, { ChangeEvent, useState, useContext, useEffect, } from 'react';
+import React, { ChangeEvent, useState, useContext,  } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { Button } from "@radix-ui/themes";
 
 
 interface AvatarFormProps {
+    anable: boolean,
     editPhoto: boolean,
     setEditPhoto: (editPhoto: boolean) => void;
-   
 }
 
-const AvatarForm: React.FC<AvatarFormProps> = ({editPhoto, setEditPhoto}) => {
+const AvatarForm: React.FC<AvatarFormProps> = ({anable, editPhoto, setEditPhoto}) => {
 
-  const [file, setFile] = useState<File | null>(null);  //<File | null>
+  const [file, setFile] = useState<File | null>(null);  
   const [fileUrl, setFileUrl] = useState('');
+  const [loading, setLoadig] = useState(false);
   const {user, setReRender, reRender} = useContext(UserContext as React.Context<UserContextType>)
   // console.log('file', file)
-  console.log('fileUrl', fileUrl)
-  console.log('user', user)
+  // console.log('fileUrl', fileUrl)
+  // console.log('user', user)
 
 
   const handleClickInput = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -44,22 +45,27 @@ const AvatarForm: React.FC<AvatarFormProps> = ({editPhoto, setEditPhoto}) => {
       if (!file) return;
       const formData = new FormData();
       formData.append('file', file);
+      setLoadig(true)
 
       const uploadResponse = await axios.post('/api/users/upload', formData)
          .then(response => {
+
           const uploadedFileUrl = response.data.fileUrl;
           console.log(uploadedFileUrl)
           setFileUrl(uploadedFileUrl);
           updateavatarUrl(uploadedFileUrl);
           toast("uploaded")
           setEditPhoto(false)
-        
     })
-    } catch (error:any) {
+    } 
+    catch (error:any) {
       console.error('Error uploading file:', error);
     }
-  };
-
+    finally{
+      setLoadig(false)
+    }
+  
+}
 const updateavatarUrl = async (avatar: string) => {
   console.log('avatar', avatar)
 
@@ -77,6 +83,9 @@ const updateavatarUrl = async (avatar: string) => {
 } 
 catch (error:any) {
   console.log("Updating avatar failed",error)
+}
+finally{
+  setLoadig(false)
 }
 }
   return (
@@ -108,35 +117,32 @@ catch (error:any) {
                 name="userPhoto"
                 accept=".png, .jpg, .jpeg, .webp"
                 hidden={!editPhoto}
-               //  disabled={!showData}
                 value=""
                 onChange={handleClickInput}
               />
       
-          {editPhoto &&(
+          {anable && editPhoto &&(
           <div className="two_btns absolute">
             <Button 
-            className="abs_btn bg-red-600/50"
+            className="abs_btn bg-red-600/90 disabled:bg-red-600/50"
             type="button"
             onClick={handleCancelAvatar}
+            disabled={!file}
             >
               Cancel
             </Button>
+
             <Button 
-            className="abs_btn  bg-green-600/50"
-            type='submit'>
-              Confirm
+            className="abs_btn  bg-green-600/90 disabled:bg-green-600/50" 
+            type='submit'
+            disabled={!file}>
+              {loading  ? "Process" : "Confirm"}
             </Button>
+ 
           </div>
          )} 
             </form>
 
-      {/* {fileUrl && (
-        <>
-          <p>Uploaded image:</p>
-          <img src={fileUrl} alt="Uploaded image" width={200} height={200}/>
-        </>
-      )} */}
     </>
   );
 };

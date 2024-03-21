@@ -2,9 +2,7 @@ import "dotenv/config"
 import { connectMongoDB } from "./mongoDB";
 interface UserData {
     email: string;
-    // Add any other properties if needed
 }
-
 
 export const emailAvailable = async (fieldValue: string): Promise<string | undefined> => {
 

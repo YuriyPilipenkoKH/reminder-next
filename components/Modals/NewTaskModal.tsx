@@ -44,8 +44,7 @@ interface Props {
     } = formState
 
     const onSubmit = async (data: createTaskSchemaType) => {
-        // console.log('Submit', data);
-          
+;
     // Convert expiresAt string to Date object if it's not undefined
     let expiryDate: Date | undefined;
     if (data.expiresAt !== undefined) {
@@ -60,11 +59,13 @@ interface Props {
                 _id: taskId ,
                 done: false
             })
-            toast.success(`Another crucial task added`)
-            // console.log(response.data)
-            reset()
-            onClose();
-            setReRender(!reRender)
+            .then(response => {
+              toast.success(`Another crucial task added`)
+              // console.log(response.data)
+              reset()
+              onClose();
+              setReRender(!reRender)
+            })
         }
          catch (error:any) {
             console.log("Creation failed",error)

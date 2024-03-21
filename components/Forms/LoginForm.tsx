@@ -46,12 +46,14 @@ function LoginForm() {
 
     try {
         const response = await axios.post("/api/users/login", data)
-        toast.success('Login success')
-        reset()
-        console.log("Login success", response.data)
- 
-        setReRender(!reRender)
-        router.push('/dashboard')
+        .then(response => {
+            toast.success('Login success')
+            reset()
+            console.log("Login success", response.data)
+     
+            setReRender(!reRender)
+            router.push('/dashboard')
+        })
     } 
     catch (error:any) {
         console.log("Login failed",error)
@@ -114,7 +116,4 @@ function LoginForm() {
     </div>
   )
 }
-
-
-
 export default LoginForm

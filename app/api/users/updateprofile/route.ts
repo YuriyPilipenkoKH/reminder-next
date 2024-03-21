@@ -18,7 +18,7 @@ export async function PATCH(req: NextRequest) {
                 { status: 404 }
             );
         }
-        // console.log(user)
+
          // Update the content 
         // Update properties instead of reassigning the 'user' variable
         // user.name = name; 
