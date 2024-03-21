@@ -53,13 +53,11 @@ const AvatarForm: React.FC<AvatarFormProps> = ({editPhoto, setEditPhoto}) => {
           updateavatarUrl(uploadedFileUrl);
           toast("uploaded")
           setEditPhoto(false)
-          setReRender(!reRender);
+        
     })
     } catch (error:any) {
       console.error('Error uploading file:', error);
     }
-
-
   };
 
 const updateavatarUrl = async (avatar: string) => {
@@ -81,12 +79,6 @@ catch (error:any) {
   console.log("Updating avatar failed",error)
 }
 }
-
-// useEffect(() => {
-
-// }, [editPhoto])
-
-
   return (
     <>
     { !!user?.avatarURL && (

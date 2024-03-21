@@ -4,19 +4,20 @@ import ThemeSwitcher from './ThemeSwitcher'
 import Logo from './Logo'
 import UserButton from './UserButton'
 import { Button, Divider } from 'antd'
-import { useRouter } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import { useContext, useEffect } from 'react'
 import UserContext, { UserContextType } from '@/context/UserContext'
 import axios from 'axios'
 import Dashboard from './Dashboard'
-import toast from 'react-hot-toast'
 
 
 function NavBar() {
   const {user, setUser, reRender} = useContext(UserContext as React.Context<UserContextType>)
   const router = useRouter() 
+  // Retrieve query string values
+  const params = useParams()
+  const isLoginPage = params?.login === 'login';
 
-  // const isLoginPage = router.pathname === '/login';
 
   const getUserDetails = async () => {
       try {
@@ -43,7 +44,7 @@ function NavBar() {
             {user && <Dashboard/> }
           </div>
        <div className='flex gap-4 items-center'>
-        {!user && (
+        {!user && !isLoginPage  && (
           <Button
           onClick={()=> router.push('/login')}>
             Login</Button>
