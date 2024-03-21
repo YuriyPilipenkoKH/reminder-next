@@ -69,7 +69,7 @@ const onSubmit = async(data:{
   return (
     <div className="pageWrapper">
       <div className="formWrapper">
-        <h1 className="text-xl font-bold">
+        <h1 className="text-xl font-bold log_title">
          {(isLoading || isSubmitting) ? "Processing" : "Register"} </h1>
         <form
         onSubmit={handleSubmit(onSubmit)}   
@@ -111,9 +111,9 @@ const onSubmit = async(data:{
             )}
             {regError && <div className="autherror">{regError}</div>}
         </form>
-            <p className="text-sm flex gap-2 justify-end">Already have an account? 
+            <p className="text-sm flex gap-2 justify-end log_link">Already have an account? 
             <Link
-            className="text-bold text-blue-900"
+            className="text-bold text-blue-900 log_link"
              href={'/login'}>Login</Link></p>
       </div>
     </div>

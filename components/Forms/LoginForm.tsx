@@ -68,7 +68,7 @@ function LoginForm() {
   return (
     <div className="pageWrapper">
       <div className="formWrapper">
-        <h1 className="text-xl font-bold">
+        <h1 className="text-xl font-bold log_title">
         {(isLoading || isSubmitting) ? "Processing" : "LogIn"} </h1>
         <form 
         onSubmit={handleSubmit(onSubmit)}   
@@ -106,9 +106,9 @@ function LoginForm() {
             )}
             {logError && <div className="autherror">{"Incorrect login or password"}</div>}
         </form>
-            <p className="text-sm flex gap-2 justify-end">Don`t have an account? 
+            <p className="text-sm flex gap-2 justify-end log_link">Don`t have an account? 
             <Link
-            className="text-bold text-blue-900"
+            className="text-bold text-blue-900 log_link"
              href={'/register'}>Register</Link></p>
       </div>
     </div>

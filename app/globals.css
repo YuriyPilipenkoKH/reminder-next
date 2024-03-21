@@ -104,7 +104,7 @@ body {
   background-color: var(--background-color);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transition: all 1s ease-in-out;
+  transition: all 1s ease;
   margin: 0;
   padding: 0;
 }
@@ -162,7 +162,7 @@ img {
   background-color: var(--background-color);
   margin: 0 auto;
   height:  100vh ;
-  transition: all 1s ease-in-out;
+  transition: all 1s ease;
 
   @media screen and (min-width: 420px) {
     width: 420px;
@@ -204,7 +204,7 @@ border: 1px solid blue;
 
 .authinput{
   @apply border border-solid border-gray-600 rounded-lg py-2 px-4 bg-slate-300 w-full focus:outline-none focus:border-blue-500 h-[38px];
-background-color: var(--input-background);
+color: var(--main-text);
 
  }
 
@@ -265,6 +265,12 @@ height: 38px;
   outline: none;
 
 }
+.log_title{
+  color: var(--main-text);
+}
+.log_link{
+  color: var(--main-text);
+}
 
 .arrow>svg {
   scale: 2;
@@ -302,7 +308,7 @@ height: 38px;
 .mcard-content{
   background-color: var(--card-color);
   min-height: 60px;
-  transition: all 1s ease-in-out;
+  transition: all 1s ease;
   animation: ulAnimation 1s ease;   
 }
 .mcard-footer {
@@ -311,7 +317,7 @@ height: 38px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: all 1s ease-in-out;
+  transition: all 1s ease;
   @media screen and (max-width: 767px) {
     padding: 8px 20px;
 
@@ -383,14 +389,14 @@ height: 38px;
   gap: 20px;
   align-items: center;
   padding: 8px 16px;
-  transition: all 0.5s ease;
+  /* transition: all 1s ease; */
 }
 .row{
   display: grid;
   grid-template-columns: 40px auto 100px 60px 60px;
   grid-column-gap: 10px;
   align-items: center;
-  transition: all 0.5s ease;
+  /* transition: all 0.5s ease; */
   height: 32px;
   animation-duration: 0.5s;
   animation-fill-mode: both;
@@ -453,7 +459,7 @@ place-content: center;
 .profile_card{
   position: relative;
   background-color: var(--profile-background);
-  transition: all 1s ease-in-out;
+  transition: all 1s ease;
   height: 520px;
   width: 420px;
   border-radius: 0.5rem/* 8px */;

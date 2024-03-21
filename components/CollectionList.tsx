@@ -29,7 +29,7 @@ function CollectionList() {
     grabUserCollections();
   }, [reRender]);
 
-  const collectionsOfCurrentUser = list.filter((c) => c.userId === user._id);
+  const collectionsOfCurrentUser = list.filter((c) => c.userId === user?._id);
 
   return (
     <div className="flex flex-col w-full gap-4 mt-6">
