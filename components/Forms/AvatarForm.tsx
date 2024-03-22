@@ -10,9 +10,15 @@ interface AvatarFormProps {
     anable: boolean,
     editPhoto: boolean,
     setEditPhoto: (editPhoto: boolean) => void;
+    setUrl: (fileUrl: string) => void;
 }
 
-const AvatarForm: React.FC<AvatarFormProps> = ({anable, editPhoto, setEditPhoto}) => {
+const AvatarForm: React.FC<AvatarFormProps> = ({
+  anable, 
+  editPhoto, 
+  setEditPhoto,
+  setUrl
+}) => {
 
   const [file, setFile] = useState<File | null>(null);  
   const [fileUrl, setFileUrl] = useState('');
@@ -28,10 +34,12 @@ const AvatarForm: React.FC<AvatarFormProps> = ({anable, editPhoto, setEditPhoto}
         const selectedFile = e.target.files[0];
         setFile(selectedFile);
         setFileUrl(URL.createObjectURL(selectedFile));
+        setUrl(URL.createObjectURL(selectedFile));
       }
   };
   const handleCancelAvatar = (e:any) => {
     setFile(null);
+    setUrl('');
     setEditPhoto(false);
 };
 

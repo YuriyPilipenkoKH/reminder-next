@@ -18,6 +18,7 @@ function UserInfo() {
   const {user, setUser,} = useContext(UserContext )
   const [anable, setAnable] = useState(false)
   const [editPhoto, setEditPhoto] = useState(false)
+  const [fileUrl, setUrl] = useState('');
   const router = useRouter();
 
 
@@ -39,14 +40,17 @@ function UserInfo() {
 
   return (
     <div className="profile">
-        <div className="profile_card  shadow-lg">
+        <div 
+        className="profile_card  shadow-lg">
           <AvatarWrap 
+          fileurl={fileUrl}
           avatarurl = {user?.avatarURL}
           className="avatar-wrap">
             <AvatarForm 
             anable={anable}
             setEditPhoto={setEditPhoto}
             editPhoto={editPhoto}
+            setUrl={setUrl}
             />
           </AvatarWrap>
   

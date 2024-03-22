@@ -8,6 +8,9 @@ import { useContext } from 'react'
 function UserButton() {
   const router = useRouter()
   const {user} = useContext(UserContext as React.Context<UserContextType>)
+
+    // Check if user is defined before accessing its properties
+    const userInitial = user?.name ? user.name.charAt(0).toUpperCase() : '';
  
   return (
     <>
@@ -15,7 +18,7 @@ function UserButton() {
        onClick={()=> router.push('/profile')}
        type="primary" 
        shape="circle">
-        {user?.name.charAt(0).toUpperCase()}
+        {userInitial}
       </Button>
     </>
   )

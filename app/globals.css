@@ -474,9 +474,9 @@ place-content: center;
 }
 
 .avatar{
-  position: absolute;
-  z-index: 3;
   pointer-events: none;
+  z-index: 5 !important;
+  position: absolute;
   /* height: 210px;
   width: 210px; */
   border-radius: 50%;
@@ -582,13 +582,14 @@ place-content: center;
   color: var(--text-color);
   }
   .userPhoto_input{
+    position: relative;
     cursor: pointer;
     width: 210px;
     height: 210px;
     border-radius:50%;
     border: none;
     outline: none;
-    z-index: 4;
+    z-index: 5 !important;
     /* background-color: var(--field-color); */
    
     appearance: none;

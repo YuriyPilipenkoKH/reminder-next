@@ -4,19 +4,21 @@ import isPropValid from '@emotion/is-prop-valid';
 
 interface AvatarWrapProps {
     avatarurl: string;
+    fileurl: string;
   }
+
 export const AvatarWrap = styled("div", {
     shouldForwardProp: (prop: string) =>
-      isPropValid(prop) && !["avatarurl"].includes(prop),
+      isPropValid(prop) && !["avatarurl", "fileurl"].includes(prop),
   })<AvatarWrapProps>(
-    ({ avatarurl }) => {
+    ({ avatarurl, fileurl }) => {
       return {
         height: '240px',
         width: '240px',
         borderRadius: '50%',
         border: '16px solid var(--background-color)',
         backgroundColor: 'var(--profile-background)',
-        backgroundImage: `url(${avatarurl})`,
+        backgroundImage: fileurl ? `url(${fileurl})` : `url(${avatarurl})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         position: 'absolute',
