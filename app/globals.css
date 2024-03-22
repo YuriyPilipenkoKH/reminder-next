@@ -470,18 +470,7 @@ place-content: center;
 
 }
 .avatar-wrap{
-  height: 240px;
-  width: 240px;
-  border-radius: 50%;
-  border: 16px solid var(--background-color);
-  background-color: var(--profile-background);
- 
 
-
-  position: absolute;
-  left: 210px;
-  top: 0px;
-  transform: translate(-50%, -50%);
 }
 
 .avatar{

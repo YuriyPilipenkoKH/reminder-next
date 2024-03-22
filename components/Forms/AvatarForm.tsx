@@ -90,7 +90,7 @@ finally{
 }
   return (
     <>
-    { !!user?.avatarURL && (
+    {/* { !!user?.avatarURL && (
         <img
         className="avatar"
         src={user.avatarURL}
@@ -105,7 +105,7 @@ finally{
                 alt="user avatar" 
                 width={210}
                 height={210}/>
-            )}
+            )} */}
             <form 
                onSubmit={handleAddAvatar} 
                autoComplete="off"

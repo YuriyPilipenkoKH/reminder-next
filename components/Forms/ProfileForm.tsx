@@ -16,7 +16,6 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ anable, user }) => {
   const [logError, setLogError] = useState('')
   const { setReRender, reRender} = useContext(UserContext as React.Context<UserContextType>)
 
-
     const {
         register, 
         handleSubmit,

@@ -11,6 +11,7 @@ import ProfileForm from "./Forms/ProfileForm";
 import { FiEdit } from "react-icons/fi";
 import { HiOutlineCamera } from "react-icons/hi2";
 import AvatarForm from "./Forms/AvatarForm";
+import { AvatarWrap } from "./UserInfo.styled";
 
 
 function UserInfo() {
@@ -39,13 +40,15 @@ function UserInfo() {
   return (
     <div className="profile">
         <div className="profile_card  shadow-lg">
-          <div className="avatar-wrap">
+          <AvatarWrap 
+          avatarurl = {user?.avatarURL}
+          className="avatar-wrap">
             <AvatarForm 
             anable={anable}
             setEditPhoto={setEditPhoto}
             editPhoto={editPhoto}
             />
-          </div>
+          </AvatarWrap>
   
           <ProfileForm 
           user={user}
