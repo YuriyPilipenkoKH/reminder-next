@@ -9,10 +9,10 @@ import User from '@/models/UserTypes';
 
 interface ProfileFormProps {
   user: User
-  anable: boolean
+  enable: boolean
   }
 
-const ProfileForm: React.FC<ProfileFormProps> = ({ anable, user }) => {
+const ProfileForm: React.FC<ProfileFormProps> = ({ enable, user }) => {
   const [logError, setLogError] = useState('')
   const { setReRender, reRender} = useContext(UserContext as React.Context<UserContextType>)
 
@@ -88,7 +88,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ anable, user }) => {
       <input
       {...register('name')}
       className='profile_input'
-      disabled= {!anable}
+      disabled= {!enable}
        type="text" />
     </label>
     <label 
@@ -96,7 +96,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ anable, user }) => {
       <input 
       {...register('email')}
       className='profile_input'
-      disabled= {!anable}
+      disabled= {!enable}
       type="text" />
     </label>
     <label 
@@ -104,7 +104,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ anable, user }) => {
       <input
       {...register('phone')}
       className='profile_input'
-      disabled= {!anable}
+      disabled= {!enable}
        type="text" />
     </label>
     <label 
@@ -112,7 +112,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ anable, user }) => {
       <input 
       {...register('company')}
       className='profile_input'
-      disabled= {!anable}
+      disabled= {!enable}
       type="text" />
     </label>
     <label 
@@ -120,10 +120,10 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ anable, user }) => {
       <input 
       {...register('location')}
       className='profile_input'
-      disabled= {!anable}
+      disabled= {!enable}
       type="text" />
     </label>
-    {(  errors?.name || errors?.email || errors?.phone || errors?.company || errors?.location ) && anable &&(
+    {(  errors?.name || errors?.email || errors?.phone || errors?.company || errors?.location ) && enable &&(
               <div className="autherror">
                 {errors.name && <div>{errors.name.message}</div>}
                 {!errors.name && errors.email && <div>{errors.email.message}</div>}
@@ -134,7 +134,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ anable, user }) => {
             )}
             {logError &&<div className="autherror">{"Incorrect some fiellds"}</div>}
 
-    {anable && (
+    {enable && (
         <button 
         className='save bg-green-800/90 disabled:bg-green-800/60'
         disabled={isSubmitting || !isDirty || !isValid}

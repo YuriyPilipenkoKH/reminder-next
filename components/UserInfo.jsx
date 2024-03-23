@@ -16,7 +16,7 @@ import { AvatarWrap } from "./UserInfo.styled";
 
 function UserInfo() {
   const {user, setUser,} = useContext(UserContext )
-  const [anable, setAnable] = useState(false)
+  const [enable, setEnable] = useState(false)
   const [editPhoto, setEditPhoto] = useState(false)
   const [fileUrl, setUrl] = useState('');
   const router = useRouter();
@@ -47,7 +47,7 @@ function UserInfo() {
           avatarurl = {user?.avatarURL}
           className="avatar-wrap">
             <AvatarForm 
-            anable={anable}
+            enable={enable}
             setEditPhoto={setEditPhoto}
             editPhoto={editPhoto}
             setUrl={setUrl}
@@ -56,10 +56,10 @@ function UserInfo() {
   
           <ProfileForm 
           user={user}
-          anable={anable}/>
+          enable={enable}/>
           <Button
            onClick={logout}
-           disabled={anable}
+           disabled={enable}
           className= "logout bg-red-600/90 text-neutral-100 font-bold px-6 py-2 rounded-lg disabled:bg-red-600/40">
             LogOut
           </Button>
@@ -67,12 +67,12 @@ function UserInfo() {
          <div  className="open_key key_style">
            <button
            className="flex items-center justify-center p-2"
-           onClick={()=> setAnable(!anable)}
+           onClick={()=> setEnable(!enable)}
           >
-             { anable ?  <Cross1Icon /> : <FiEdit /> }
+             { enable ?  <Cross1Icon /> : <FiEdit /> }
            </button>
          </div>
-        { anable && (
+        { enable && (
          <div  className="edit_key key_style">
            <button
            className="flex items-center justify-center p-2"

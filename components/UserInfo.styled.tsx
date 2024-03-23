@@ -30,30 +30,5 @@ export const AvatarWrap = styled("div", {
     }
   )
 
-//   interface StyledIconProps {
-//     as?: EmotionIcon
-//     color: ThemeColor
-//     size: IconSize
-//     margin: string
-//     padding: string
-//   }
 
-//   export const StyledIcon = styled("span", {
-//     shouldForwardProp: (prop: string) =>
-//       isPropValid(prop) && !["size", "as"].includes(prop),
-//   })<StyledIconProps>(({ color, size, margin, padding, theme }) => {
-//     return {
-//       color: theme.colors[color],
-//       fill: "currentColor",
-//       display: "inline-flex",
-//       alignItems: "center",
-//       justifyContents: "center",
-//       fontSize: theme.iconSizes[size],
-//       width: theme.iconSizes[size],
-//       height: theme.iconSizes[size],
-//       margin: computeSpacingStyle(margin, theme),
-//       padding: computeSpacingStyle(padding, theme),
-//       flexShrink: 0,
-//     }
-//   })
   

@@ -7,14 +7,14 @@ import { Button } from "@radix-ui/themes";
 
 
 interface AvatarFormProps {
-    anable: boolean,
+    enable: boolean,
     editPhoto: boolean,
     setEditPhoto: (editPhoto: boolean) => void;
     setUrl: (fileUrl: string) => void;
 }
 
 const AvatarForm: React.FC<AvatarFormProps> = ({
-  anable, 
+  enable, 
   editPhoto, 
   setEditPhoto,
   setUrl
@@ -129,7 +129,7 @@ finally{
                 onChange={handleClickInput}
               />
       
-          {anable && editPhoto &&(
+          {enable && editPhoto &&(
           <div className="two_btns absolute">
             <Button 
             className="abs_btn bg-red-600/90 disabled:bg-red-600/50"
