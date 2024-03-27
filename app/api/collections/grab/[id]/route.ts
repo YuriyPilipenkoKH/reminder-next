@@ -1,7 +1,6 @@
-import { connectMongoDB, db, } from "@/lib/mongoDB";
+import { connectMongoDB,  } from "@/lib/mongoDB";
 import Collection from "@/models/collectionSchema";
 import { NextRequest, NextResponse } from "next/server";
-
 
 
 

@@ -8,17 +8,26 @@ import CollectionTypes from "@/models/CollectionTypes";
 
 function CollectionList() {
   const [list, setList] = useState<CollectionTypes[]>([]);
+  const [loading, setLoading] = useState(false);
   const { user,  reRender } = useContext(UserContext as React.Context<UserContextType>);
  const userId = user?._id
 
   const grabUserCollections = async (id: string | null) => {
+       setLoading(true);
     try {
-      const response = await axios.get(`/api/collections/grab/${id}`);
-      if (response.data && response.data.collections) {
-        setList(response.data.collections);
-      }
+      const response = await axios.get(`/api/collections/grab/${id}`)
+      .then(response => {
+
+        if (response.data && response.data.collections) {
+          setList(response.data.collections);
+        }
+      })
+
     } catch (error) {
       console.log("Grabbing failed", error);
+    }
+    finally{
+      setLoading(false);
     }
   };
 

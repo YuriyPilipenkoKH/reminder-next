@@ -41,7 +41,7 @@ function NavBar() {
   return (
     <>
       <nav className='flex w-full items-center justify-between p-4 px-8 h-[60px]'>
-          <div className='flex gap-4 items-center'>
+          <div className='flex gap-5 items-center'>
             <Logo/>
             {user && <Dashboard/> }
           </div>

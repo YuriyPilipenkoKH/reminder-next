@@ -22,7 +22,7 @@ export const AvatarWrap = styled("div", {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         position: 'absolute',
-        left: '210px',
+        left: '200px',
         top: '0px',
         transform: 'translate(-50%, -50%)'
 

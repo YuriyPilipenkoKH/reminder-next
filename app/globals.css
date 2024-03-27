@@ -161,6 +161,7 @@ img {
    /* gap: 40px; */
   background-color: var(--background-color);
   margin: 0 auto;
+  padding-bottom: 40px;
   height:  100vh ;
   transition: all 1s ease;
 
@@ -462,9 +463,9 @@ place-content: center;
   background-color: var(--profile-background);
   transition: all 1s ease;
   height: 520px;
-  width: 420px;
+  width: 400px;
   border-radius: 0.5rem/* 8px */;
-  padding: 140px 32px 16px;
+  padding: 140px 24px 16px;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -524,15 +525,15 @@ place-content: center;
   }
   .open_key{
   position: absolute;
-  right: 0;
-  top: 0;
+  right: 20px;
+  top: 20px;
   transform: translate(50%, -50%);  
  
   }
   .edit_key{
   position: absolute;
-  left: 0;
-  top: 0;
+  left: 20px;
+  top: 20px;
   transform: translate(-50%, -50%);  
  
   }
