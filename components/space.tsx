@@ -17,3 +17,18 @@ const SPACES = {
   }
   
   export default space;
+
+  //
+
+  export interface some {
+    total: boolean,
+
+  }
+
+  const total: number | null = 200
+  const name:string | undefined = "mar"
+  const active:boolean = true
+
+  const obj: some = {
+    total: true
+  }

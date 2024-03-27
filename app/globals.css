@@ -217,9 +217,9 @@ color: var(--main-text);
   
 }
 .autherror{
-  /* overflow: hidden;  */
-  /* text-overflow: ellipsis;  */
-  /* white-space: nowrap;  */
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  white-space: nowrap; 
 
 }
 
@@ -359,7 +359,8 @@ height: 38px;
   height: 480px;
   width: 380px;
 
-}
+} 
+/* :contains-selector(a.active) */
 .ant-modal-content{
   display: flex;
   flex-direction: column;

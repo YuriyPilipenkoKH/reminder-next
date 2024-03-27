@@ -8,11 +8,12 @@ import CollectionTypes from "@/models/CollectionTypes";
 
 function CollectionList() {
   const [list, setList] = useState<CollectionTypes[]>([]);
-  const { user, reRender } = useContext(UserContext as React.Context<UserContextType>);
- 
-  const grabUserCollections = async () => {
+  const { user,  reRender } = useContext(UserContext as React.Context<UserContextType>);
+ const userId = user?._id
+
+  const grabUserCollections = async (id: string | null) => {
     try {
-      const response = await axios.get("/api/collections");
+      const response = await axios.get(`/api/collections/grab/${id}`);
       if (response.data && response.data.collections) {
         setList(response.data.collections);
       }
@@ -22,8 +23,8 @@ function CollectionList() {
   };
 
   useEffect(() => {
-    grabUserCollections();
-  }, [reRender]);
+    grabUserCollections(userId);
+  }, [reRender, userId]);
 
   const collectionsOfCurrentUser = list.filter((c) => c.userId === user?._id);
 
