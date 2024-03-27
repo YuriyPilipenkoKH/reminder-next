@@ -14,18 +14,26 @@ export async function POST(req: NextRequest, res: NextResponse) {
   try {
     const file = await req.formData()
     const avatar: File | null = file.get('file') as unknown as File
-    console.log(avatar)
+    const userId:string | null = file.get('userId')?.toString() ?? null;
+    // console.log(avatar)
+    // console.log(userId)
 
     const bytes = await avatar?.arrayBuffer();
     const buffer = Buffer.from(bytes);
     //  console.log(buffer)
+
+        // Specify a constant filename based on userId
+    const filename = `${userId}.png`; // Or use appropriate file extension
 
     // Upload file buffer to Cloudinary using upload_stream
     const result: UploadApiResponse = await new Promise((resolve, reject) => {
     const stream = cloudinary.uploader.upload_stream(
       { 
         resource_type: "image",
-        folder: "reminder"
+        folder: `reminder/avatars/${userId}`,
+        public_id: filename, // Use the constant filename
+        overwrite: true, // Specify overwrite to replace existing files
+
       },
       (error?: Error, result?: UploadApiResponse) => {
         if (error) {

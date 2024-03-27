@@ -24,6 +24,7 @@ const AvatarForm: React.FC<AvatarFormProps> = ({
   const [fileUrl, setFileUrl] = useState('');
   const [loading, setLoadig] = useState(false);
   const {user, setReRender, reRender} = useContext(UserContext as React.Context<UserContextType>)
+  const userId = user?._id
   // console.log('file', file)
   // console.log('fileUrl', fileUrl)
   // console.log('user', user)
@@ -53,6 +54,7 @@ const AvatarForm: React.FC<AvatarFormProps> = ({
       if (!file) return;
       const formData = new FormData();
       formData.append('file', file);
+      formData.append('userId', userId);
       setLoadig(true)
 
       const uploadResponse = await axios.post('/api/users/upload', formData)
