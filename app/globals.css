@@ -221,7 +221,18 @@ color: var(--main-text);
   overflow: hidden; 
   text-overflow: ellipsis; 
   white-space: nowrap; 
+}
 
+.nav_bar{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem ;
+  height: 60px;
+  @media screen and (min-width: 768px) {
+    padding: 1rem 2rem;
+  }
 }
 
 .mform {
@@ -311,6 +322,7 @@ height: 38px;
   min-height: 60px;
   transition: all 1s ease;
   animation: ulAnimation 1s ease;   
+
 }
 .mcard-footer {
   background-color: var(--card-color);
@@ -390,8 +402,11 @@ height: 38px;
   display: grid;
   gap: 20px;
   align-items: center;
-  padding: 8px 16px;
+  padding: 8px 4px;
   /* transition: all 1s ease; */
+  @media screen and (min-width: 768px) {
+    padding: 8px 16px;
+  }
 }
 .row{
   display: grid;
@@ -417,11 +432,12 @@ height: 38px;
  overflow: hidden !important;
  text-overflow: ellipsis; 
  white-space: nowrap; 
- max-width: 320px;
- @media screen and (max-width: 767px) {
-  max-width: 220px;
+ max-width: 160px;
+ @media screen and (min-width: 768px) {
+   max-width: 320px;
 }
 }
+
 .mcard-content-date{
   justify-self: center;
   font-size: 0.9rem;

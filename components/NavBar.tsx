@@ -40,7 +40,7 @@ function NavBar() {
 
   return (
     <>
-      <nav className='flex w-full items-center justify-between p-4 px-8 h-[60px]'>
+      <nav className='nav_bar'>
           <div className='flex gap-5 items-center'>
             <Logo/>
             {user && <Dashboard/> }
