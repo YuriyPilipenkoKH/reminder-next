@@ -13,8 +13,8 @@ export const AvatarWrap = styled("div", {
   })<AvatarWrapProps>(
     ({ avatarurl, fileurl }) => {
       return {
-        height: '240px',
-        width: '240px',
+        height: '160px',
+        width: '160px',
         borderRadius: '50%',
         border: '16px solid var(--background-color)',
         backgroundColor: 'var(--profile-background)',
@@ -22,10 +22,15 @@ export const AvatarWrap = styled("div", {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         position: 'absolute',
-        left: '200px',
+        left: '160px',
         top: '0px',
-        transform: 'translate(-50%, -50%)'
+        transform: 'translate(-50%, -50%)',
 
+        '@media screen and (min-width: 768px)': {
+          height: '210px',
+          width: '210px',
+          left: '200px',
+        }
       }
     }
   )

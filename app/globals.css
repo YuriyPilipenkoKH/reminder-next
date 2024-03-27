@@ -165,8 +165,8 @@ img {
   height:  100vh ;
   transition: all 1s ease;
 
-  @media screen and (min-width: 420px) {
-    width: 420px;
+  @media screen and (min-width: 320px) {
+    width: 320px;
 }
 
 @media screen and (min-width: 768px) {
@@ -463,12 +463,17 @@ place-content: center;
   background-color: var(--profile-background);
   transition: all 1s ease;
   height: 520px;
-  width: 400px;
+  width: 320px;
   border-radius: 0.5rem/* 8px */;
-  padding: 140px 24px 16px;
+  padding: 100px 24px 16px;
   display: flex;
   flex-direction: column;
   gap: 6px;
+  @media screen and (min-width: 768px) {
+    padding: 140px 24px 16px;
+    height: 520px;
+    width: 400px;
+  }
 
 }
 .avatar-wrap{
@@ -479,24 +484,40 @@ place-content: center;
   pointer-events: none;
   z-index: 5 !important;
   position: absolute;
-  /* height: 210px;
-  width: 210px; */
+  height: 160px;
+  width: 160px;
   border-radius: 50%;
   object-fit: cover;
-
+  @media screen and (min-width: 768px) {
+    height: 210px;
+    width: 210px;
 }
 
+}
+.profile_main{
+  padding-top: 80px;
+  @media screen and (min-width: 768px) {
+    padding-top: 128px;
+  }
+}
 .profile_form{
   display: grid;
-  gap: 12px;
+  gap: 5px;
   grid-template-rows: repeat(6, 1fr);
   height: 320px;
   position: relative;
+  @media screen and (min-width: 768px) {
+    gap: 12px;
+  }
 }
 .profile_label{
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
   align-items: center;
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+  }
 }
 .profile_input{
   padding: 6px 12px;
@@ -513,7 +534,7 @@ place-content: center;
 }
 .save{
   position: absolute;
-  bottom: -46px;
+  bottom: -83px;
   right: 0;
   --tw-text-opacity: 1;
   color: rgb(245 245 245 / var(--tw-text-opacity));
@@ -522,6 +543,10 @@ place-content: center;
     padding: 8px 24px;;
     border-radius: 0.5rem/* 8px */;
     width: 120px;
+    @media screen and (min-width: 768px) {
+      bottom: -46px;
+      right: 0;
+    }
   }
   .open_key{
   position: absolute;
@@ -549,12 +574,20 @@ place-content: center;
   }
   .two_btns{
     left: -76px;
-    bottom: -20px;
+    bottom: -40px;
     display: flex;
     justify-content: space-between;
     gap: 80px;
-    width: 360px;
+    width: 280px;
     /* transform: translate(0, -50%);  */
+    @media screen and (min-width: 768px) {
+      left: -90px;
+      bottom: -20px;
+      display: flex;
+      justify-content: space-between;
+      gap: 80px;
+      width: 360px;
+    }
   }
   .abs_btn{
     color: rgb(245 245 245);
@@ -586,8 +619,8 @@ place-content: center;
   .userPhoto_input{
     position: relative;
     cursor: pointer;
-    width: 210px;
-    height: 210px;
+    width: 130px;
+    height: 130px;
     border-radius:50%;
     border: none;
     outline: none;
@@ -599,6 +632,11 @@ place-content: center;
     -moz-appearance: none;
     -ms-appearance: none;
     -o-appearance: none;
+
+    @media screen and (min-width: 768px) {
+      width: 180px;
+      height: 180px;
+  }
 
   }
 
