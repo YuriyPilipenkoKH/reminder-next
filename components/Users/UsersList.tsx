@@ -3,6 +3,7 @@
 import UserContext, { UserContextType } from '@/context/UserContext';
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
+import UserCard from './UserCard/UserCard';
 
 function UsersList() {
   const {reRender, } = useContext(UserContext as React.Context<UserContextType>);
@@ -31,14 +32,13 @@ function UsersList() {
       {list && (
         <div>
           {list.map((user) => (
-            <div key={user?._id}>
-              <div>{user?.name}</div>
-              <div>{user?.email}</div>
-            </div>
+            <UserCard  
+            user={user}
+            key={user?._id}
+            />
           ))}
         </div>
       )}
-      <div>{}</div>
     </div>
   )
 }
