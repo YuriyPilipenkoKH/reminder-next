@@ -7,7 +7,7 @@ interface UserData {
     email: string;
 }
 
-connectMongoDB()
+
 
 export const emailAvailable = async (fieldValue: string): Promise<string | undefined> => {
 

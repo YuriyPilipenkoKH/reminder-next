@@ -48,13 +48,13 @@ export const LoginSchema = z.object({
         .refine((val) => !val.endsWith('.ru'), {
             message: 'Domain is not supported'
           })
-        // .refine(async (fieldValue) => {
-        //     const result = await emailAvailable(fieldValue);
-        //     return result !== undefined;
-        // }, {
-        //     message: 'Email not found'
-        // })  
-        ,
+        .refine(async (fieldValue) => {
+            const result = await emailAvailable(fieldValue);
+            return result !== undefined;
+        }, {
+            message: 'Email not found'
+        })  
+      ,
     password: z
         .string()
         .min(6, "Minimum 6 characters for password")
