@@ -13,8 +13,9 @@ function Dashboard() {
   return (
     <div className="w-full flex flex-col items-center">
       <div className="text-center flex flex-col flex-grow w-full items-center gap-4 p-4 max-w-[700px]">
-       <h1 className="text-2xl font-bold bg-gradient-to-r from-cyan-700 to-cyan-900 bg-clip-text text-transparent">Welcome {' '}
-       {capitalize(user?.name)}
+       <h1 className="text-2xl font-bold bg-gradient-to-r from-cyan-700 to-cyan-900 bg-clip-text text-transparent">
+          Welcome {' '}
+        {capitalize(user?.name)}
        </h1>
          <SubDrawer/>
          <CollectionList/>

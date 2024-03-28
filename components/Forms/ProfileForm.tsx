@@ -17,17 +17,17 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ enable, user }) => {
   const { setReRender, reRender} = useContext(UserContext as React.Context<UserContextType>)
 
     const {
-        register, 
-        handleSubmit,
-        formState,
-        reset,
+          register, 
+          handleSubmit,
+          formState,
+          reset,
     } = useForm<createProfileSchemaType>({
         defaultValues: {
-            name: user?.name || '',
-            email: user?.email || '',
-            phone: user?.phone || '',
-            company: user?.company || '',
-            location: user?.location || '',
+          name: user?.name || '',
+          email: user?.email || '',
+          phone: user?.phone || '',
+          company: user?.company || '',
+          location: user?.location || '',
         },
         mode:'all',
         resolver: zodResolver(createProfileSchema),
@@ -42,105 +42,109 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ enable, user }) => {
 
     const onSubmit =async (data: createProfileSchemaType) => {
       
-      console.log('onSubmit',data)
-      try {
-        const response = await axios.patch("/api/users/updateprofile", {
-            name: data?.name,
-            email: data?.email,
-            phone: data?.phone,
-            company: data?.company,
-            location: data?.location,
-            userId: user._id,
-        })
-        .then(response => {
-          // Assuming response.data.user contains updated user data
-          const updatedUserData = response.data.user;
-          
-          // Reset the form with updated user data
-          reset({
-              name: updatedUserData.name,
-              email: updatedUserData.email,
-              phone: updatedUserData.phone,
-              company: updatedUserData.company,
-              location: updatedUserData.location,
-          });
-            toast.success(`${updatedUserData?.name}s  info updated`);
-            setReRender(!reRender);
+    console.log('onSubmit',data)
+    try {
+      const response = await axios.patch("/api/users/updateprofile", {
+        name: data?.name,
+        email: data?.email,
+        phone: data?.phone,
+        company: data?.company,
+        location: data?.location,
+        userId: user._id,
+      })
+      .then(response => {
+        // Assuming response.data.user contains updated user data
+        const updatedUserData = response.data.user;
+        
+        // Reset the form with updated user data
+        reset({
+          name: updatedUserData.name,
+          email: updatedUserData.email,
+          phone: updatedUserData.phone,
+          company: updatedUserData.company,
+          location: updatedUserData.location,
         });
+          toast.success(`${updatedUserData?.name}s  info updated`);
+          setReRender(!reRender);
+      });
 
     }
      catch (error:any) {
-        console.log("Updating failed",error)
-        // setLogError(error?.response.data.error)
-        toast.error(error.message)
+          console.log("Updating failed",error)
+          // setLogError(error?.response.data.error)
+          toast.error(error.message)
      }
   }
 
-
   return (
     <form 
-    className='profile_form'
-    onSubmit={handleSubmit(onSubmit)} 
-    autoComplete="off"
-    noValidate>
+      className='profile_form'
+      onSubmit={handleSubmit(onSubmit)} 
+      autoComplete="off"
+      noValidate
+      >
     <label 
-    className='profile_label'>name
+      className='profile_label'>name
       <input
-      {...register('name')}
-      className='profile_input'
-      disabled= {!enable}
-       type="text" />
+        {...register('name')}
+        className='profile_input'
+        disabled= {!enable}
+        type="text"
+        />
     </label>
     <label 
-    className='profile_label'>email
-      <input 
+      className='profile_label'>email
+    <input 
       {...register('email')}
       className='profile_input'
       disabled= {!enable}
-      type="text" />
+      type="text" 
+      />
     </label>
     <label 
-    className='profile_label'>phone
-      <input
+      className='profile_label'>phone
+    <input
       {...register('phone')}
       className='profile_input'
       disabled= {!enable}
-       type="text" />
+       type="text" 
+       />
     </label>
     <label 
-    className='profile_label'>company
-      <input 
+      className='profile_label'>company
+    <input 
       {...register('company')}
       className='profile_input'
       disabled= {!enable}
-      type="text" />
+      type="text" 
+      />
     </label>
     <label 
-    className='profile_label'>location
-      <input 
+      className='profile_label'>location
+    <input 
       {...register('location')}
       className='profile_input'
       disabled= {!enable}
-      type="text" />
+      type="text" 
+      />
     </label>
     {(  errors?.name || errors?.email || errors?.phone || errors?.company || errors?.location ) && enable &&(
-              <div className="autherror">
-                {errors.name && <div>{errors.name.message}</div>}
-                {!errors.name && errors.email && <div>{errors.email.message}</div>}
-                {!errors.name && !errors.email && errors.phone && <div>{errors.phone.message}</div>}
-                {!errors.name && !errors.email && !errors.phone && errors.company &&<div>{errors.company.message}</div>}
-                {!errors.name && !errors.email && !errors.phone && !errors.company && errors.location &&<div>{errors.location.message}</div>}
-              </div>
-            )}
-            {logError &&<div className="autherror">{"Incorrect some fiellds"}</div>}
-
-    {enable && (
-        <button 
-        className='save bg-green-800/90 disabled:bg-green-800/60'
-        disabled={isSubmitting || !isDirty || !isValid}
-        type='submit'>
-          {(isLoading || isSubmitting) ? "Process" : "Save"}
-          </button>
+        <div className="autherror">
+          {errors.name && <div>{errors.name.message}</div>}
+          {!errors.name && errors.email && <div>{errors.email.message}</div>}
+          {!errors.name && !errors.email && errors.phone && <div>{errors.phone.message}</div>}
+          {!errors.name && !errors.email && !errors.phone && errors.company &&<div>{errors.company.message}</div>}
+          {!errors.name && !errors.email && !errors.phone && !errors.company && errors.location &&<div>{errors.location.message}</div>}
+        </div>
+        )}
+    {  logError && <div className="autherror">{"Incorrect some fiellds"}</div>}
+    {  enable && (
+    <button 
+      className='save bg-green-800/90 disabled:bg-green-800/60'
+      disabled={isSubmitting || !isDirty || !isValid}
+      type='submit'>
+      {(isLoading || isSubmitting) ? "Process" : "Save"}
+      </button>
     )}        
   </form>
   )

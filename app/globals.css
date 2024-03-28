@@ -598,7 +598,7 @@ color: var(--main-text);
     width: 280px;
     /* transform: translate(0, -50%);  */
     @media screen and (min-width: 768px) {
-      left: -90px;
+      left: -91px;
       bottom: -20px;
       display: flex;
       justify-content: space-between;

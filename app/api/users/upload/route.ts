@@ -38,9 +38,11 @@ export async function POST(req: NextRequest, res: NextResponse) {
       (error?: Error, result?: UploadApiResponse) => {
         if (error) {
           reject(error);
-        } else if (result) {
+        } 
+        else if (result) {
           resolve(result);
-        } else {
+        } 
+        else {
           reject(new Error("Unknown error occurred during upload"));
         }
       }

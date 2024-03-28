@@ -7,10 +7,10 @@ import { Button } from "@radix-ui/themes";
 import axios from "axios"
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast"
-import ProfileForm from "./Forms/ProfileForm";
+import ProfileForm from "../Forms/ProfileForm";
 import { FiEdit } from "react-icons/fi";
 import { HiOutlineCamera } from "react-icons/hi2";
-import AvatarForm from "./Forms/AvatarForm";
+import AvatarForm from "../Forms/AvatarForm";
 import { AvatarWrap } from "./UserInfo.styled";
 
 
@@ -23,19 +23,19 @@ function UserInfo() {
 
 
     const logout =async() => {
-        try {
-            const response = await axios.get("/api/users/logout")
-            .then(response => {
-              toast.success('Logout success')
-              // console.log("Logout success", response.data)
-              setUser(null)
-              router.push("/login ")                   
-            })
-        } 
-        catch (error) {
-            console.log("Logout failed",error)
-            toast.error(error.message)
-           }
+      try {
+          const response = await axios.get("/api/users/logout")
+          .then(response => {
+            toast.success('Logout success')
+            // console.log("Logout success", response.data)
+            setUser(null)
+            router.push("/login ")                   
+          })
+      } 
+      catch (error) {
+          console.log("Logout failed",error)
+          toast.error(error.message)
+          }
     }
 
   return (

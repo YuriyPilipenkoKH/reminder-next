@@ -51,7 +51,7 @@ const AvatarForm: React.FC<AvatarFormProps> = ({
         return; // No file selected, do nothing
       }
     try {
-      if (!file) return;
+     
       const formData = new FormData();
       formData.append('file', file);
       formData.append('userId', userId);
@@ -89,70 +89,50 @@ const updateavatarUrl = async (avatar: string) => {
 
       toast.success(`${updatedUserData?.name}s avatar updated`);
       setReRender(!reRender);
-})
-} 
-catch (error:any) {
-  console.log("Updating avatar failed",error)
-}
-finally{
-  setLoadig(false)
-}
+  })
+  } 
+  catch (error:any) {
+    console.log("Updating avatar failed",error)
+  }
+  finally{
+    setLoadig(false)
+  }
 }
   return (
     <>
-    {/* { !!user?.avatarURL && (
-        <img
-        className="avatar"
-        src={user.avatarURL}
-        alt="user avatar" 
-        width={210}
-        height={210}/>
-    )}
-              {!!file &&  (
-                <img
-                className="avatar"
-                src={fileUrl}
-                alt="user avatar" 
-                width={210}
-                height={210}/>
-            )} */}
-            <form 
-               onSubmit={handleAddAvatar} 
-               autoComplete="off"
-               noValidate>
-              <input 
-                className="userPhoto_input "
-                type="file"
-                id="userPhoto"
-                name="userPhoto"
-                accept=".png, .jpg, .jpeg, .webp"
-                hidden={!editPhoto}
-                value=""
-                onChange={handleClickInput}
-              />
-      
+      <form 
+          onSubmit={handleAddAvatar} 
+          autoComplete="off"
+          noValidate>
+        <input 
+          className="userPhoto_input "
+          type="file"
+          id="userPhoto"
+          name="userPhoto"
+          accept=".png, .jpg, .jpeg, .webp"
+          hidden={!editPhoto}
+          value=""
+          onChange={handleClickInput}
+          />
           {enable && editPhoto &&(
-          <div className="two_btns absolute">
-            <Button 
-            className="abs_btn bg-red-600/90 disabled:bg-red-600/50"
-            type="button"
-            onClick={handleCancelAvatar}
-            disabled={!file}
-            >
-              Cancel
-            </Button>
-
-            <Button 
-            className="abs_btn  bg-green-600/90 disabled:bg-green-600/50" 
-            type='submit'
-            disabled={!file}>
-              {loading  ? "Process" : "Confirm"}
-            </Button>
- 
-          </div>
+        <div className="two_btns absolute">
+        <Button 
+          className="abs_btn bg-red-600/90 disabled:bg-red-600/50"
+          type="button"
+          onClick={handleCancelAvatar}
+          disabled={!file}
+          >
+            Cancel
+        </Button>
+        <Button 
+          className="abs_btn  bg-green-600/90 disabled:bg-green-600/50" 
+          type='submit'
+          disabled={!file}>
+            {loading  ? "Process" : "Confirm"}
+        </Button>
+        </div>
          )} 
-            </form>
-
+        </form>
     </>
   );
 };

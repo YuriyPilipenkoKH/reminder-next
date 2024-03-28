@@ -1,6 +1,8 @@
 "use client"
 
-import UserInfo from "@/components/UserInfo.jsx"
+import UserInfo from "@/components/Users/UserInfo"
+
+
 
 function Profile() {
     return (
