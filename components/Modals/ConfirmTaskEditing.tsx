@@ -88,6 +88,10 @@ if (data.expiresAt !== undefined) {
   };
 
   const handleCancel = () => {
+    reset({
+      content: task.content,
+      expiresAt: formattedExpiresAt,
+    })
     setOpen(false);
   };
 
@@ -104,7 +108,6 @@ if (data.expiresAt !== undefined) {
         <GrEdit />
         </Button>
      </Tooltip>
-
       <Modal className='task-modal '
         open={open}
         title={(isLoading || isSubmitting) 
@@ -114,33 +117,32 @@ if (data.expiresAt !== undefined) {
         onCancel={handleCancel}
         footer={[  ]}
       >
-            <div className='task-modal-w1'>
-             <h1 className='modal-collection-name '>
-             {capitalize(collection?.name)}
-            </h1>
-                <span >Write what you know</span>
-            </div>
-         <form 
-            onSubmit={handleSubmit(onSubmit)}
-            className='modal-form'
-            autoComplete="off"
-            noValidate>
-                <label >Content
-                    <textarea 
-                     {...register('content')}
-                    className="text_field resize-none w-full "
-                    rows={5}
-                    placeholder="Task conternt here"
-                    />
-                
-                </label>
-                <label className='flex flex-col gap-2 h-[60px]'>expires at
-                    <input 
-                    {...register('expiresAt')}
-                     type="datetime-local"
-                     className='expiry'
-                     />
-                </label>
+      <div className='task-modal-w1'>
+        <h1 className='modal-collection-name '>
+        {capitalize(collection?.name)}
+      </h1>
+          <span >Write what you know</span>
+      </div>
+      <form 
+        onSubmit={handleSubmit(onSubmit)}
+        className='modal-form'
+        autoComplete="off"
+        noValidate>
+          <label >Content
+            <textarea 
+              {...register('content')}
+            className="text_field resize-none w-full "
+            rows={5}
+            placeholder="Task conternt here"
+            />
+          </label>
+          <label className='flex flex-col gap-2 h-[60px]'>expires at
+            <input 
+            {...register('expiresAt')}
+              type="datetime-local"
+              className='expiry'
+              />
+          </label>
           <button 
           className='authbtn task-create'
           disabled={isSubmitting || !isDirty || !isValid}

@@ -28,7 +28,7 @@ const SubDrawer: React.FC = () => {
         type="button"
         className="dark:text-white w-full dark:bg-neutral-950 bg-green-700  rounded-lg h-10"
         onClick={showDrawer}>
-        <span className="bg-slate-200 bg-clip-text text-transparent">
+        <span className="bg-slate-200 bg-clip-text text-transparent font-bold">
           Create Collection</span>
       </button>
     </div>

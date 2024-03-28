@@ -26,7 +26,6 @@ interface Props {
         handleSubmit,
         formState,
         reset,
-        watch
     } = useForm<createTaskSchemaType>({
         defaultValues: {
             content: '',
@@ -50,31 +49,32 @@ interface Props {
     if (data.expiresAt !== undefined) {
         expiryDate = new Date(data.expiresAt);
     }
-        try {
-          const taskId = nanoid(15); // Generate a ID for the task
-            const response = await axios.patch("/api/collections/addtask", {
-                content: data.content,
-                expiresAt: expiryDate,
-                collectionId: collection._id,
-                _id: taskId ,
-                done: false
-            })
-            .then(response => {
-              toast.success(`Another crucial task added`)
-              // console.log(response.data)
-              reset()
-              onClose();
-              setReRender(!reRender)
-            })
+    try {
+      const taskId = nanoid(15); // Generate a ID for the task
+      const response = await axios.patch("/api/collections/addtask", {
+          content: data.content,
+          expiresAt: expiryDate,
+          collectionId: collection._id,
+          _id: taskId ,
+          done: false
+        })
+        .then(response => {
+          toast.success(`Another crucial task added`)
+          // console.log(response.data)
+          reset()
+          onClose();
+          setReRender(!reRender)
+        })
         }
-         catch (error:any) {
-            console.log("Creation failed",error)
-            setLogError(error?.response.data.error)
-            toast.error(error.message)
-         }
+      catch (error:any) {
+        console.log("Creation failed",error)
+        setLogError(error?.response.data.error)
+        toast.error(error.message)
+      }
     };
 
   const handleCancel = () => {
+    reset()
     onClose();
   };
 
