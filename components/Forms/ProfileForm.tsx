@@ -1,7 +1,7 @@
 import { createProfileSchema, createProfileSchemaType } from '@/models/schema/profileSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import UserContext, { UserContextType } from "@/context/UserContext";
-import { useContext,  useState } from "react";
+import { useContext,  useEffect,  useState } from "react";
 import { useForm } from 'react-hook-form'
 import axios from 'axios';
 import toast from 'react-hot-toast';
@@ -75,6 +75,21 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ enable, user }) => {
           toast.error(error.message)
      }
   }
+
+  const resetToDefault = () => {
+    reset({
+      name: user?.name || '',
+      email: user?.email || '',
+      phone: user?.phone || '',
+      company: user?.company || '',
+      location: user?.location || '',
+    });
+  }
+  useEffect(() => {
+    if (!enable) {
+      resetToDefault();
+    }
+  }, [enable]);
 
   return (
     <form 

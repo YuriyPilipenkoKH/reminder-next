@@ -1,24 +1,24 @@
 "use client"
 import UserContext, { UserContextType } from "@/context/UserContext";
-import React, { ChangeEvent, useState, useContext,  } from 'react';
+import React, { ChangeEvent, useState, useContext, useEffect,  } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { Button } from "@radix-ui/themes";
 
 
-interface AvatarFormProps {
-    enable: boolean,
-    editPhoto: boolean,
-    setEditPhoto: (editPhoto: boolean) => void;
-    setUrl: (fileUrl: string) => void;
-}
+  interface AvatarFormProps {
+      enable: boolean,
+      editPhoto: boolean,
+      setEditPhoto: (editPhoto: boolean) => void;
+      setUrl: (fileUrl: string) => void;
+  }
 
 const AvatarForm: React.FC<AvatarFormProps> = ({
-  enable, 
-  editPhoto, 
-  setEditPhoto,
-  setUrl
-}) => {
+    enable, 
+    editPhoto, 
+    setEditPhoto,
+    setUrl
+  }) => {
 
   const [file, setFile] = useState<File | null>(null);  
   const [fileUrl, setFileUrl] = useState('');
@@ -38,11 +38,11 @@ const AvatarForm: React.FC<AvatarFormProps> = ({
         setUrl(URL.createObjectURL(selectedFile));
       }
   };
-  const handleCancelAvatar = (e:any) => {
+  const handleCancelAvatar = () => {
     setFile(null);
     setUrl('');
     setEditPhoto(false);
-};
+  };
 
   const handleAddAvatar = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -75,9 +75,9 @@ const AvatarForm: React.FC<AvatarFormProps> = ({
       setLoadig(false)
     }
   
-}
-const updateavatarUrl = async (avatar: string) => {
-  console.log('avatar', avatar)
+  }
+  const updateavatarUrl = async (avatar: string) => {
+    console.log('avatar', avatar)
 
   try {
     const updateResponse = await axios.patch("/api/users/updateavatar", {
@@ -97,7 +97,12 @@ const updateavatarUrl = async (avatar: string) => {
   finally{
     setLoadig(false)
   }
-}
+  }
+  useEffect(() => {
+    if (!enable) {
+      handleCancelAvatar()
+    }
+  }, [enable]);
   return (
     <>
       <form 
