@@ -4,10 +4,11 @@ import bcryptjs from 'bcryptjs'
 import User from "@/models/user";
 import { sendEmail } from "@/lib/mailer";
 
-connectMongoDB()
+
 
 export async function POST(req:NextRequest) {
     try {
+        await connectMongoDB()
         const reqBody = await req.json()
         const {name, email, password} = reqBody
         console.log(reqBody)

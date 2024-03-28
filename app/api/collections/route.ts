@@ -1,16 +1,16 @@
 import { connectMongoDB, db, } from "@/lib/mongoDB";
+import Collection from "@/models/collectionSchema";
 import { NextRequest, NextResponse } from "next/server";
 
 
-connectMongoDB()
-
 export async function GET(request:NextRequest, response:NextResponse) {
+    
     try {
-      
-        const collections = await db.collection("collections")
-        .find()
-        .toArray();
-        // Assuming you have a collections collection in your MongoDB
+        await connectMongoDB()
+        // const collections = await db.collection("collections")
+        // .find()
+        // .toArray();
+        const collections = await Collection.find()
 
         return NextResponse.json({
             message: `Collections found`,

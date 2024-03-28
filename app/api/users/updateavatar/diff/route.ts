@@ -2,10 +2,11 @@ import { connectMongoDB } from "@/lib/mongoDB";
 import { NextRequest, NextResponse } from "next/server";
 import User from "@/models/user";
 
-connectMongoDB()
 
 export async function PATCH(req: NextRequest) {
+
     try {
+        await connectMongoDB()
         // const reqBody = await req.json();
         const file = await req.formData()
         const avatar: File | null = file.get('avatar') as unknown as File
@@ -22,7 +23,6 @@ export async function PATCH(req: NextRequest) {
         const bytes = await avatar?.arrayBuffer();
         const buffer = Buffer.from(bytes);
         console.log(buffer)
-        
 
         // console.log(formData)
         // Find user by ID

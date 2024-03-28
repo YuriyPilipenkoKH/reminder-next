@@ -26,7 +26,7 @@ function LoginForm() {
     } = useForm<LogInput>({
         defaultValues: {
             email: '',
-            password: ''
+            password: '',
         },
         mode:'all',
         resolver: zodResolver(LoginSchema),
@@ -61,8 +61,10 @@ function LoginForm() {
         toast.error(error.message)
      }
     };
+    
     const watchedUserEmail = watch('email')
     const watchedUserPassword = watch('password')
+
     useEffect(() => {
         setLogError('')
     }, [watchedUserEmail, watchedUserPassword])
@@ -82,17 +84,17 @@ function LoginForm() {
             placeholder="Email" 
             className="authinput"/>
         <label className="relative">
-            <input
-                {...register('password')}
-                placeholder="Password"
-                type={show ? "text" : "password"}
-                className="authinput"/>
-            <button 
-                type='button'
-                onClick={() => setShow((prev) => !prev)}
-                className="absolute top-3 right-4">
-                    < BoolIcon />
-            </button>
+        <input
+            {...register('password')}
+            placeholder="Password"
+            type={show ? "text" : "password"}
+            className="authinput"/>
+        <button 
+            type='button'
+            onClick={() => setShow((prev) => !prev)}
+            className="absolute top-3 right-4">
+                < BoolIcon />
+        </button>
         </label>
         <button 
             type="submit" 
@@ -108,10 +110,14 @@ function LoginForm() {
             )}
             {logError && <div className="autherror">{"Incorrect login or password"}</div>}
         </form>
-            <p className="text-sm flex gap-2 justify-end log_link">Don`t have an account? 
-            <Link
+        <p 
+            className="text-sm flex gap-2 justify-end log_link">
+            Don`t have an account? 
+        <Link
             className="text-bold text-blue-900 log_link"
-             href={'/register'}>Register</Link></p>
+            href={'/register'}>
+                Register
+        </Link></p>
       </div>
     </div>
   )

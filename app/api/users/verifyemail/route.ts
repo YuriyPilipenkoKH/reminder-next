@@ -3,12 +3,11 @@ import User from "@/models/user";
 import { NextRequest, NextResponse } from "next/server";
 
 
-connectMongoDB()
-
 
 export async function POST(request: NextRequest){
 
     try {
+        await connectMongoDB()
         const reqBody = await request.json()
         const {token} = reqBody
         console.log(token);

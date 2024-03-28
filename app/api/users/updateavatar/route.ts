@@ -2,10 +2,12 @@ import { connectMongoDB } from "@/lib/mongoDB";
 import { NextRequest, NextResponse } from "next/server";
 import User from "@/models/user";
 
-connectMongoDB()
+
 
 export async function PATCH(req: NextRequest) {
+    
     try {
+        await connectMongoDB()
         const reqBody = await req.json();
         const {  userId, avatarURL } = reqBody
         // const {  userId } = params;

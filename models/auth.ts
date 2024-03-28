@@ -24,12 +24,12 @@ export const RegisterSchema = z.object({
         .refine((val) => !val.endsWith('.ru'), {
             message: 'Domain is not supported'
           })
-        // .refine(async (fieldValue) => {
-        //     const result = await emailAvailable(fieldValue);
-        //     return result === undefined;
-        // }, {
-        //     message: 'Email already exists'
-        // })  
+        .refine(async (fieldValue) => {
+            const result = await emailAvailable(fieldValue);
+            return result === undefined;
+        }, {
+            message: 'Email already exists'
+        })  
         ,
     password: z
         .string()

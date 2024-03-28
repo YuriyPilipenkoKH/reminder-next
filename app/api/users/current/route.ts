@@ -5,10 +5,11 @@ import User from "@/models/user";
 import { NextRequest, NextResponse } from "next/server";
 
 
-connectMongoDB()
 
 export async function GET(request:NextRequest){
+    
     try {
+        await connectMongoDB()
         const userId = await getDataFromToken(request);
         const user = await User.findOne({_id: userId}).select("-password");
         if(!user){

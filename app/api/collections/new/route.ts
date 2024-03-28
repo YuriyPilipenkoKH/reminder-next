@@ -3,10 +3,12 @@ import { connectMongoDB } from "@/lib/mongoDB";
 import { NextRequest, NextResponse } from "next/server";
 import Collection from "@/models/collectionSchema";
 
-connectMongoDB()
+
 
 export async function POST(req:NextRequest) {
+    
     try {
+        await connectMongoDB()
         const reqBody = await req.json()
         const {name, color, userId} = reqBody
         // console.log(reqBody)

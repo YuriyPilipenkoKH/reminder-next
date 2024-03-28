@@ -2,10 +2,11 @@ import { connectMongoDB } from "@/lib/mongoDB";
 import { NextRequest, NextResponse } from "next/server";
 import Collection from "@/models/collectionSchema";
 
-connectMongoDB()
+
 // different approach
 export async function DELETE(req:NextRequest,  {params}: {params: {id: string}} ) {
     try {
+        await connectMongoDB()
         const {id} = params
         const reqBody = await req.json()
         const { collectionId } = reqBody

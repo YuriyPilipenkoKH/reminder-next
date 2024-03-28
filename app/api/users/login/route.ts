@@ -4,10 +4,11 @@ import bcryptjs from 'bcryptjs'
 import User from "@/models/user";
 import jwt from "jsonwebtoken"
 
-connectMongoDB()
 
 export async function POST(req:NextRequest) {
+    
     try {
+        await connectMongoDB()
         const reqBody = await req.json()
         const { email, password} = reqBody
         // console.log(reqBody)

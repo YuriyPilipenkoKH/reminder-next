@@ -3,10 +3,12 @@ import { connectMongoDB } from "@/lib/mongoDB";
 import { NextRequest, NextResponse } from "next/server";
 import Collection from "@/models/collectionSchema";
 
-connectMongoDB()
+
 
 export async function PATCH(req: NextRequest) {
+    
     try {
+        await connectMongoDB()
         const reqBody = await req.json();
         const { content, expiresAt, collectionId, _id } = reqBody;
 
