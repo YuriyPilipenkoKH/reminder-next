@@ -38,32 +38,30 @@ function CollectionCard({collection} :Props) {
         CollectionColors[collection.color as CollectionColor]
         )}
         >
-            <button
-            type="button"
-
-            onClick={()=> setIsOpen(!isOpen)}
-            className="mcard-title-btn w-full h-full bg-transparent font-bold">
-                {capitalize(collection?.name)}
-            </button>
-            <MdKeyboardArrowDown 
-            className={cn("mcard-title-arrow" ,
-            isOpen && 'rotate-180'
-            )}
-            
-            size={40} />
-        </div>
+    <button
+        type="button"
+        onClick={()=> setIsOpen(!isOpen)}
+        className="mcard-title-btn w-full h-full bg-transparent font-bold">
+        {capitalize(collection?.name)}
+    </button>
+    <MdKeyboardArrowDown 
+        className={cn("mcard-title-arrow" ,
+        isOpen && 'rotate-180'
+        )}
+        size={40} />
+    </div>
         {isOpen && (
         <>
-        <div className="mcard-content ">
-            {tasks && tasks.length > 0 ? (
-                tasks.map(task => (
-                    <TaskElement key={task._id}
-                    task={task}
-                    collection={collection}/>
-                ))
-            ) : (
-                <div>No tasks available</div>
-            )}
+    <div className="mcard-content ">
+    {tasks && tasks.length > 0 ? (
+        tasks.map(task => (
+            <TaskElement key={task._id}
+            task={task}
+            collection={collection}/>
+            ))
+        ) : (
+            <div>No tasks available</div>
+        )}
         </div>
                 <Divider/>
         <div className="mcard-footer">
@@ -78,19 +76,16 @@ function CollectionCard({collection} :Props) {
             <BsPlusSquare />
             </Button>
         </Tooltip>
-
         <ConfirmModal 
             collection = {collection}/>
             </div>
         </div>
         </>
         )}
-
         <NewTaskModal 
             collection={collection}
             visible={isNewTaskModalOpen}
             onClose={toggleNewTaskModal}/>
-
     </div>
 )
 

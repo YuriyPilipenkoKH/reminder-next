@@ -29,8 +29,8 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ enable, user }) => {
           company: user?.company || '',
           location: user?.location || '',
         },
-        mode:'all',
-        resolver: zodResolver(createProfileSchema),
+          mode:'all',
+          resolver: zodResolver(createProfileSchema),
     })
     const {
         errors,
@@ -86,9 +86,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ enable, user }) => {
     });
   }
   useEffect(() => {
-    if (!enable) {
-      resetToDefault();
-    }
+    if (!enable) { resetToDefault() }
   }, [enable]);
 
   return (

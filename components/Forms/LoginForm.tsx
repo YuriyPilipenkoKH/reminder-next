@@ -28,8 +28,8 @@ function LoginForm() {
             email: '',
             password: '',
         },
-        mode:'all',
-        resolver: zodResolver(LoginSchema),
+            mode:'all',
+            resolver: zodResolver(LoginSchema),
     })
     const {
         errors,
@@ -61,7 +61,7 @@ function LoginForm() {
         toast.error(error.message)
      }
     };
-    
+
     const watchedUserEmail = watch('email')
     const watchedUserPassword = watch('password')
 

@@ -8,7 +8,7 @@ import UserContext, { UserContextType } from '@/context/UserContext';
 const SubDrawer: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-      const { reRender } = useContext(UserContext as React.Context<UserContextType>);
+  const { reRender } = useContext(UserContext as React.Context<UserContextType>);
 
   const showDrawer = () => {
     setOpen(true);
@@ -28,11 +28,12 @@ const SubDrawer: React.FC = () => {
         type="button"
         className="dark:text-white w-full dark:bg-neutral-950 bg-green-700  rounded-lg h-10"
         onClick={showDrawer}>
-        <span className="bg-slate-200 bg-clip-text text-transparent font-bold">
+        <span 
+          className="bg-slate-200 bg-clip-text text-transparent font-bold">
           Create Collection</span>
       </button>
     </div>
-      <Drawer 
+    <Drawer 
       className='mdrawer'
       title={( isSubmitting )
         ? "Processing"
@@ -40,11 +41,10 @@ const SubDrawer: React.FC = () => {
       style={{backgroundColor:"var(--background-color)", color: 'var(--text-color)'}}
       onClose={onClose} 
       open={open}>
-
       <CollectionForm
-      setIsSubmitting={setIsSubmitting}/>
-
-      </Drawer>
+        open={open}
+        setIsSubmitting={setIsSubmitting}/>
+    </Drawer>
     </>
   );
 };

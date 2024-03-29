@@ -4,6 +4,8 @@ import UserContext, { UserContextType } from '@/context/UserContext';
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
 import UserCard from './UserCard/UserCard';
+import { UsersTable } from './UserCard/UserCard.styled';
+import TableHead from './TableHead';
 
 function UsersList() {
   const {reRender, } = useContext(UserContext as React.Context<UserContextType>);
@@ -11,6 +13,7 @@ function UsersList() {
   console.log(list)
 
   const grabUsersData = async () => {
+    
     try {
       const response = await axios.get(`/api/users/grab`)
       .then(response => {
@@ -27,17 +30,19 @@ function UsersList() {
     useEffect(() => {
       grabUsersData();
     }, [reRender]);
+
   return (
-    <div>
+    <div className='px-2 py-8'>
       {list && (
-        <div>
+        <UsersTable >
+          <TableHead/>
           {list.map((user) => (
             <UserCard  
             user={user}
             key={user?._id}
             />
           ))}
-        </div>
+        </UsersTable>
       )}
     </div>
   )

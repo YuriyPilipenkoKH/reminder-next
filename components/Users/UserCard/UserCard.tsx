@@ -1,5 +1,6 @@
 import User from '@/models/UserTypes'
 import React from 'react'
+import { Cell, RowWrap } from './UserCard.styled'
 
 interface UserCardProps {
     user: User
@@ -7,15 +8,17 @@ interface UserCardProps {
 
 const UserCard: React.FC<UserCardProps> = ({ user }) => {
   return (
-    <div className='flex gap-3'>
-       <div>{user?.name}</div>
-       <div>{user?.email}</div>
-       <div>{user?.phone}</div>
-       <div>{user?.company}</div>
-       <div>{user?.location}</div>
+    <RowWrap className='RowWrap'>
+       <Cell>{user?.name}</Cell>
+       <Cell>{user?.email}</Cell>
+       <Cell>{user?.phone}</Cell>
+       <Cell>{user?.company}</Cell>
+       <Cell>{user?.location}</Cell>
    
-    </div>
+    </RowWrap>
   )
 }
 
 export default UserCard
+
+

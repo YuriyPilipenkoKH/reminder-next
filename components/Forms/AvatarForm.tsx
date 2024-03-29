@@ -25,10 +25,6 @@ const AvatarForm: React.FC<AvatarFormProps> = ({
   const [loading, setLoadig] = useState(false);
   const {user, setReRender, reRender} = useContext(UserContext as React.Context<UserContextType>)
   const userId = user?._id
-  // console.log('file', file)
-  // console.log('fileUrl', fileUrl)
-  // console.log('user', user)
-
 
   const handleClickInput = async (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -48,7 +44,7 @@ const AvatarForm: React.FC<AvatarFormProps> = ({
     e.preventDefault();
     if (!file) {
         toast('Select image')
-        return; // No file selected, do nothing
+        return; 
       }
     try {
      
@@ -85,8 +81,8 @@ const AvatarForm: React.FC<AvatarFormProps> = ({
       avatarURL: avatar
     })
     .then(response => {
-      const updatedUserData = response.data.user;
 
+      const updatedUserData = response.data.user;
       toast.success(`${updatedUserData?.name}s avatar updated`);
       setReRender(!reRender);
   })

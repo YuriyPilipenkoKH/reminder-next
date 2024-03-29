@@ -8,7 +8,6 @@ export  const Btn: React.FC<ButtonProps> = ({ children, ...props }) => {
     return <SBtn type='button' {...props}> {children}</SBtn>;
 };
 
-
 export const BtnDelete: React.FC<ButtonProps> = ({ children, ...props }) => {
     return <SBtnDelete type='button' {...props}> {children}</SBtnDelete>;
 };

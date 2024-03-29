@@ -16,10 +16,9 @@ export const connectMongoDB =async () => {
             console.log('MongoDB connection error. Please make sure MongoDB is running. ' + err);
             process.exit(1);
         })  
-    
     } 
     catch (error) {
-        console.log('Error connecting to mongoDB', error)
+        console.log('Error connecting to MongoDB', error)
     }
 }
 

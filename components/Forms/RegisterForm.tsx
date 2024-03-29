@@ -27,8 +27,8 @@ function RegisterForm() {
         email: '',
         password: ''
     },
-    mode:'all',
-    resolver: zodResolver(RegisterSchema),
+        mode:'all',
+        resolver: zodResolver(RegisterSchema),
 })
 const {
     errors,

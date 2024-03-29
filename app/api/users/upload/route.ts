@@ -51,13 +51,13 @@ export async function POST(req: NextRequest, res: NextResponse) {
   });
   console.log(`curl`,result?.secure_url)
 
-      return NextResponse.json({
-        message: `Uploaded`,
-        success: true,
-         fileUrl: result?.secure_url
+    return NextResponse.json({
+      message: `Uploaded`,
+      success: true,
+      fileUrl: result?.secure_url
     });
-     
-  } catch (error) {
+  } 
+  catch (error) {
     return NextResponse.json(
       { message: "Error occurred uploading" },
       { status: 500 }

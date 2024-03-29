@@ -10,14 +10,13 @@ import toast from 'react-hot-toast'
 import UserContext, { UserContextType } from '@/context/UserContext'
 
 interface CollectionFormProps {
-    setIsSubmitting: (isSubmitting: boolean) => void; // Define setIsSubmitting prop
+    setIsSubmitting: (isSubmitting: boolean) => void,
+    open: boolean,
   }
 
-
-function CollectionForm({ setIsSubmitting }: CollectionFormProps)  {
+function CollectionForm({ setIsSubmitting, open }: CollectionFormProps)  {
     const [logError, setLogError] = useState('')
     const [selectedColor, setSelectedColor] = useState('');
-
     const { user , setReRender, reRender} = useContext(UserContext as React.Context<UserContextType>);
  
     const {
@@ -31,8 +30,8 @@ function CollectionForm({ setIsSubmitting }: CollectionFormProps)  {
             name: '',
             color: '',
         },
-        mode:'all',
-        resolver: zodResolver(createCollectionSchema),
+            mode:'all',
+            resolver: zodResolver(createCollectionSchema),
     })
     const {
         errors,
@@ -82,48 +81,51 @@ function CollectionForm({ setIsSubmitting }: CollectionFormProps)  {
         setLogError('')
     }, [watchedCollectionName])
 
+    useEffect(() => {
+        if(!open){ reset() }
+    }, [open])
 
   return (
     <div className='flex flex-col gap-6'>
         <h3 >
-        {(isLoading || isSubmitting) 
-        ? "Processing" 
-        : "Collections are the way to group your tasks"}
-            </h3>
+            {(isLoading || isSubmitting) 
+            ? "Processing" 
+            : "Collections are the way to group your tasks"}
+        </h3>
         <form 
-        onSubmit={handleSubmit(onSubmit)} 
-        className="grid grid-rows-4 gap-3  h-[280px] mform"
-        autoComplete="off"
-        noValidate>
-            <label className='flex flex-col gap-1'>Collection Name
-                <input 
-                {...register('name')}
-                className='authinput bg-slate-300'
-                placeholder='Collection name'
-                type="text" />
-            </label>
-           
-            <label className='mlabel flex flex-col gap-1'>Collection Color
-            <ColorSelect 
+            onSubmit={handleSubmit(onSubmit)} 
+            className="grid grid-rows-4 gap-3  h-[280px] mform"
+            autoComplete="off"
+            noValidate>
+        <label className='flex flex-col gap-1'>
+                Collection Name
+        <input 
+            {...register('name')}
+            className='authinput bg-slate-300'
+            placeholder='Collection name'
+            type="text" />
+        </label>
+        <label className='mlabel flex flex-col gap-1'>
+                Collection Color
+        <ColorSelect 
             onColorChange={handleColorChange}/>
-            <input 
+        <input 
             className='visually-hidden'
             {...register('color')}
-              type="text" />
-            </label>
-           
-             <button
+            type="text" />
+        </label>
+        <button
             disabled={isSubmitting || !isDirty || !isValid}
             className="authbtn cbtn"
             type='submit'>
                 Confirm
-            </button>
-                { errors?.name  && (
-                    <div className="autherror">
-                    {errors.name && <div>{errors.name.message}</div>}
-                  </div>
-                )}
-                {(logError && !isSubmitting ) && <div className="autherror">{logError}</div>}
+        </button>
+            { errors?.name  && (
+                <div className="autherror">
+                {errors.name && <div>{errors.name.message}</div>}
+                </div>
+            )}
+            {(logError && !isSubmitting ) && <div className="autherror">{logError}</div>}
         </form>
       
     </div>
