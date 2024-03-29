@@ -66,28 +66,30 @@ function CollectionCard({collection} :Props) {
             )}
         </div>
                 <Divider/>
-            <div className="mcard-footer">
-                <span className="text-[0.8rem] ">Created at: {' '}
-                {format(new Date(collection?.createdAt || ''), 'dd.MM.yyyy HH:mm')}
-                </span>
-                <div className="footer-btn-wrap">
-                <Tooltip title="Add Task" color={'#006effcc'} placement="top">
-                    <Button 
-                    onClick={toggleNewTaskModal} 
-                    >
-                    <BsPlusSquare />
-                    </Button>
-                    </Tooltip>
-                    <ConfirmModal collection = {collection}/>
-                </div>
+        <div className="mcard-footer">
+            <span className="text-[0.8rem] ">Created at: {' '}
+            {format(new Date(collection?.createdAt || ''), 'dd.MM.yyyy HH:mm')}
+            </span>
+        <div className="footer-btn-wrap">
+        <Tooltip title="Add Task" color={'#006effcc'} placement="top">
+            <Button 
+            onClick={toggleNewTaskModal} 
+            >
+            <BsPlusSquare />
+            </Button>
+        </Tooltip>
+
+        <ConfirmModal 
+            collection = {collection}/>
             </div>
+        </div>
         </>
         )}
 
-     <NewTaskModal 
-        collection={collection}
-      visible={isNewTaskModalOpen}
-      onClose={toggleNewTaskModal}/>
+        <NewTaskModal 
+            collection={collection}
+            visible={isNewTaskModalOpen}
+            onClose={toggleNewTaskModal}/>
 
     </div>
 )

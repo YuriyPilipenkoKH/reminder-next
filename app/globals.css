@@ -666,5 +666,9 @@ color: var(--main-text);
 
   }
 
- 
+ .removal_modal>div[tabindex='-1']>.ant-modal-content>.ant-modal-footer  {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+ }
 

@@ -47,7 +47,6 @@ function TaskElement({collection, task} :Props) {
     const popoverTitle:string = "My Task from  " + capitalize(collection?.name)
   return (
     <div 
-
     className="row relative"
     >
     <Tooltip 

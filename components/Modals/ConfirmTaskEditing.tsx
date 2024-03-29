@@ -8,10 +8,9 @@ import { useForm } from 'react-hook-form';
 import { createTaskSchema, createTaskSchemaType } from '@/models/schema/createTask';
 import { zodResolver } from '@hookform/resolvers/zod';
 import capitalize from '@/lib/capitalize';
-import { format } from 'date-fns';
 import toast from 'react-hot-toast';
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
+
 
 interface ConfirmTaskEditingProps {
     collection: CollectionTypes 
@@ -56,19 +55,18 @@ if (data.expiresAt !== undefined) {
 }
     try {
 
-        const response = await axios.patch("/api/collections/edittask", {
-            content: data.content,
-            expiresAt: expiryDate,
-            collectionId: collection._id,
-            _id: task._id ,
-        })
-        .then(response => {
-          toast.success(`Another task edited`)
-          reset()
-          setReRender(!reRender)
-          handleCancel();
-         
-        })
+      const response = await axios.patch("/api/collections/edittask", {
+          content: data.content,
+          expiresAt: expiryDate,
+          collectionId: collection._id,
+          _id: task._id ,
+      })
+      .then(response => {
+        toast.success(`Another task edited`)
+        reset()
+        setReRender(!reRender)
+        handleCancel();
+      })
     }
      catch (error:any) {
         console.log("Editing failed",error)
@@ -84,7 +82,7 @@ if (data.expiresAt !== undefined) {
   const handleOk = () => {
     setTimeout(() => {
       setOpen(false);
-    }, 3000);
+    }, 1000);
   };
 
   const handleCancel = () => {
@@ -97,22 +95,22 @@ if (data.expiresAt !== undefined) {
 
   return (
     <>
-      <Tooltip 
+    <Tooltip 
       title={task?.done ? '' : "Edit"}
       color={'#037305dd'} 
       >
-        <Button 
-        disabled={task?.done}
-        className="mcard-content-btn"
-        onClick={showModal}>
+    <Button 
+      disabled={task?.done}
+      className="mcard-content-btn"
+      onClick={showModal}>
         <GrEdit />
-        </Button>
+    </Button>
      </Tooltip>
       <Modal className='task-modal '
         open={open}
         title={(isLoading || isSubmitting) 
-            ? "Processing" 
-            : "Edit a task of collection"}
+          ? "Processing" 
+          : "Edit a task of collection"}
         onOk={handleOk}
         onCancel={handleCancel}
         footer={[  ]}

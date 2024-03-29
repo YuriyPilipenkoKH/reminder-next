@@ -7,28 +7,32 @@ import CollectionTypes from '@/models/CollectionTypes';
 import Task from '@/models/TaskTypes';
 import toast from 'react-hot-toast';
 import UserContext, { UserContextType } from '@/context/UserContext';
+import { Btn, BtnDelete } from '../Button/Button';
+
 interface ConfirmTaskRemovalProps {
     collection: CollectionTypes 
      task: Task
 }
 
 const ConfirmTaskRemoval: React.FC<ConfirmTaskRemovalProps> = ({collection, task}) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const { user , setReRender, reRender} = useContext(UserContext as React.Context<UserContextType>);
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const {  setReRender, reRender} = useContext(UserContext as React.Context<UserContextType>);
 
   const showModal = () => {
-    setIsModalOpen(true);
+    setOpen(true);
   };
-
   const handleOk = () => {
-
     removeTask(task._id, collection._id)
 
-    setIsModalOpen(false);
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setOpen(false);
+    }, 3000);
   };
-
   const handleCancel = () => {
-    setIsModalOpen(false);
+    setOpen(false);
   };
 
   const removeTask = async( id:string, collectionId:string,) => {
@@ -64,9 +68,25 @@ const ConfirmTaskRemoval: React.FC<ConfirmTaskRemovalProps> = ({collection, task
       </Button>
     </Tooltip>
       <Modal 
+      className='removal_modal'
+      open={open}
       title={ty}
-      open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-        <div className='flex flex-col gap-6'>
+      onOk={handleOk}
+       onCancel={handleCancel}
+       footer={[
+        <Btn
+          key="back" 
+          onClick={handleCancel}>
+          Cancel
+        </Btn>,
+        <BtnDelete
+          key="submit" 
+          onClick={handleOk}>
+          Delete
+        </BtnDelete>,
+      ]}
+       >
+        <div className='flex flex-col gap-6 border-b-2'>
             <p className='text-xs font-semibold'>From {capitalize(collection?.name)} ?</p>
             <p>There will be no return</p>
         </div>
