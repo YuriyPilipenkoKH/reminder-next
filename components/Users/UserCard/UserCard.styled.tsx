@@ -11,8 +11,12 @@ export const RowWrap = styled('div')`
 `;
 
 export const UsersTable = styled('div')`
-    display: grid;
-    gap: 20px;
+    display: none;
+    @media screen and (min-width: 768px) {
+        display: grid;
+        gap: 20px;
+
+    }
 `;
 
 export const Cell = styled('div')`

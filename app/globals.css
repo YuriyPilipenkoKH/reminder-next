@@ -663,7 +663,6 @@ color: var(--main-text);
       width: 180px;
       height: 180px;
   }
-
   }
 
  .removal_modal>div[tabindex='-1']>.ant-modal-content>.ant-modal-footer  {
