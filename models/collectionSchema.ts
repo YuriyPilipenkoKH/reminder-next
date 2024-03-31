@@ -6,7 +6,8 @@ const collectionSchema = new mongoose.Schema({
     name: {
         type: String,
         minlength: 4,
-        required: true
+        required: true,
+        message: '-Mongo- Invalid name'
     },
     color: {
         type: String,
@@ -14,14 +15,15 @@ const collectionSchema = new mongoose.Schema({
             validator: function(value:string) {
                 return Object.keys(CollectionColors).includes(value);
             },
-            message: 'Invalid color'
+            message: '-Mongo- Invalid color'
         },
         required: true
     },
     userId: {
         type: String,
         min: 0,
-        required: true
+        required: true,
+        essage: '-Mongo- Invalid userId'
     },
     createdAt: {
         type: Date

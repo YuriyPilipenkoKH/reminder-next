@@ -11,7 +11,7 @@ export async function POST(req:NextRequest) {
         await connectMongoDB()
         const reqBody = await req.json()
         const {name, color, userId} = reqBody
-        // console.log(reqBody)
+        console.log(reqBody)
 
         // collection exists
         const collection = await Collection.findOne({name})
@@ -25,8 +25,9 @@ export async function POST(req:NextRequest) {
             color,
             userId,
         })
+  
         const savedCollection  = await newCollection.save()
-        console.log(savedCollection);
+        console.log('savedCollection', savedCollection);
 
 
         return NextResponse.json({
