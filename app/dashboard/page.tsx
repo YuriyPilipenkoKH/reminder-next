@@ -17,8 +17,8 @@ function Dashboard() {
           Welcome {' '}
         {capitalize(user?.name)}
        </h1>
-         <SubDrawer/>
-         <CollectionList/>
+         <SubDrawer/><CollectionList/>
+         
       </div>
     </div>
   )

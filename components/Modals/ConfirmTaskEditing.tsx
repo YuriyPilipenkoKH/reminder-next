@@ -106,7 +106,8 @@ if (data.expiresAt !== undefined) {
         <GrEdit />
     </Button>
      </Tooltip>
-      <Modal className='task-modal '
+      <Modal 
+        className='task-modal '
         open={open}
         title={(isLoading || isSubmitting) 
           ? "Processing" 
@@ -131,7 +132,7 @@ if (data.expiresAt !== undefined) {
               {...register('content')}
             className="text_field resize-none w-full "
             rows={5}
-            placeholder="Task conternt here"
+            placeholder="Task content here"
             />
           </label>
           <label className='flex flex-col gap-2 h-[60px]'>expires at
