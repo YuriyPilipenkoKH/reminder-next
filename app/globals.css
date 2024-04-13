@@ -372,23 +372,22 @@ color: var(--main-text);
 
 
 .ant-modal .ant-modal-content {
-  @media screen and (max-width: 767px) {
+  width: 300px;
+  @media screen and (min-width: 768px) {
     width: 400px;
 
   }
 }
 .task-modal > div>.ant-modal-content{
+  width: 300px;
   height: 480px;
-  width: 380px;
+  @media screen and (min-width: 768px) {
+    width: 400px;
 
+  }
 } 
 /* :contains-selector(a.active) */
-.ant-modal-content{
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
 
-}
 
 .task-modal > div{
   display: flex;
@@ -399,6 +398,19 @@ color: var(--main-text);
 .task-modal > div>.ant-modal-content>.task-create{
   margin-top: auto;
   height: 40px;
+}
+.removal_modal >  div[tabindex='-1']{
+  display: flex;
+  justify-content: center;
+  padding-right: 14px;
+
+}
+.removal_modal >  div[tabindex='-1'] >.ant-modal-content{
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 4px;
 }
 
 .modal-form {
