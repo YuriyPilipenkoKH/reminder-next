@@ -10,7 +10,7 @@ function CollectionList() {
   const [list, setList] = useState<CollectionTypes[]>([]);
   const [loading, setLoading] = useState(false);
   const { user,  reRender } = useContext(UserContext as React.Context<UserContextType>);
- const userId = user?._id
+  const userId = user?._id
 
   const grabUserCollections = async (id: string | null) => {
        setLoading(true);
