@@ -25,6 +25,7 @@ interface TextProps {
     font-weight: ${(props) => (props.isLarger ? 600 : 400)};
     color: var(--text-color);
     margin: 0;
+    padding: 0 1rem;
     ${(props) =>
       props.isLarger &&
       css`
