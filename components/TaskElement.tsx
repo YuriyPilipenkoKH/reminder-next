@@ -84,6 +84,9 @@ function TaskElement({collection, task} :Props) {
         <ConfirmTaskEditing 
              collection = {collection} 
              task = {task}/>
+        <ConfirmTaskEditing 
+             collection = {collection} 
+             task = {task}/>
         <ConfirmTaskRemoval 
             collection = {collection} 
             task = {task}/>

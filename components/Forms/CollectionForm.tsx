@@ -58,7 +58,7 @@ function CollectionForm({ setIsSubmitting, open }: CollectionFormProps)  {
         .then(response => {
             toast.success(`${data?.name} created successfully` )
             reset()
-            console.log("Creation success", response.data)
+            // console.log("Creation success", response.data)
             setReRender(!reRender)
         })
     } 

@@ -430,7 +430,7 @@ color: var(--main-text);
 }
 .row{
   display: grid;
-  grid-template-columns: 40px auto 100px 60px 60px;
+  grid-template-columns: 40px auto 100px 40px 40px 40px;
   grid-column-gap: 10px;
   align-items: center;
   /* transition: all 0.5s ease; */
@@ -438,7 +438,7 @@ color: var(--main-text);
   animation-duration: 0.5s;
   animation-fill-mode: both;
   @media screen and (max-width: 767px) {
-    grid-template-columns: 30px auto  40px 40px;
+    grid-template-columns: 30px auto  30px 30px 30px;
     grid-column-gap: 6px;
     max-width: 390px;
   }
