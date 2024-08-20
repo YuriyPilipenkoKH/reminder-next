@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation';
 import ConfirmTaskEditing from './Modals/ConfirmTaskEditing';
 import { cn } from '@/lib/utils';
 import capitalize from '@/lib/capitalize';
+import ConfirmTaskMoving from './Modals/ConfirmTaskMoving';
 
 interface Props {
     collection: CollectionTypes
@@ -84,7 +85,7 @@ function TaskElement({collection, task} :Props) {
         <ConfirmTaskEditing 
              collection = {collection} 
              task = {task}/>
-        <ConfirmTaskEditing 
+        <ConfirmTaskMoving 
              collection = {collection} 
              task = {task}/>
         <ConfirmTaskRemoval 
