@@ -102,16 +102,14 @@ const {
         open={open}
         title={(isLoading || isSubmitting) 
           ? "Processing" 
-          : "Move a task "}
+          : `Move a task from ${capitalize(collection?.name)}`}
         onOk={handleOk}
         onCancel={handleCancel}
         footer={[  ]}
       >
       <div className='task-modal-w1'>
-        <h1 className='modal-collection-name '>
-        {capitalize(collection?.name)}
-      </h1>
-          <span >Write what you know</span>
+
+
       </div>
       <form 
         onSubmit={handleSubmit(onSubmit)}
@@ -119,7 +117,7 @@ const {
         autoComplete="off"
         noValidate>
 
-          <label className='flex flex-col gap-2 h-[60px]'>expires at
+          <label className='flex flex-col gap-2 h-[60px]'>Choose collection
             <input 
             {...register('collection')}
               type="text"
