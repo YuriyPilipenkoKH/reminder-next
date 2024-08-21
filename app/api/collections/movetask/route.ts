@@ -10,7 +10,7 @@ export async function PATCH(req: NextRequest) {
     try {
         await connectMongoDB()
         const reqBody = await req.json();
-        const {  collectionName, content, expiresA, done } = reqBody;
+        const {  collectionName, content, expiresAt, _id, done } = reqBody;
         console.log(reqBody)
 
         // Find the collection by ID
@@ -24,6 +24,15 @@ export async function PATCH(req: NextRequest) {
                 { status: 404 }
             );
         }
+        // Push reqBody object to tasks array
+        collection.tasks.push({ content, expiresAt, _id, done });
+        // Save the updated collection
+        await collection.save();
+
+        return NextResponse.json({
+            message: `Task moved successfully`,
+            success: true,
+        })
 
         // Find the task to be edited within the tasks array
         // const taskIndex = collection.tasks.findIndex((task:any) => task._id === _id);
@@ -46,10 +55,7 @@ export async function PATCH(req: NextRequest) {
         // Save the updated collection
         // await collection.save();
 
-        return NextResponse.json({
-            message: `Task moved successfully`,
-            success: true,
-        });
+
     } catch (error) {
         return NextResponse.json(
             { message: "Error occurred while moving task" },

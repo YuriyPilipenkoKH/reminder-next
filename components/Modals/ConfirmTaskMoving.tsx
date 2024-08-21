@@ -11,6 +11,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { moveTaskSchema, moveTaskSchemaType } from '@/models/schema/moveTask';
 import { MdMoving } from "react-icons/md";
+import { nanoid } from 'nanoid';
 
 interface ConfirmTaskMovingProps {
     collection: CollectionTypes 
@@ -51,11 +52,13 @@ const {
     //     expiryDate = new Date(data.expiresAt);
     // }
     try {
+      const taskId = nanoid(15); 
       const response = await axios.patch("/api/collections/movetask", {
         collectionName: data.collection,
         content: task .content,
         expiresAt: task.expiresAt,
         done: task.done,
+        _id: taskId ,
          
       })
       .then(response => {
