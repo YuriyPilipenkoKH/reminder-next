@@ -54,22 +54,31 @@ const {
     // }
     try {
       const newTaskId = nanoid(15); 
-      const response = await axios.patch("/api/collections/movetask", {
-        collectionName: data.collection,
-        content: task .content,
-        expiresAt: task.expiresAt,
-        done: task.done,
-        _id: newTaskId ,
-        rmTaskId: task._id,
-        rmCollectionId: collection._id
-         
-      })
-      .then(response => {
-        toast.success(response?.data?.message)
-        setReRender(!reRender)
-        reset()
-        handleCancel();
-      })
+
+      // First, make the PATCH request to move the task
+      const patchResponse = await axios.patch("/api/collections/movetask", {
+          collectionName: data.collection,
+          content: task.content,
+          expiresAt: task.expiresAt,
+          done: task.done,
+          _id: newTaskId,
+      });
+
+      // If the PATCH request is successful, proceed to delete the task
+      if (patchResponse.status === 200) {
+          const deleteResponse = await axios.delete("/api/collections/movetask", {
+              data: { 
+                  rmTaskId: task._id,
+                  rmCollectionId: collection._id,
+              },
+          });
+
+          // Handle the response from the delete request
+          toast.success(deleteResponse?.data?.message);
+          setReRender(!reRender);
+          reset();
+          handleCancel();
+      }
     }
     catch (error : any) {
       console.log("Moving task failed",error)
