@@ -110,23 +110,3 @@ export async function DELETE(req: NextRequest) {
 }
 }
 
-        // Find the task to be edited within the tasks array
-        // const taskIndex = collection.tasks.findIndex((task:any) => task._id === _id);
-
-        // if (taskIndex === -1) {
-        //     // If task not found in the collection, return 404 response
-        //     return NextResponse.json(
-        //         { message: "Task not found in the collection" },
-        //         { status: 404 }
-        //     );
-        // }
-
-        // Update the content and expiresAt fields of the task using the spread operator
-        // collection.tasks[taskIndex] = {
-        //     ...collection.tasks[taskIndex],
-        //     content,
-        //     expiresAt
-        // };
-
-        // Save the updated collection
-        // await collection.save();
