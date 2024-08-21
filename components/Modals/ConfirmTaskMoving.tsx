@@ -44,33 +44,33 @@ const {
 } = formState
 
   const onSubmit = async (data: moveTaskSchemaType) => {
-      
+    console.log(data)
     // Convert expiresAt string to Date object if it's not undefined
     // let expiryDate: Date | undefined;
     // if (data.expiresAt !== undefined) {
     //     expiryDate = new Date(data.expiresAt);
     // }
-        try {
-    
-          const response = await axios.patch("/api/collections/movetask", {
-              // content: data.content,
-              // expiresAt: expiryDate,
-              collectionId: collection._id,
-              _id: task._id ,
-          })
-          .then(response => {
-            toast.success(`Another task edited`)
-
-            setReRender(!reRender)
-            handleCancel();
-          })
-        }
-         catch (error:any) {
-            console.log("Editing failed",error)
-            setLogError(error?.response.data.error)
-            toast.error(error.message)
-         }
+    try {
+      const response = await axios.patch("/api/collections/movetask", {
+        collectionName: data.collection,
+        content: task .content,
+        expiresAt: task.expiresAt,
+        done: task.done,
+         
+      })
+      .then(response => {
+        toast.success(response?.data?.message)
+        setReRender(!reRender)
+        handleCancel();
+      })
+    }
+    catch (error : any) {
+      console.log("Moving task failed",error)
+        setLogError(error?.response.data.error)
+        toast.error(error.message)
+    }
     };
+
     const showModal = () => {
       setOpen(true);
     };
@@ -82,7 +82,6 @@ const {
     };
   
     const handleCancel = () => {
-
       setOpen(false);
     };
   return (
