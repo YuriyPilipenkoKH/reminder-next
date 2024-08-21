@@ -53,13 +53,15 @@ const {
     //     expiryDate = new Date(data.expiresAt);
     // }
     try {
-      const taskId = nanoid(15); 
+      const newTaskId = nanoid(15); 
       const response = await axios.patch("/api/collections/movetask", {
         collectionName: data.collection,
         content: task .content,
         expiresAt: task.expiresAt,
         done: task.done,
-        _id: taskId ,
+        _id: newTaskId ,
+        rmTaskId: task._id,
+        rmCollectionId: collection._id
          
       })
       .then(response => {
@@ -89,6 +91,8 @@ const {
   
     const handleCancel = () => {
       setOpen(false);
+      reset()
+      setLogError('')
     };
     const watchedCollection = watch('collection')
     useEffect(() => {

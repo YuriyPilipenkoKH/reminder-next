@@ -16,10 +16,17 @@ export async function PATCH(req: NextRequest) {
     try {
         await connectMongoDB()
         const reqBody = await req.json();
-        const {  collectionName, content, expiresAt, _id, done } = reqBody;
+        const {  
+            collectionName, 
+            content, 
+            expiresAt, 
+            _id, 
+            done, 
+            rmTaskId,
+            rmCollectionId } = reqBody;
         console.log(reqBody)
 
-        // Find the collection by ID
+        // Find the collection 
         const collection = await Collection.findOne({ name: collectionName });
         if(collection) {
             console.log(collection)
