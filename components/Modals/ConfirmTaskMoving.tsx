@@ -64,13 +64,16 @@ const {
       .then(response => {
         toast.success(response?.data?.message)
         setReRender(!reRender)
-        handleCancel();
       })
     }
     catch (error : any) {
       console.log("Moving task failed",error)
-        setLogError(error?.response.data.error)
-        toast.error(error.message)
+      setLogError(error?.response.data.error)
+      toast.error(error.message)
+    }
+    finally{
+      reset()
+      handleCancel();
     }
     };
 
