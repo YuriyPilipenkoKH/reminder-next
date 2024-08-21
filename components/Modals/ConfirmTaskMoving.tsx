@@ -2,7 +2,7 @@ import toast from 'react-hot-toast';
 import axios from 'axios';
 import CollectionTypes from '@/models/CollectionTypes';
 import Task from '@/models/TaskTypes';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import UserContext, { UserContextType } from '@/context/UserContext';
 import capitalize from '@/lib/capitalize';
 import { Button, Modal, Tooltip } from 'antd';
@@ -27,7 +27,8 @@ const ConfirmTaskMoving: React.FC<ConfirmTaskMovingProps> = ({collection, task})
     register, 
     handleSubmit,
     formState,
-    reset
+    reset,
+    watch
    } = useForm<moveTaskSchemaType>({
     defaultValues: {
         collection: '',
@@ -64,17 +65,16 @@ const {
       .then(response => {
         toast.success(response?.data?.message)
         setReRender(!reRender)
+        reset()
+        handleCancel();
       })
     }
     catch (error : any) {
       console.log("Moving task failed",error)
-      setLogError(error?.response.data.error)
-      toast.error(error.message)
+      setLogError(error?.response?.data?.message)
+      toast.error(error.response?.data?.message)
     }
-    finally{
-      reset()
-      handleCancel();
-    }
+
     };
 
     const showModal = () => {
@@ -90,6 +90,11 @@ const {
     const handleCancel = () => {
       setOpen(false);
     };
+    const watchedCollection = watch('collection')
+    useEffect(() => {
+      setLogError('')
+  }, [watchedCollection])
+
   return (
     <>
     <Tooltip 

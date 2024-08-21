@@ -2,7 +2,13 @@
 import { connectMongoDB } from "@/lib/mongoDB";
 import { NextRequest, NextResponse } from "next/server";
 import Collection from "@/models/collectionSchema";
-
+// Define Task interface based on the taskSchema
+interface Task {
+    content: string;
+    expiresAt: Date;
+    _id: string;
+    done: boolean;
+}
 
 
 export async function PATCH(req: NextRequest) {
@@ -15,7 +21,9 @@ export async function PATCH(req: NextRequest) {
 
         // Find the collection by ID
         const collection = await Collection.findOne({ name: collectionName });
-        // if(collection) console.log(collection)
+        if(collection) {
+            console.log(collection)
+        } 
 
         if (!collection) {
             // If collection not found, return 404 response
@@ -26,6 +34,15 @@ export async function PATCH(req: NextRequest) {
         }
         // Push reqBody object to tasks array
         collection.tasks.push({ content, expiresAt, _id, done });
+        // Check if a task with the same content already exists
+        const existingTask = collection.tasks.find((task:Task )=> task.content === content);
+
+        if (existingTask) {
+            return NextResponse.json(
+                { message: "Task with the same content already exists", success: false },
+                { status: 409 } // 409 Conflict
+            );
+        }
         // Save the updated collection
         await collection.save();
 
@@ -33,6 +50,15 @@ export async function PATCH(req: NextRequest) {
             message: `Task moved successfully`,
             success: true,
         })
+
+
+    } catch (error) {
+        return NextResponse.json(
+            { message: "Error occurred while moving task" },
+            { status: 500 }
+        );
+    }
+}
 
         // Find the task to be edited within the tasks array
         // const taskIndex = collection.tasks.findIndex((task:any) => task._id === _id);
@@ -54,12 +80,3 @@ export async function PATCH(req: NextRequest) {
 
         // Save the updated collection
         // await collection.save();
-
-
-    } catch (error) {
-        return NextResponse.json(
-            { message: "Error occurred while moving task" },
-            { status: 500 }
-        );
-    }
-}
