@@ -12,6 +12,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { moveTaskSchema, moveTaskSchemaType } from '@/models/schema/moveTask';
 import { MdMoving } from "react-icons/md";
 import { nanoid } from 'nanoid';
+import { wait } from '@/lib/wait';
 
 interface ConfirmTaskMovingProps {
     collection: CollectionTypes 
@@ -66,13 +67,14 @@ const {
 
       // If the PATCH request is successful, proceed to delete the task
       if (patchResponse.status === 200) {
+        toast.success(patchResponse?.data?.message);
           const deleteResponse = await axios.delete("/api/collections/movetask", {
               data: { 
                   rmTaskId: task._id,
                   rmCollectionId: collection._id,
               },
           });
-
+          await wait(1000)
           // Handle the response from the delete request
           toast.success(deleteResponse?.data?.message);
           setReRender(!reRender);

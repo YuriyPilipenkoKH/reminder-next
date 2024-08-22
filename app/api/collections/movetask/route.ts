@@ -22,7 +22,7 @@ export async function PATCH(req: NextRequest) {
 					expiresAt, 
 					_id, 
 					done } = reqBody;
-			console.log(reqBody)
+			// console.log(reqBody)
 
 			// Find the collection 
 			const collection = await Collection.findOne({ name: collectionName });
