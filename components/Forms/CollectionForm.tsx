@@ -18,6 +18,7 @@ function CollectionForm({ setIsSubmitting, open }: CollectionFormProps)  {
     const [logError, setLogError] = useState('')
     const [selectedColor, setSelectedColor] = useState('');
     const { user , setReRender, reRender} = useContext(UserContext as React.Context<UserContextType>);
+
  
     const {
         register, 
@@ -45,6 +46,11 @@ function CollectionForm({ setIsSubmitting, open }: CollectionFormProps)  {
         name:string, 
         color:string 
     }) => {
+        if (!user) {
+            setLogError("User not found. Please login.");
+            return;
+        }
+
         data.color = selectedColor
         console.log('onSubmit',data)
 

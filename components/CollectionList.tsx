@@ -10,9 +10,10 @@ function CollectionList() {
   const [list, setList] = useState<CollectionTypes[]>([]);
   const [loading, setLoading] = useState(false);
   const { user,  reRender } = useContext(UserContext as React.Context<UserContextType>);
-  const userId = user?._id
+  const userId = user?._id || null;  // Convert undefined to null
 
   const grabUserCollections = async (id: string | null) => {
+    if (!id) return; // If id is null, exit the function
        setLoading(true);
     try {
       const response = await axios.get(`/api/collections/grab/${id}`)

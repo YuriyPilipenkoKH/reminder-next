@@ -22,7 +22,6 @@ export async function PATCH(req: NextRequest) {
 					expiresAt, 
 					_id, 
 					done } = reqBody;
-			// console.log(reqBody)
 
 			// Find the collection 
 			const collection = await Collection.findOne({ name: collectionName });
@@ -81,7 +80,7 @@ export async function DELETE(req: NextRequest) {
 			);
 	}
 	        // Find the index of the task to be deleted within the tasks array
-        const taskIndex = collection.tasks.findIndex((task:any) => task._id === rmTaskId);
+        const taskIndex = collection.tasks.findIndex((task:Task) => task._id === rmTaskId);
 
         if (taskIndex === -1) {
             // If task not found in the collection, return 404 response

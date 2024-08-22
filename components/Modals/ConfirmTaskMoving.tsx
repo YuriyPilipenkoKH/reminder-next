@@ -47,12 +47,7 @@ const {
 } = formState
 
   const onSubmit = async (data: moveTaskSchemaType) => {
-    console.log(data)
-    // Convert expiresAt string to Date object if it's not undefined
-    // let expiryDate: Date | undefined;
-    // if (data.expiresAt !== undefined) {
-    //     expiryDate = new Date(data.expiresAt);
-    // }
+    // console.log(data)
     try {
       const newTaskId = nanoid(15); 
 
@@ -68,18 +63,20 @@ const {
       // If the PATCH request is successful, proceed to delete the task
       if (patchResponse.status === 200) {
         toast.success(patchResponse?.data?.message);
-          const deleteResponse = await axios.delete("/api/collections/movetask", {
-              data: { 
-                  rmTaskId: task._id,
-                  rmCollectionId: collection._id,
-              },
-          });
-          await wait(1000)
-          // Handle the response from the delete request
-          toast.success(deleteResponse?.data?.message);
-          setReRender(!reRender);
-          reset();
-          handleCancel();
+
+        const deleteResponse = await axios.delete("/api/collections/movetask", {
+            data: { 
+                rmTaskId: task._id,
+                rmCollectionId: collection._id,
+            },
+        });
+      await wait(1000)
+
+      // Handle the response from the delete request
+      toast.success(deleteResponse?.data?.message);
+      setReRender(!reRender);
+      reset();
+      handleCancel();
       }
     }
     catch (error : any) {
