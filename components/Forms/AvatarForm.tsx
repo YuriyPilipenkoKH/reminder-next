@@ -24,7 +24,11 @@ const AvatarForm: React.FC<AvatarFormProps> = ({
   const [fileUrl, setFileUrl] = useState('');
   const [loading, setLoadig] = useState(false);
   const {user, setReRender, reRender} = useContext(UserContext as React.Context<UserContextType>)
-  const userId = user?._id
+    // Make sure user is defined before using it
+    if (!user) {
+      return null; // or you can return a fallback UI here
+    }
+  const userId = user?._id || null;  // Convert undefined to null
 
   const handleClickInput = async (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -42,10 +46,10 @@ const AvatarForm: React.FC<AvatarFormProps> = ({
 
   const handleAddAvatar = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!file) {
-        toast('Select image')
-        return; 
-      }
+    if (!file || !userId) {
+      toast('Select an image and ensure the user is logged in');
+      return; 
+  }
     try {
      
       const formData = new FormData();
