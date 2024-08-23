@@ -77,7 +77,7 @@ const AvatarForm: React.FC<AvatarFormProps> = ({
 
   try {
     const updateResponse = await axios.patch("/api/users/updateavatar", {
-      userId: user._id,
+      userId: user?._id,
       avatarURL: avatar
     })
     .then(response => {
