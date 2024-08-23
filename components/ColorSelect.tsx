@@ -4,7 +4,7 @@ import UserContext, { UserContextType } from '@/context/UserContext'
 import { CollectionColor, CollectionColors } from '@/lib/constants'
 import { cn } from '@/lib/utils'
 import { wait } from '@/lib/wait'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { ChangeEvent, MouseEvent, useContext, useEffect, useState } from 'react'
 import { MdKeyboardArrowDown } from 'react-icons/md'
 
 type ColorChangeHandler = (color: string) => void;
@@ -22,7 +22,7 @@ function ColorSelect({ onColorChange }: ColorSelectProps) {
     const click=() => {
         setOpen(!open)
     }
-    const choose= async(e:any,color:any) => {
+    const choose= async(e:MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,color:string) => {
       setColor(color);
       setSelectedColor(color);
         // console.log('choose',e.target.value)

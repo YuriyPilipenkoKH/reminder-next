@@ -8,7 +8,7 @@ export interface UserContextType {
   reRender:boolean;
   setReRender: React.Dispatch<boolean>;
   collectionsInfo:collectionsInfoTypes | null;
-  setCollectionsInfo: React.Dispatch<any>;
+  setCollectionsInfo: React.Dispatch<collectionsInfoTypes>;
 }
 
 const UserContext = React.createContext<UserContextType | null>(null);

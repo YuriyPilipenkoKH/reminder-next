@@ -13,6 +13,7 @@ import { moveTaskSchema, moveTaskSchemaType } from '@/models/schema/moveTask';
 import { MdMoving } from "react-icons/md";
 import { nanoid } from 'nanoid';
 import { wait } from '@/lib/wait';
+import CollectionSelect from '../CollectionSelect';
 
 interface ConfirmTaskMovingProps {
     collection: CollectionTypes 
@@ -140,12 +141,15 @@ const {
         noValidate>
 
           <label className='flex flex-col gap-2 h-[60px]'>Choose collection
+            <CollectionSelect/>
             <input 
             {...register('collection')}
               type="text"
-              // className='expiry'
+              className='visually-hidden'
               />
+              
           </label>
+
           <button 
           className='authbtn task-create'
           // disabled={isSubmitting || !isDirty || !isValid}
