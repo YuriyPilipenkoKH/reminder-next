@@ -24,10 +24,6 @@ const AvatarForm: React.FC<AvatarFormProps> = ({
   const [fileUrl, setFileUrl] = useState('');
   const [loading, setLoadig] = useState(false);
   const {user, setReRender, reRender} = useContext(UserContext as React.Context<UserContextType>)
-    // Make sure user is defined before using it
-    if (!user) {
-      return null; // or you can return a fallback UI here
-    }
   const userId = user?._id || null;  // Convert undefined to null
 
   const handleClickInput = async (e: ChangeEvent<HTMLInputElement>) => {
