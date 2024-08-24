@@ -13,5 +13,6 @@ export default CollectionTypes
 export interface collectionsInfoTypes  {
     _id: string;
     name: string;
+    color: string;
 }
  

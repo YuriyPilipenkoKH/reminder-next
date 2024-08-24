@@ -4,7 +4,7 @@ import UserContext, { UserContextType } from '@/context/UserContext'
 import { CollectionColor, CollectionColors } from '@/lib/constants'
 import { cn } from '@/lib/utils'
 import { wait } from '@/lib/wait'
-import React, { ChangeEvent, MouseEvent, useContext, useEffect, useState } from 'react'
+import React, {  MouseEvent, useContext, useEffect, useState } from 'react'
 import { MdKeyboardArrowDown } from 'react-icons/md'
 
 type ColorChangeHandler = (color: string) => void;
@@ -14,9 +14,9 @@ interface ColorSelectProps {
 }
 
 function ColorSelect({ onColorChange }: ColorSelectProps) {
-    const [open, setOpen] = useState(false)
-    const [color, setColor] = useState('')
-    const [selectedColor, setSelectedColor] = useState('');
+    const [open, setOpen] = useState<boolean>(false)
+    const [color, setColor] = useState<string>('')
+    const [selectedColor, setSelectedColor] = useState<string>('')
     const { reRender} = useContext(UserContext as React.Context<UserContextType>);
 
     const click=() => {

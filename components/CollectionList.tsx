@@ -9,7 +9,7 @@ import CollectionTypes from "@/models/CollectionTypes";
 function CollectionList() {
   const [list, setList] = useState<CollectionTypes[]>([]);
   const [loading, setLoading] = useState(false);
-  const { user,  reRender } = useContext(UserContext as React.Context<UserContextType>);
+  const { user,  reRender, setCollectionsInfo } = useContext(UserContext as React.Context<UserContextType>);
   const userId = user?._id || null;  // Convert undefined to null
 
   const grabUserCollections = async (id: string | null) => {
@@ -21,6 +21,14 @@ function CollectionList() {
 
         if (response.data && response.data.collections) {
           setList(response.data.collections);
+          // Extract _id, name, and color from each collection object
+        const info = response.data.collections.map((collection: CollectionTypes) => ({
+          _id: collection._id,
+          name: collection.name,
+          color: collection.color,
+      }));
+
+      setCollectionsInfo(info);
         }
       })
 
