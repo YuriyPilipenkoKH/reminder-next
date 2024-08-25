@@ -30,11 +30,11 @@ const ConfirmTaskMoving: React.FC<ConfirmTaskMovingProps> = ({collection, task})
     handleSubmit,
     formState,
     reset,
-    watch
+    watch,
+    setValue
    } = useForm<moveTaskSchemaType>({
     defaultValues: {
         collection: '',
-
     },
     mode:'all',
     resolver: zodResolver(moveTaskSchema),
@@ -141,7 +141,9 @@ const {
         noValidate>
 
           <label className='flex flex-col gap-2 h-[60px]'>Choose collection
-            <CollectionSelect/>
+            <CollectionSelect
+            currentCollectionName={collection.name}
+            setValue={setValue}/>
             <input 
             {...register('collection')}
               type="text"
