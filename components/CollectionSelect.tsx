@@ -34,7 +34,7 @@ const CollectionSelect: React.FC<CollectionSelectProps> = ({currentCollectionNam
     }
 
   return (
-    <>
+    <div className='relative'>
 			<div
 				className={cn(`mselect w-full flex flex-col items-center justify-start gap-3 outline-none bg-slate-300`,
 				CollectionColors[color as CollectionColor]
@@ -49,8 +49,8 @@ const CollectionSelect: React.FC<CollectionSelectProps> = ({currentCollectionNam
 					type='button'
 					key={collection._id}
 					onClick={(e) => choose(e, collection.name, collection.color)}
-					className={cn(`moption  flex items-center justify-center w-full h-[38px] py-5 rounded-lg  focus:text-white focus:font-bold focus:ring-2 ring-neutral-600 focus:ring-inset dark:focus:ring-white focus:px-6  `,
-					CollectionColors[color as CollectionColor]
+					className={cn(`moption  flex items-center justify-center w-full h-[38px] py-5 rounded-lg  focus:text-white focus:font-bold focus:ring-2 ring-neutral-600 focus:ring-inset dark:focus:ring-white focus:px-6  bg-[${collection.color}]`,
+						// collection.color[color as CollectionColor]
 					)}
 					>
 					{collection.name}
@@ -61,10 +61,10 @@ const CollectionSelect: React.FC<CollectionSelectProps> = ({currentCollectionNam
 				<button 
 				type='button'
 				onClick={click}
-				className='arrow'>
+				className='arrow pos1'>
 					<MdKeyboardArrowDown />
 				</button>
-		</>
+		</div>
 	)
 }
 

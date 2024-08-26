@@ -271,6 +271,7 @@ color: var(--main-text);
   height: 20px;
   z-index: 4;
 }
+
 .arrow{
   position: absolute;
   bottom: 0;
@@ -284,6 +285,14 @@ color: var(--main-text);
   place-items: center;
   outline: none;
 
+}
+.pos1{
+  bottom: 0;
+  right: 20px;
+  color: #fff;
+}
+.pos1 > svg{
+  color: #fff;
 }
 .log_title{
   color: var(--main-text);
