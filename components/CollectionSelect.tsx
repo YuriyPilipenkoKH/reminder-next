@@ -2,16 +2,21 @@ import UserContext, { UserContextType } from '@/context/UserContext';
 import { CollectionColor, CollectionColors } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import { wait } from '@/lib/wait';
-import React, { MouseEvent, useContext, useState } from 'react'
-import { UseFormSetValue } from 'react-hook-form';
+import React, { MouseEvent, useContext, useEffect, useState } from 'react'
+import { UseFormReset, UseFormSetValue } from 'react-hook-form';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 
 interface CollectionSelectProps {
 	currentCollectionName: string
 	setValue: UseFormSetValue<{ collection: string }>; // Accept setValue
+	canceling: boolean
 }
 
-const CollectionSelect: React.FC<CollectionSelectProps> = ({currentCollectionName, setValue}) => {
+const CollectionSelect: React.FC<CollectionSelectProps> = ({
+	currentCollectionName, 
+	setValue,
+	canceling 
+}) => {
     const [open, setOpen] = useState<boolean>(false)
     const [color, setColor] = useState<string>('')
     const [selectedCollection, setSelectedCollection] = useState<string>('')
@@ -24,14 +29,20 @@ const CollectionSelect: React.FC<CollectionSelectProps> = ({currentCollectionNam
     }
 		const choose= async(e: MouseEvent<HTMLButtonElement>, collectionName: string, color: string) => {
 			console.log(collectionName, color)
-			setSelectedCollection(collectionName);
-			setColor(color);
-			// await wait(500)
+			setSelectedCollection(collectionName)
+			setColor(color)
 			// e.stopPropagation()
-			setValue('collection', collectionName); // Set the value of the hidden input
+			setValue('collection', selectedCollection) // Set the value of the hidden input
 			await wait(500)
-			setOpen(false)
+		  setOpen(false)
     }
+		
+    useEffect(() => {
+			if(canceling) {
+				setSelectedCollection('')
+				setColor('')
+			}
+			}, [canceling])
 
   return (
     <div className='relative'>

@@ -18,13 +18,13 @@ import CollectionSelect from '../CollectionSelect';
 interface ConfirmTaskMovingProps {
     collection: CollectionTypes 
      task: Task
-     
 }
 
 const ConfirmTaskMoving: React.FC<ConfirmTaskMovingProps> = ({collection, task}) => {
-  const {  setReRender, reRender} = useContext(UserContext as React.Context<UserContextType>);
+  const {setReRender, reRender} = useContext(UserContext as React.Context<UserContextType>);
   const [open, setOpen] = useState(false);
   const [logError, setLogError] = useState('')
+  const [canceling, setCanceling] = useState<boolean>(false);
   const {
     register, 
     handleSubmit,
@@ -40,12 +40,13 @@ const ConfirmTaskMoving: React.FC<ConfirmTaskMovingProps> = ({collection, task})
     resolver: zodResolver(moveTaskSchema),
 })
 const {
-    errors,
+    errors,defaultValues,
     isDirty,
     isValid ,
     isSubmitting,
     isLoading,
 } = formState
+
 
   const onSubmit = async (data: moveTaskSchemaType) => {
     // console.log('data', data)
@@ -99,9 +100,11 @@ const {
     };
   
     const handleCancel = () => {
+      setCanceling(true)
       setOpen(false);
       reset()
       setLogError('')
+
     };
     const watchedCollection = watch('collection')
     useEffect(() => {
@@ -131,8 +134,6 @@ const {
         footer={[  ]}
       >
       <div className='task-modal-w1'>
-
-
       </div>
       <form 
         onSubmit={handleSubmit(onSubmit)}
@@ -140,10 +141,15 @@ const {
         autoComplete="off"
         noValidate>
 
-          <label className='flex flex-col gap-2 h-[60px]'>Choose collection
+          <label className='flex flex-col gap-2 h-[60px]'>
+           { ( isValid )
+              ? 'to'
+              : 'Choose collection'}
             <CollectionSelect
             currentCollectionName={collection.name}
-            setValue={setValue}/>
+            setValue={setValue}
+            canceling={canceling}
+            />
             <input 
             {...register('collection')}
               type="text"
