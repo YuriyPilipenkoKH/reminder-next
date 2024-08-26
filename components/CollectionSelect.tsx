@@ -16,16 +16,19 @@ const CollectionSelect: React.FC<CollectionSelectProps> = ({currentCollectionNam
     const [color, setColor] = useState<string>('')
     const [selectedCollection, setSelectedCollection] = useState<string>('')
     const {  collectionsInfo } = useContext(UserContext as React.Context<UserContextType>);
-    console.log('collectionsInfo', collectionsInfo)
+    // console.log('collectionsInfo', collectionsInfo)
+    console.log('selectedCollection', selectedCollection)
 
     const click=() => {
         setOpen(!open)
     }
 		const choose= async(e: MouseEvent<HTMLButtonElement>, collectionName: string, color: string) => {
+			console.log(collectionName, color)
 			setSelectedCollection(collectionName);
 			setColor(color);
-			await wait(500)
-			setValue('collection', selectedCollection); // Set the value of the hidden input
+			// await wait(500)
+			// e.stopPropagation()
+			setValue('collection', collectionName); // Set the value of the hidden input
 			await wait(500)
 			setOpen(false)
     }

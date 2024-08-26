@@ -48,7 +48,7 @@ const {
 } = formState
 
   const onSubmit = async (data: moveTaskSchemaType) => {
-    // console.log(data)
+    // console.log('data', data)
     try {
       const newTaskId = nanoid(15); 
 
@@ -153,9 +153,9 @@ const {
           </label>
 
           <button 
-          className='authbtn task-create'
-          // disabled={isSubmitting || !isDirty || !isValid}
-          type="submit"  
+            className='authbtn task-create'
+            disabled={ isSubmitting || !isValid }
+            type="submit"  
           >
            Apply changes
            </button>
