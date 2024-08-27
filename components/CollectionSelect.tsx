@@ -10,12 +10,14 @@ interface CollectionSelectProps {
 	currentCollectionName: string
 	setValue: UseFormSetValue<{ collection: string }>; // Accept setValue
 	canceling: boolean
+	onSelectCollection: (collectionName: string) => void;
 }
 
 const CollectionSelect: React.FC<CollectionSelectProps> = ({
 	currentCollectionName, 
 	setValue,
-	canceling 
+	canceling ,
+	onSelectCollection
 }) => {
     const [open, setOpen] = useState<boolean>(false)
     const [color, setColor] = useState<string>('')
@@ -30,6 +32,7 @@ const CollectionSelect: React.FC<CollectionSelectProps> = ({
 		const choose= async(e: MouseEvent<HTMLButtonElement>, collectionName: string, color: string) => {
 			console.log(collectionName, color)
 			setSelectedCollection(collectionName)
+			onSelectCollection(collectionName)
 			setColor(color)
 			// e.stopPropagation()
 			setValue('collection', selectedCollection) // Set the value of the hidden input

@@ -25,6 +25,7 @@ const ConfirmTaskMoving: React.FC<ConfirmTaskMovingProps> = ({collection, task})
   const [open, setOpen] = useState(false);
   const [logError, setLogError] = useState('')
   const [canceling, setCanceling] = useState<boolean>(false);
+  const [selectedCollection, setSelectedCollection] = useState<string>('');  // State to hold selected collection
   const {
     register, 
     handleSubmit,
@@ -40,7 +41,7 @@ const ConfirmTaskMoving: React.FC<ConfirmTaskMovingProps> = ({collection, task})
     resolver: zodResolver(moveTaskSchema),
 })
 const {
-    errors,defaultValues,
+    errors,
     isDirty,
     isValid ,
     isSubmitting,
@@ -111,6 +112,10 @@ const {
       setLogError('')
   }, [watchedCollection])
 
+  const handleSelectCollection = (collectionName: string) => {
+    setSelectedCollection(collectionName);  // Update selectedCollection when a new collection is selected
+  };
+
   return (
     <>
     <Tooltip 
@@ -142,13 +147,14 @@ const {
         noValidate>
 
           <label className='flex flex-col gap-2 h-[60px]'>
-           { ( isValid )
+           { ( selectedCollection !== '' )
               ? 'to'
               : 'Choose collection'}
             <CollectionSelect
-            currentCollectionName={collection.name}
-            setValue={setValue}
-            canceling={canceling}
+              currentCollectionName={collection.name}
+              setValue={setValue}
+              canceling={canceling}
+              onSelectCollection={handleSelectCollection}  // Pass the callback function
             />
             <input 
             {...register('collection')}
@@ -160,7 +166,7 @@ const {
 
           <button 
             className='authbtn task-create'
-            disabled={ isSubmitting || !isValid }
+            disabled={ isSubmitting || !selectedCollection }
             type="submit"  
           >
            Apply changes
