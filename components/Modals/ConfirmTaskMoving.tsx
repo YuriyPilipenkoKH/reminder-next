@@ -171,12 +171,6 @@ const {
           >
            Apply changes
            </button>
-           {/* {( errors?.content || errors?.expiresAt )&& (
-              <div className="autherror">
-                {errors.content && <div>{errors.content.message}</div>}
-                {!errors.content && errors.expiresAt && <div>{errors.expiresAt.message}</div>}
-              </div>
-            )} */}
             {logError && <div className="autherror">{logError}</div>}
           </form>
       </Modal>
