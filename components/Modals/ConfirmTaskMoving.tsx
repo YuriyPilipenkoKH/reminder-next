@@ -142,7 +142,7 @@ const {
       </div>
       <form 
         onSubmit={handleSubmit(onSubmit)}
-        className='modal-form'
+        className='modal-form1'
         autoComplete="off"
         noValidate>
 

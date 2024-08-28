@@ -257,15 +257,11 @@ color: var(--main-text);
 
 .mselect{
   border: 0;
-  width: 330px;
   height: 38px;
   border-radius: 8px;
-  /* appearance: none; */
-  /* background-color: #cbd5e1; */
   padding: 4px 40px 4px 16px;
 }
 .moption{
-
   color: #ccc;
   font-weight: 600;
   height: 20px;
@@ -424,6 +420,12 @@ color: var(--main-text);
 .modal-form {
   display: grid;
   gap: 22px;
+  grid-template-rows: 140px 50px auto;
+  /* height: 90%; */
+}
+.modal-form1 {
+  display: grid;
+  gap: 20px;
   grid-template-rows: 140px 50px auto;
   /* height: 90%; */
 }
