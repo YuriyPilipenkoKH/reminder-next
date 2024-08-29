@@ -264,8 +264,12 @@ color: var(--main-text);
 .moption{
   color: #ccc;
   font-weight: 600;
-  height: 20px;
+  width: 190px;
+  height: 40px;
   z-index: 4;
+  @media screen and (min-width: 768px) {
+    width: 250px;
+  }
 }
 
 .arrow{
@@ -284,7 +288,7 @@ color: var(--main-text);
 }
 .pos1{
   bottom: 0;
-  right: 20px;
+  right: 10px;
   color: #fff;
 }
 .pos1 > svg{

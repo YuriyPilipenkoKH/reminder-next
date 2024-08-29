@@ -69,7 +69,7 @@ const CollectionSelect: React.FC<CollectionSelectProps> = ({
 					type='button'
 					key={collection._id}
 					onClick={(e) => choose(e, collection.name, collection.color)}
-					className={cn(`moption  flex items-center justify-center w-[250px] h-[38px] py-5 rounded-lg  focus:text-white focus:font-bold focus:ring-2 ring-neutral-600 focus:ring-inset dark:focus:ring-white focus:px-6  `,
+					className={cn(`moption  flex items-center justify-center  py-3 rounded-lg  focus:text-white focus:font-bold focus:ring-2 ring-neutral-600 focus:ring-inset dark:focus:ring-white focus:px-6  `,
 						CollectionColors[collection.color as CollectionColor]
 					)}
 					>
