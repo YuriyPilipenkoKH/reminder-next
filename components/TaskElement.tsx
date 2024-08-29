@@ -1,6 +1,6 @@
 import { Checkbox , CheckboxProps, Popover, Tooltip,} from 'antd'
 import UserContext, { UserContextType } from "@/context/UserContext";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import ConfirmTaskRemoval from "./Modals/ConfirmTaskRemoval"
 import { format } from 'date-fns';
 import CollectionTypes from '@/models/CollectionTypes';
@@ -21,12 +21,12 @@ interface Props {
 function TaskElement({collection, task} :Props) {
     const { setReRender, reRender} = useContext(UserContext as React.Context<UserContextType>)
     const router = useRouter()
+		const [windowWidth, setWindowWidth] = useState<number>(0);
 
      const onChange: CheckboxProps['onChange'] = (e) => {
         // console.log(`checked = ${e.target.checked}`);
         setTaskToDone(task._id, collection._id)
       };
-
 
       const setTaskToDone = async( id:string, collectionId:string,) => {
         try {
@@ -46,6 +46,18 @@ function TaskElement({collection, task} :Props) {
     }
 
     const popoverTitle:string = "My Task from  " + capitalize(collection?.name)
+
+		useEffect(() => {
+			// Function to update the width
+			const handleResize = () => setWindowWidth(window.innerWidth);
+			// Set the initial width
+			handleResize();
+			// Add event listener
+			window.addEventListener('resize', handleResize);
+			// Cleanup on unmount
+			return () => window.removeEventListener('resize', handleResize);
+
+	}, []);
   return (
     <div 
     className="row relative"
@@ -61,8 +73,9 @@ function TaskElement({collection, task} :Props) {
         </Checkbox>
     </Tooltip>
         <div className={cn('green-spot',
-        !task?.done && 'visually-hidden'
-        )}></div>
+            !task?.done && 'visually-hidden'
+            )}>
+        </div>
 
         <Popover 
         content={task?.content}
