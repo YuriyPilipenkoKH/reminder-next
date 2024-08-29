@@ -11,11 +11,9 @@ import capitalize from '@/lib/capitalize';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 
-
 interface ConfirmTaskEditingProps {
     collection: CollectionTypes 
-     task: Task
-     
+     task: Task  
 }
 
 const ConfirmTaskEditing: React.FC<ConfirmTaskEditingProps> = ({collection, task}) => {
