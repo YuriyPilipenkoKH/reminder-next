@@ -4,6 +4,8 @@ import React, { useState } from 'react'
 import ConfirmTaskEditing from './Modals/ConfirmTaskEditing'
 import ConfirmTaskMoving from './Modals/ConfirmTaskMoving'
 import ConfirmTaskRemoval from './Modals/ConfirmTaskRemoval'
+import { Button } from 'antd'
+import { RiFunctionLine } from "react-icons/ri";
 
 interface ButtonHolderProps {
     collection: CollectionTypes 
@@ -28,7 +30,11 @@ const ButtonHolder: React.FC<ButtonHolderProps> = ({collection, task}) => {
 				</>
 			) : (
 				<div>
-
+					<Button
+						// className="mcard-content-btn"
+						onClick={()=> setOpen(!open)}>
+							<RiFunctionLine />
+					</Button>
 				</div>
 			) }
     </div>
