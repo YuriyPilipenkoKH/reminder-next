@@ -6,6 +6,7 @@ import ConfirmTaskMoving from './Modals/ConfirmTaskMoving'
 import ConfirmTaskRemoval from './Modals/ConfirmTaskRemoval'
 import { Button } from 'antd'
 import { RiFunctionLine } from "react-icons/ri";
+import { CgChevronDoubleDownR } from "react-icons/cg";
 
 interface ButtonHolderProps {
     collection: CollectionTypes 
@@ -15,9 +16,9 @@ interface ButtonHolderProps {
 const ButtonHolder: React.FC<ButtonHolderProps> = ({collection, task}) => {
 	const [open, setOpen] = useState(false);
   return (
-    <div>
+    <div className='ml-auto'>
 			{open ? (
-				<>
+				<div  className='flex gap-1 items-center justify-center'>
 					<ConfirmTaskEditing
 							collection = {collection}
 							task = {task}/>
@@ -27,13 +28,13 @@ const ButtonHolder: React.FC<ButtonHolderProps> = ({collection, task}) => {
 					<ConfirmTaskRemoval
 						collection = {collection}
 						task = {task}/>
-				</>
+				</div>
 			) : (
 				<div>
 					<Button
 						// className="mcard-content-btn"
 						onClick={()=> setOpen(!open)}>
-							<RiFunctionLine />
+							<CgChevronDoubleDownR />
 					</Button>
 				</div>
 			) }

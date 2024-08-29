@@ -12,6 +12,7 @@ import ConfirmTaskEditing from './Modals/ConfirmTaskEditing';
 import { cn } from '@/lib/utils';
 import capitalize from '@/lib/capitalize';
 import ConfirmTaskMoving from './Modals/ConfirmTaskMoving';
+import ButtonHolder from './ButtonHolder';
 
 interface Props {
     collection: CollectionTypes
@@ -94,16 +95,25 @@ function TaskElement({collection, task} :Props) {
                 : 'no expiration'
             }
         </div>
+
+			{(windowWidth <= 768) ? (
+				<ButtonHolder
+				collection = {collection}
+				task = {task}/>
+			) : (
+        <>
+					<ConfirmTaskEditing
+							 collection = {collection}
+							 task = {task}/>
+					<ConfirmTaskMoving
+							 collection = {collection}
+							 task = {task}/>
+					<ConfirmTaskRemoval
+							collection = {collection}
+							task = {task}/>
+				</>
+			)}	
       
-        <ConfirmTaskEditing 
-             collection = {collection} 
-             task = {task}/>
-        <ConfirmTaskMoving 
-             collection = {collection} 
-             task = {task}/>
-        <ConfirmTaskRemoval 
-            collection = {collection} 
-            task = {task}/>
       </div>
   )
 }
