@@ -50,13 +50,15 @@ const {
 
 
   const onSubmit = async (data: moveTaskSchemaType) => {
-    // console.log('data', data)
+
+    console.log('data', data)
+    console.log('selectedCollection', selectedCollection)
     try {
       const newTaskId = nanoid(15); 
 
       // First, make the PATCH request to move the task
       const patchResponse = await axios.patch("/api/collections/movetask", {
-          collectionName: data.collection,
+          collectionName: selectedCollection,
           content: task.content,
           expiresAt: task.expiresAt,
           done: task.done,

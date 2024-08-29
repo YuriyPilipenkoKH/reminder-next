@@ -22,6 +22,7 @@ export async function PATCH(req: NextRequest) {
 					expiresAt, 
 					_id, 
 					done } = reqBody;
+					console.log(reqBody)
 
 			// Find the collection 
 			const collection = await Collection.findOne({ name: collectionName });
@@ -44,7 +45,7 @@ export async function PATCH(req: NextRequest) {
 			if (!collection) {
 				// If collection not found, return 404 response
 				return NextResponse.json(
-					{ message: "Collection not found" },
+					{ message: "Collection not found --patch--" },
 					{ status: 404 }
 				);
 			}
@@ -75,7 +76,7 @@ export async function DELETE(req: NextRequest) {
 	if (!collection) {
 			// If collection not found, return 404 response
 			return NextResponse.json(
-					{ message: "Collection not found" },
+					{ message: "Collection not found --del--" },
 					{ status: 404 }
 			);
 	}
