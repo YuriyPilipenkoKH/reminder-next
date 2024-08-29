@@ -84,3 +84,24 @@ export const SBtnDelete = styled('button')`
   background-color: var(--red);
 
 `;
+
+export const SFlatBtn = styled('button')`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 8px;
+  font-weight: 600;
+  border-radius: 50%; 
+  border: none;
+  background-color: transparent;
+
+  &:hover {
+  background-color: #5983679b;
+  }
+  &:disabled{
+  background-color: #888;
+  }
+
+`;
