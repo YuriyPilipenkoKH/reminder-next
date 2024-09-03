@@ -7,7 +7,9 @@ import ConfirmTaskRemoval from './Modals/ConfirmTaskRemoval'
 import { Button } from 'antd'
 import { FaWindowClose } from "react-icons/fa";
 import { CgChevronDoubleDownR } from "react-icons/cg";
+import { PiDotsThreeOutline } from "react-icons/pi";
 import { FlatBtn } from './Button/Button'
+
 
 interface ButtonHolderProps {
     collection: CollectionTypes 
@@ -39,7 +41,7 @@ const ButtonHolder: React.FC<ButtonHolderProps> = ({collection, task}) => {
 					<Button
 						className="mcard-content-btn"
 						onClick={()=> setOpen(!open)}>
-							<CgChevronDoubleDownR />
+							<PiDotsThreeOutline />
 					</Button>
 				</div>
 			) }
